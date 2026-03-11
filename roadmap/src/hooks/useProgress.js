@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LEVELS } from "../data/index.js";
 
+const STORAGE_KEY = "agent-kit-progress";
+
 export function useProgress() {
-  const [checked, setChecked] = useState({});
+  const [checked, setChecked] = useState(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : {};
+  });
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+  }, [checked]);
 
   const key = (li, si, ii, ci) => `${li},${si},${ii},${ci}`;
 
