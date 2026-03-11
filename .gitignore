@@ -1,0 +1,13 @@
+# Dependencies
+roadmap/node_modules/
+
+# Build
+roadmap/dist/
+
+# Env
+roadmap/.env
+roadmap/.env.local
+roadmap/.env.*.local
+.env
+.env.local
+.env.*.local
