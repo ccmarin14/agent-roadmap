@@ -6,7 +6,7 @@ Documentación de servidores MCP disponibles para el equipo.
 
 Cada servidor MCP debe incluir:
 
-```markdown
+````markdown
 # [Nombre]
 
 ## Descripción
@@ -70,6 +70,7 @@ Si ya configuraste los casos de uso en AGENTS.md, el agente lo usa automáticame
 ```
 [Ejemplos de prompts]
 ```
+````
 
 ## Servidores disponibles
 
