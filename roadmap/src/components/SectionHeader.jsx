@@ -1,26 +1,19 @@
-import { C } from "../theme.js";
-
 export function SectionHeader({ level, secIdx, setSecIdx, setOpenItem, secStats, lvlIdx }) {
   return (
-    <div style={{
-      padding: "14px 24px 12px",
-      borderBottom: `1px solid ${C.border}`,
-      flexShrink: 0,
-      background: C.surface,
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-        <span style={{ fontSize: "12px", color: level.color, letterSpacing: "1px" }}>
+    <div className="px-6 py-3 border-b border-border flex-shrink-0 bg-surface">
+      <div className="flex items-center gap-2 mb-1">
+        <span className="text-xs tracking-wider" style={{ color: level.color }}>
           NIVEL {level.id} · {level.title.toUpperCase()}
         </span>
-        <span style={{ color: C.border }}>·</span>
-        <span style={{ fontSize: "12px", color: C.textDim }}>👥 {level.team}</span>
+        <span style={{ color: "#252D3D" }}>·</span>
+        <span className="text-xs" style={{ color: "#475569" }}>👥 {level.team}</span>
       </div>
 
-      <div style={{ color: C.textMid, fontSize: "13px", lineHeight: "1.6", maxWidth: "600px", marginBottom: "10px" }}>
+      <div className="text-[13px] leading-relaxed max-w-[600px] mb-2" style={{ color: "#94A3B8" }}>
         {level.desc}
       </div>
 
-      <div style={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>
+      <div className="flex gap-1 flex-wrap">
         {level.sections.map((s, si) => {
           const ss = secStats(lvlIdx, si);
           const active = si === secIdx;
@@ -28,17 +21,15 @@ export function SectionHeader({ level, secIdx, setSecIdx, setOpenItem, secStats,
             <button
               key={si}
               onClick={() => { setSecIdx(si); setOpenItem(null); }}
+              className="px-3 py-1 rounded text-xs transition-all duration-100 flex items-center gap-[5px]"
               style={{
-                padding: "4px 12px", borderRadius: "4px", fontSize: "12px",
-                background: active ? `${level.color}18` : C.borderLight,
-                color: active ? level.color : C.textDim,
-                border: `1px solid ${active ? level.color + "40" : "transparent"}`,
-                fontFamily: "inherit", transition: "all .1s",
-                display: "flex", alignItems: "center", gap: "5px",
+                backgroundColor: active ? `${level.color}18` : "#1E2535",
+                color: active ? level.color : "#475569",
+                border: active ? `1px solid ${level.color}40` : "1px solid transparent",
               }}
             >
               {s.title}
-              {ss.pct > 0 && <span style={{ opacity: 0.7 }}>{ss.pct}%</span>}
+              {ss.pct > 0 && <span className="opacity-70">{ss.pct}%</span>}
             </button>
           );
         })}

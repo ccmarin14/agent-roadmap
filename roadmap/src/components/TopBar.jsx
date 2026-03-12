@@ -1,51 +1,38 @@
-import { C } from "../theme.js";
-
 export function TopBar({ level, tab, setTab, total }) {
   return (
-    <div style={{
-      display: "flex", alignItems: "center", justifyContent: "space-between",
-      padding: "0 20px", height: "48px",
-      borderBottom: `1px solid ${C.border}`,
-      flexShrink: 0,
-      background: C.surface,
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-        <span style={{ color: C.textDim, fontSize: "13px", letterSpacing: "2px" }}>
+    <div className="flex items-center justify-between px-5 h-12 border-b border-border flex-shrink-0 bg-surface">
+      <div className="flex items-center gap-4">
+        <span className="text-[13px] tracking-widest" style={{ color: "#475569" }}>
           AGENTES DE IA
         </span>
-        <span style={{ color: C.border }}>|</span>
-        <span style={{ color: C.textMid, fontSize: "14px" }}>
+        <span style={{ color: "#252D3D" }}>|</span>
+        <span className="text-sm" style={{ color: "#94A3B8" }}>
           De cero a orquestación en equipo
         </span>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-          <div style={{
-            height: "4px", width: "100px",
-            background: C.borderLight, borderRadius: "2px", overflow: "hidden",
-          }}>
-            <div style={{
-              height: "100%", width: `${total.pct}%`,
-              background: level.color, borderRadius: "2px", transition: "width .3s",
-            }} />
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-[6px]">
+          <div className="h-1 w-[100px] bg-border-light rounded-[2px] overflow-hidden">
+            <div
+              className="h-full transition-all duration-300 rounded-[2px]"
+              style={{ width: `${total.pct}%`, backgroundColor: level.color }}
+            />
           </div>
-          <span style={{ fontSize: "13px", color: C.textDim }}>
+          <span className="text-[13px]" style={{ color: "#475569" }}>
             {total.d}/{total.t}
           </span>
         </div>
 
-        <div style={{ display: "flex", gap: "3px" }}>
+        <div className="flex gap-[3px]">
           {["content", "progress"].map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
+              className="px-3 py-1 rounded text-xs tracking-widest transition-all duration-150"
               style={{
-                padding: "4px 12px", borderRadius: "4px",
-                fontSize: "12px", letterSpacing: "1px",
-                background: tab === t ? level.color : C.borderLight,
-                color: tab === t ? "#000" : C.textDim,
-                fontFamily: "inherit", transition: "all .15s",
+                backgroundColor: tab === t ? level.color : "#1E2535",
+                color: tab === t ? "#000" : "#475569",
               }}
             >
               {t === "content" ? "CONTENIDO" : "PROGRESO"}

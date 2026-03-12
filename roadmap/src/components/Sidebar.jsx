@@ -1,15 +1,9 @@
-import { C } from "../theme.js";
 import { LEVELS } from "../data/index.js";
 
 export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, levelStats }) {
   return (
-    <div style={{
-      width: "220px", flexShrink: 0,
-      borderRight: `1px solid ${C.border}`,
-      display: "flex", flexDirection: "column",
-      overflow: "hidden",
-    }}>
-      <div style={{ flex: 1, overflowY: "auto", padding: "8px 0" }}>
+    <div className="w-[220px] flex-shrink-0 border-r border-border flex flex-col overflow-hidden">
+      <div className="flex-1 overflow-y-auto py-2">
         {LEVELS.map((lv, li) => {
           const st = levelStats(li);
           const active = li === lvlIdx;
@@ -17,53 +11,62 @@ export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, lev
             <div key={li}>
               <button
                 onClick={() => { setLvlIdx(li); setSecIdx(0); setOpenItem(null); }}
+                className={`w-full text-left px-4 py-[10px] border-l-[3px] transition-all duration-150 ${
+                  active ? "bg-opacity-10" : "bg-transparent"
+                }`}
                 style={{
-                  width: "100%", textAlign: "left",
-                  padding: "10px 16px",
-                  borderLeft: `3px solid ${active ? lv.color : "transparent"}`,
-                  background: active ? `${lv.color}10` : "transparent",
-                  transition: "all .15s",
+                  borderLeftColor: active ? lv.color : "transparent",
+                  backgroundColor: active ? `${lv.color}10` : "transparent",
                 }}
               >
-                <div style={{
-                  display: "flex", justifyContent: "space-between",
-                  alignItems: "center", marginBottom: "3px",
-                }}>
-                  <span style={{ fontSize: "12px", color: active ? lv.color : C.textDim, letterSpacing: "1px" }}>
+                <div className="flex justify-between items-center mb-[3px]">
+                  <span
+                    className="text-xs tracking-widest"
+                    style={{ color: active ? lv.color : "#475569" }}
+                  >
                     NIVEL {lv.id}
                   </span>
-                  <span style={{ fontSize: "12px", color: st.pct > 0 ? lv.color : C.textFaint }}>
+                  <span
+                    className="text-xs"
+                    style={{ color: st.pct > 0 ? lv.color : "#65738b" }}
+                  >
                     {st.pct}%
                   </span>
                 </div>
-                <div style={{ color: active ? C.text : C.textDim, fontSize: "14px", marginBottom: "4px", lineHeight: "1.3" }}>
+                <div
+                  className="text-sm mb-1 leading-[1.3]"
+                  style={{ color: active ? "#E2E8F0" : "#475569" }}
+                >
                   {lv.title}
                 </div>
-                <div style={{ fontSize: "12px", color: C.textFaint }}>
+                <div className="text-xs" style={{ color: "#65738b" }}>
                   {lv.duration} · {lv.team}
                 </div>
                 {st.t > 0 && (
-                  <div style={{ marginTop: "6px", height: "2px", background: C.borderLight, borderRadius: "1px", overflow: "hidden" }}>
-                    <div style={{ height: "100%", width: `${st.pct}%`, background: lv.color, transition: "width .3s", borderRadius: "1px" }} />
+                  <div className="mt-[6px] h-[2px] bg-border-light rounded-[1px] overflow-hidden">
+                    <div
+                      className="h-full transition-all duration-300 rounded-[1px]"
+                      style={{ width: `${st.pct}%`, backgroundColor: lv.color }}
+                    />
                   </div>
                 )}
               </button>
 
               {active && (
-                <div style={{ paddingLeft: "16px", paddingBottom: "4px" }}>
+                <div className="pl-4 pb-1">
                   {lv.sections.map((s, si) => (
                     <button
                       key={si}
                       onClick={() => { setSecIdx(si); setOpenItem(null); }}
+                      className="w-full text-left px-2 py-[5px] border-l-2 mb-[2px] bg-transparent transition-all duration-100"
                       style={{
-                        width: "100%", textAlign: "left",
-                        padding: "5px 8px",
-                        borderLeft: `2px solid ${si === secIdx ? lv.color + "80" : C.borderLight}`,
-                        marginBottom: "2px", background: "transparent",
-                        transition: "all .1s",
+                        borderLeftColor: si === secIdx ? `${lv.color}80` : "#1E2535",
                       }}
                     >
-                      <span style={{ fontSize: "12px", color: si === secIdx ? C.textMid : C.textDim, lineHeight: "1.4" }}>
+                      <span
+                        className="text-xs leading-[1.4]"
+                        style={{ color: si === secIdx ? "#94A3B8" : "#475569" }}
+                      >
                         {s.title}
                       </span>
                     </button>

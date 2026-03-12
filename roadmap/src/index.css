@@ -1,7 +1,16 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0F1117;
+  --color-surface: #161B27;
+  --color-surface-hover: #1C2333;
+  --color-border: #252D3D;
+  --color-border-light: #1E2535;
+  --color-text: #E2E8F0;
+  --color-text-mid: #94A3B8;
+  --color-text-dim: #475569;
+  --color-text-faint: #65738b;
+  --font-family-mono: 'DM Mono', monospace;
 }
 
 html, body, #root {
