@@ -74,7 +74,7 @@ export default function App() {
                 setSecIdx={setSecIdx}
                 setTab={setTab}
                 checked={checked}
-                key={key}
+                key_fn={key}
                 toggle={toggle}
                 levelStats={levelStats}
               />

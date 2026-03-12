@@ -1,6 +1,6 @@
 import { LEVELS } from "../data/index.js";
 
-export function ProgressView({ lvlIdx, setLvlIdx, setSecIdx, setTab, checked, key, toggle, levelStats }) {
+export function ProgressView({ lvlIdx, setLvlIdx, setSecIdx, setTab, checked, key_fn, toggle, levelStats }) {
   return (
     <div className="max-w-[860px]">
       <div className="mb-6">
@@ -60,7 +60,7 @@ export function ProgressView({ lvlIdx, setLvlIdx, setSecIdx, setTab, checked, ke
                     {item.label}
                   </div>
                   {item.checks.map((chk, ci) => {
-                    const k = key(li, si, ii, ci);
+                    const k = key_fn(li, si, ii, ci);
                     const done = checked[k];
                     return (
                       <button
