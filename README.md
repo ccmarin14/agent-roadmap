@@ -22,7 +22,7 @@ agent-kit/
 | Módulo | Estado | Descripción |
 |--------|--------|-------------|
 | roadmap | ✅ Listo | App React con 4 niveles de aprendizaje |
-| mcp | ⚠️ Docs | Solo documentación de servidores externos |
+| mcp | ✅ Listo | Documentación de servidores |
 | skills | 🔄 Plantilla | Estructura lista, sin skills |
 | agents | 🔄 Plantilla | Estructura lista, sin agentes |
 | prompts | 🔄 Plantilla | Estructura lista, sin prompts |
@@ -57,7 +57,7 @@ Documentación de servidores MCP disponibles para usar en proyectos.
 
 Cada archivo es una guía de configuración y uso para un servidor específico.
 
-→ Ver [mcp/mysql.md](./mcp/mysql.md)
+→ Ver [mcp/README.md](./mcp/README.md)
 
 ---
 
