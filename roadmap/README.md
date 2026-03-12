@@ -56,8 +56,12 @@ Múltiples agentes especializados trabajando en coordinación. El orquestador ge
 
 ---
 
-## Cómo correrlo
+## Cómo acceder
 
+### Demo pública (solo lectura):
+https://test-web.master2000.net/agentforge/
+
+### Clona el repositorio y corre la app localmente:
 ```bash
 npm install
 npm run dev

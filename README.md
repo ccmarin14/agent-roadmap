@@ -39,6 +39,10 @@ App web interactiva que guía el aprendizaje de agentes de IA en 4 niveles progr
 - **03 Automatización** — hooks, scripts, flujos automatizados, AGENTS.md avanzado
 - **04 Orquestación** — agentes especializados, orquestador, pipeline completo de feature
 
+### Demo online: 
+https://test-web.master2000.net/agentforge/
+
+### Para ejecutar la app:
 ```bash
 cd roadmap
 npm install
