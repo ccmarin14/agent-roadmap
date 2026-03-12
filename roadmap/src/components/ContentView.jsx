@@ -1,3 +1,5 @@
+import { REFERENCES, getReferencesForItem } from "../data/references.js";
+
 export function ContentView({ section, level, lvlIdx, secIdx, openItem, setOpenItem, checked, key_fn, toggle }) {
   const key = key_fn;
   return (
@@ -58,6 +60,32 @@ export function ContentView({ section, level, lvlIdx, secIdx, openItem, setOpenI
                 >
                   {item.body}
                 </div>
+                {item.references && item.references.length > 0 && (
+                  <div className="mb-4 pt-3" style={{ borderTop: `1px solid ${level.color}20` }}>
+                    <div className="text-xs tracking-widest mb-2" style={{ color: "#475569" }}>
+                      REFERENCIAS
+                    </div>
+                    {item.references.map((refKey) => {
+                      const refs = REFERENCES[refKey] || [];
+                      return refs.map((ref, ri) => (
+                        <a
+                          key={ri}
+                          href={ref.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-start gap-[10px] w-full text-left px-2 py-[6px] rounded transition-colors duration-100 mb-[2px] hover:bg-[#1e293b]"
+                          style={{ textDecoration: "none" }}
+                        >
+                          <span className="text-xs mt-[2px]" style={{ color: level.color }}>↗</span>
+                          <div>
+                            <span className="text-sm block" style={{ color: "#E2E8F0" }}>{ref.title}</span>
+                            <span className="text-xs block" style={{ color: "#64748B" }}>{ref.desc}</span>
+                          </div>
+                        </a>
+                      ));
+                    })}
+                  </div>
+                )}
                 <div className="text-xs tracking-widest mb-2" style={{ color: "#475569" }}>
                   CRITERIOS DE DOMINIO
                 </div>
