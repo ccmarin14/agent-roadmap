@@ -1,25 +1,37 @@
 # agent-kit
 
-Kit completo para trabajar con agentes de IA en equipos de desarrollo. Contiene todo lo necesario para pasar de cero a orquestación: roadmap interactivo, servidores MCP, skills, configuraciones de agentes y librería de prompts.
+Kit para trabajar con agentes de IA en equipos de desarrollo.
 
 ---
 
-## Contenido del repositorio
+## Contenido
 
 ```
 agent-kit/
 ├── roadmap/          # App interactiva de aprendizaje (React + Vite)
-├── mcp/              # Servidores MCP propios del equipo
-├── skills/           # Skills personalizados para el agente
-├── agents/           # Configuraciones AGENTS.md por proyecto y módulo
-└── prompts/          # Librería de prompts del equipo por tipo de tarea
+├── mcp/              # Documentación de servidores MCP
+├── skills/           # Plantilla para skills del equipo
+├── agents/           # Plantilla para agentes especializados
+└── prompts/         # Plantilla para librería de prompts
 ```
 
 ---
 
-## roadmap
+## Estado del proyecto
 
-Aplicación web interactiva que guía el aprendizaje de agentes de IA en 4 niveles progresivos. Cada tema tiene contenido detallado y un checklist de criterios concretos para saber cuándo se domina.
+| Módulo | Estado | Descripción |
+|--------|--------|-------------|
+| roadmap | ✅ Listo | App React con 4 niveles de aprendizaje |
+| mcp | ⚠️ Docs | Solo documentación de servidores externos |
+| skills | 🔄 Plantilla | Estructura lista, sin skills |
+| agents | 🔄 Plantilla | Estructura lista, sin agentes |
+| prompts | 🔄 Plantilla | Estructura lista, sin prompts |
+
+---
+
+## Roadmap (listo)
+
+App web interactiva que guía el aprendizaje de agentes de IA en 4 niveles progresivos. Cada tema tiene contenido detallado y un checklist de criterios concretos para saber cuándo se domina.
 
 **Niveles:**
 - **01 Fundamentos** — LLMs, modelos (Claude, GPT, Gemini, DeepSeek, Qwen), qué es un agente, IDE y consola, AGENTS.md
@@ -27,36 +39,55 @@ Aplicación web interactiva que guía el aprendizaje de agentes de IA en 4 nivel
 - **03 Automatización** — hooks, scripts, flujos automatizados, AGENTS.md avanzado
 - **04 Orquestación** — agentes especializados, orquestador, pipeline completo de feature
 
+```bash
+cd roadmap
+npm install
+npm run dev
+```
+
+Abre `http://localhost:5173`.
+
 → Ver [roadmap/README.md](./roadmap/README.md)
 
 ---
 
 ## mcp
 
-Servidores MCP desarrollados internamente para casos de uso que no cubre ningún servidor público. Cada servidor tiene su propio directorio con código, documentación y guía de instalación.
+Documentación de servidores MCP disponibles para usar en proyectos.
+
+Cada archivo es una guía de configuración y uso para un servidor específico.
+
+→ Ver [mcp/mysql.md](./mcp/mysql.md)
 
 ---
 
 ## skills
 
-Skills personalizados que reflejan las decisiones y patrones del equipo. Commiteados al repositorio para que todos los miembros los tengan disponibles automáticamente al clonar.
+Skills personalizados que reflejan las decisiones y patrones del equipo.
 
-Instalación en un proyecto:
-```bash
-npx skills add ./skills/<nombre-del-skill>
-```
+La carpeta contiene la estructura y plantillas para crear skills. Los skills se copian manualmente a cada proyecto.
+
+→ Ver [skills/README.md](./skills/README.md)
 
 ---
 
 ## agents
 
-Configuraciones AGENTS.md organizadas por tipo de proyecto y módulo. Sirven como punto de partida para nuevos proyectos o como referencia para actualizar configuraciones existentes.
+Configuraciones de agentes especializados organizados por tipo de tarea.
+
+La carpeta contiene la estructura y plantillas para definir agentes. Cada agente incluye su propio AGENT.md con instrucciones, herramientas disponibles y workflow.
+
+→ Ver [agents/README.md](./agents/README.md)
 
 ---
 
 ## prompts
 
-Librería de prompts documentados por tipo de tarea: features, debugging, code review, refactor, generación de tests, migraciones, documentación. Cada entrada incluye el prompt exacto, el modelo recomendado y notas de uso.
+Librería de prompts documentados por tipo de tarea: features, debugging, code review, refactor, generación de tests, migraciones, documentación.
+
+La carpeta contiene la estructura y plantillas para crear prompts.
+
+→ Ver [prompts/README.md](./prompts/README.md)
 
 ---
 
@@ -70,10 +101,15 @@ npm install
 npm run dev
 ```
 
-Abre `http://localhost:5173` y sigue los niveles en orden.
-
 ---
 
 ## Contribuir
 
-Cada carpeta tiene su propio flujo de contribución, pero la regla general aplica a todo el repositorio: los cambios se proponen via PR, se revisan en equipo y se documentan. El conocimiento que funciona se comparte — si encontraste un prompt que da mejores resultados, un skill que resuelve un problema frecuente o un patrón de AGENTS.md que mejoró la calidad del agente, agrégalo aquí.
+Agregar nuevo contenido:
+
+- **mcp**: Crear un archivo `.md` con la documentación del servidor
+- **skills**: Crear una carpeta con `SKILL.md` y recursos
+- **agents**: Crear una carpeta con `AGENT.md` y configuración
+- **prompts**: Crear un archivo `.md` con la plantilla de prompt
+
+Ver el README de cada módulo para más detalles.
