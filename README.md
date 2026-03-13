@@ -23,7 +23,7 @@ agent-kit/
 |--------|--------|-------------|
 | roadmap | ✅ Listo | App React con 4 niveles de aprendizaje |
 | mcp | ✅ Listo | Documentación de servidores |
-| skills | 🔄 Plantilla | Estructura lista, sin skills |
+| skills | ✅ Listo | Skills personalizados |
 | agents | 🔄 Plantilla | Estructura lista, sin agentes |
 | prompts | 🔄 Plantilla | Estructura lista, sin prompts |
 
