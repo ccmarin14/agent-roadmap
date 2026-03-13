@@ -220,7 +220,81 @@ skills/{name}/
 ```
 
 ### Paso 9: Generar SKILL.md
-Crear archivo con toda la información recopilada.
+
+**9a. Generar el SKILL.md con la plantilla completa:**
+
+```markdown
+---
+name: {name}
+description: Use this skill when the user asks to "trigger 1", "trigger 2", "trigger 3". Include exact trigger phrases.
+version: 1.0.0
+license: MIT
+compatibility:
+  - {agente 1}
+  - {agente 2}
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Grep
+  - question
+---
+
+# Nombre del Skill
+
+## Overview
+{Propósito de la skill}
+
+## When to Use
+- Cuando el usuario pide "{trigger 1}"
+- Cuando el usuario necesita "{trigger 2}"
+- Cuando el usuario pregunta "{trigger 3}"
+
+## Instructions
+
+### Paso 1: [Nombre del paso]
+Instrucciones detalladas...
+
+### Paso 2: [Nombre del paso]
+Más instrucciones...
+
+[Agregar pasos según sea necesario]
+
+## Examples
+
+**Usuario**: "Ejemplo de frase"
+**Agente**: [Cómo responde]
+
+## Quick Reference
+
+| Paso | Acción |
+|------|--------|
+| 1 | Acción 1 |
+| 2 | Acción 2 |
+
+## Convenciones
+- Regla 1
+- Regla 2
+
+## Notas
+- Nota importante 1
+- Nota importante 2
+```
+
+**9b. Generar references/guide.md:**
+
+Crear archivo con guía técnica relevante para la skill.
+
+**9c. Generar examples/usage.md:**
+
+Crear archivo con ejemplos prácticos de uso.
+
+**9d. Importante:**
+- NO omitir ninguna sección
+- Usar la plantilla exactamente como se muestra
+- Completar TODOS los campos con la información recopilada
+- Verificar que el frontmatter esté completo
 
 ### Paso 10: Presentación Final
 ```
