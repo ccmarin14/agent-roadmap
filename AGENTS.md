@@ -69,3 +69,9 @@ Gestiona la persistencia en `LocalStorage` bajo la clave `agent-kit-progress`. C
 3. **Actualización de Contenido:** Al agregar nuevos temas al roadmap, asegúrate de incluir al menos 3-4 "Criterios de Dominio" (checks) por cada item.
 4. **No Side-Effects:** Evita instalar librerías adicionales en `/roadmap` sin justificar la necesidad arquitectónica. Actualmente es un stack muy ligero y rápido.
 5. **Respeto a los Patterns:** No conviertas componentes funcionales a clases. Mantén el uso de hooks.
+
+## Documentación de Librerías/APIs
+
+- Antes de escribir código con cualquier librería o framework—consulta Context7 primero para obtener la información actual y ejemplos funcionales
+- Si te encuentras con una función o método desconocido—usa Context7 para entender qué hace
+- Al configurar una nueva librería pide a Context7 los docs actualizados para no seguir guías obsoletas

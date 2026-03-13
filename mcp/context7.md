@@ -50,7 +50,7 @@ https://www.npmjs.com/package/@upstash/context7-mcp
 
 ## Cuándo usar
 
-- Antes de escribir código con cualquier librería o framework—consulta Context7 primero para obtener la API actual y ejemplos funcionales
+- Antes de escribir código con cualquier librería o framework—consulta Context7 primero para obtener la información actual y ejemplos funcionales
 - Si te encuentras con una función o método desconocido—usa Context7 para entender qué hace
 - Al configurar una nueva librería pide a Context7 los docs actualizados para no seguir guías obsoletas
 
