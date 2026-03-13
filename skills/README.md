@@ -180,6 +180,7 @@ Más instrucciones...
 
 | Skill | Descripción | Estructura |
 |-------|-------------|------------|
+| [code-review](./code-review/) | Análisis exhaustivo de código: bugs, seguridad, performance, arquitectura | Standard |
 | [feature-docs](./feature-docs/) | Documentar features del proyecto | Standard |
 | [skill-builder](./skill-builder/) | Wizard para crear nuevas skills | Standard |
 
