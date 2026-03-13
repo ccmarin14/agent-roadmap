@@ -1,22 +1,22 @@
 # Chrome DevTools
 
-## Description
+## Descripción
 MCP server que permite a agentes de IA (como Claude, Cursor, Copilot o Gemini) controlar e inspeccionar un navegador Chrome en vivo. Proporciona capacidades de debugging, automatización, análisis de red, screenshots y performance insights.
 
-## Source
+## Enlace
 https://www.npmjs.com/package/chrome-devtools-mcp
 
-## Requirements
+## Requisitos
 - Node.js 18+
 - Chrome/Chromium instalado en el sistema
 - Puppeteer se instala automáticamente con el paquete
 
-## Security Notes
+## Notas de seguridad
 - **Acceso al navegador:** El servidor tiene acceso completo al contenido del navegador. Solo usa con páginas de confianza.
 - **Datos sensibles:** Evita compartir datos sensibles o personales en el navegador controlado por el MCP.
 - **Automation:** El servidor puede automatizar acciones en el navegador (clicks, formularios, navegación).
 
-## Installation
+## Instalación
 
 ### opencode
 ```json
@@ -42,7 +42,7 @@ https://www.npmjs.com/package/chrome-devtools-mcp
 }
 ```
 
-## When to Use
+## Cuándo usar
 
 - ¿El navegador muestra errores? Revisa la consola y las pestañas de red a través de este MCP
 - ¿Necesitas automatizar interacciones como clics, llenado de formularios o navegación? Úsalo
@@ -50,7 +50,7 @@ https://www.npmjs.com/package/chrome-devtools-mcp
 
 > **Nota:** Copia estos casos de uso al AGENTS.md de tus proyectos para que el agente use Chrome DevTools automáticamente en estos escenarios.
 
-## How to Use in Conversation
+## Cómo usar en conversación
 
 ### Sin AGENTS.md
 Cuando el agente no tiene la configuración automática, menciónalo explícitamente:

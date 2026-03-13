@@ -1,23 +1,23 @@
 # MySQL
 
-## Description
+## Descripción
 Servidor MCP para interactuar con bases de datos MySQL con soporte de consultas de solo lectura.
 
-## Source
+## Enlace
 https://www.npmjs.com/package/mcp-server-mysql
 
-## Requirements
+## Requisitos
 - Node.js 18+
 - MySQL 5.7+ o MariaDB 10.2+
 - Conexión de red al servidor de base de datos
 - Credenciales con permisos de solo lectura (recomendado)
 
-## Security Notes
+## Notas de seguridad
 - **Solo lectura:** Este servidor solo ejecuta consultas SELECT. Operaciones de escritura (INSERT, UPDATE, DELETE, DROP) no están soportadas.
 - **Credenciales:** Usa un usuario con permisos mínimos necesarios (solo SELECT). No uses el usuario root.
 
 
-## Installation
+## Instalación
 
 ### opencode
 ```json
@@ -57,14 +57,14 @@ https://www.npmjs.com/package/mcp-server-mysql
 }
 ```
 
-## When to Use
+## Cuándo usar
 
 - ¿Debugueando y necesitas ver qué hay realmente en la base de datos? Consúltala directamente
 - Inspeccionando el schema para entender cómo se relacionan las tablas entre sí
 
 > **Nota:** Copia estos casos de uso al AGENTS.md de tus proyectos para que el agente use MySQL automáticamente en estos escenarios.
 
-## How to Use in Conversation
+## Cómo usar en conversación
 
 ### Sin AGENTS.md
 Cuando el agente no tiene la configuración automática, menciónalo explícitamente:

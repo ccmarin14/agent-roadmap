@@ -1,22 +1,22 @@
 # Context7
 
-## Description
+## Descripción
 MCP server que proporciona documentación actualizada y ejemplos de código para bibliotecas y frameworks directamente en tus prompts de IA.
 
-## Source
+## Enlace
 https://www.npmjs.com/package/@upstash/context7-mcp
 
-## Requirements
+## Requisitos
 - Node.js 18+
 - Conexión a internet para acceder a la API de Context7
 - API key de Context7 (obtenerla en https://context7.com)
 
-## Security Notes
+## Notas de seguridad
 - **API Key:** La API key se pasa en headers. No la expongas en repositorios públicos.
 - **Solo lectura:** Este servidor consulta documentación, no modifica archivos.
 - **Datos externos:** El servidor obtiene datos de Context7, asegúrate de confiar en la fuente.
 
-## Installation
+## Instalación
 
 ### opencode
 ```json
@@ -48,15 +48,15 @@ https://www.npmjs.com/package/@upstash/context7-mcp
 }
 ```
 
-## When to Use
+## Cuándo usar
 
 - Antes de escribir código con cualquier librería o framework—consulta Context7 primero para obtener la API actual y ejemplos funcionales
 - Si te encuentras con una función o método desconocido—usa Context7 para entender qué hace
-- Al configurar una nueva librería—pide a Context7 los docs actualizados para no seguir guías obsoletas
+- Al configurar una nueva librería pide a Context7 los docs actualizados para no seguir guías obsoletas
 
 > **Nota:** Copia estos casos de uso al AGENTS.md de tus proyectos para que el agente use Context7 automáticamente en estos escenarios.
 
-## How to Use in Conversation
+## Cómo usar en conversación
 
 ### Sin AGENTS.md
 Cuando el agente no tiene la configuración automática, menciónalo explícitamente:

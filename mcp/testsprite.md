@@ -1,23 +1,23 @@
 # TestSprite
 
-## Description
+## Descripción
 MCP server que trae pruebas de software automatizadas al workflow de desarrollo. Conecta tu IDE de IA (como Cursor o Copilot) con el motor de testing de TestSprite para generar, ejecutar y debuggear tests automáticamente.
 
-## Source
+## Enlace
 https://www.npmjs.com/package/@testsprite/testsprite-mcp
 
-## Requirements
+## Requisitos
 - Node.js 18+
 - IDE compatible (Cursor, VSCode, Windsurf, etc.)
 - Cuenta de TestSprite (obtener API key en https://testsprite.com)
 - Aplicación a probar corriendo localmente
 
-## Security Notes
+## Notas de seguridad
 - **API Key:** Proporcionada por TestSprite. No la expongas en repositorios públicos.
 - **Código enviado a la nube:** El código se envía a los servidores de TestSprite para generar y ejecutar tests.
 - **Ambiente de sandbox:** Los tests se ejecutan en un sandbox seguro en la nube.
 
-## Installation
+## Instalación
 
 ### opencode
 ```json
@@ -49,7 +49,7 @@ https://www.npmjs.com/package/@testsprite/testsprite-mcp
 }
 ```
 
-## When to Use
+## Cuándo usar
 
 - ¿Necesitas tests pero no quieres escribirlos manualmente?—solo describe qué probar
 - Cuando aparece un bug y quieres un caso de prueba reproducible para depurarlo
@@ -57,7 +57,7 @@ https://www.npmjs.com/package/@testsprite/testsprite-mcp
 
 > **Nota:** Copia estos casos de uso al AGENTS.md de tus proyectos para que el agente use TestSprite automáticamente en estos escenarios.
 
-## How to Use in Conversation
+## Cómo usar en conversación
 
 ### Sin AGENTS.md
 Cuando el agente no tiene la configuración automática, menciónalo explícitamente:

@@ -56,11 +56,13 @@ Múltiples agentes especializados trabajando en coordinación. El orquestador ge
 
 ---
 
-## Cómo acceder
+## Demo
 
-### Demo pública (solo lectura):
-https://test-web.master2000.net/agentforge/
+Consulta la versión online: **https://test-web.master2000.net/agentforge/**
 
+---
+
+## Cómo correrlo
 ### Clona el repositorio y corre la app localmente:
 ```bash
 npm install
@@ -87,7 +89,7 @@ src/
 │   ├── ContentView.jsx   # Acordeones con checklist integrado
 │   └── ProgressView.jsx  # Tarjetas de progreso y checklist completo
 ├── hooks/
-│   └── useProgress.js    # Estado de checks y cálculo de estadísticas
+│   └── useProgress.js    # Estado de checks con persistencia en LocalStorage
 ├── theme.js              # Tokens de diseño
 ├── App.jsx               # Componente raíz
 ├── main.jsx              # Entry point
@@ -96,8 +98,14 @@ src/
 
 ---
 
+## 🎨 Tema Visual
+El roadmap tiene una estética "cyberpunk/dark", utilizando colores personalizados definidos en `src/theme.js` para mantener la consistencia (ej. `bg: #0F1117`, `surface: #161B27`).
+
+---
+
 ## Stack
 
 - React 18
 - Vite 5
+- Tailwind CSS v4
 - DM Mono — Google Fonts
