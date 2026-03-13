@@ -196,13 +196,26 @@ Para crear una nueva skill, usa el wizard interactivo:
 > guíame a crear una skill
 ```
 
-El wizard guiará paso a paso:
-1. Propósito
-2. Nombre
-3. Triggers
-4. Estructura (con sugerencia automática)
-5. Herramientas
-6. Compatibilidad
+El wizard guía paso a paso:
+
+| Paso | Acción |
+|------|--------|
+| 0 | Saludo inicial |
+| 1 | Propósito |
+| 2 | Nombre |
+| 3 | Triggers |
+| 4 | Estructura (Minimal/Standard/Complete) |
+| 5 | Herramientas |
+| 6 | Compatibilidad |
+| 7 | Resumen y confirmación |
+| 8 | Generar estructura de directorios |
+| 9 | Generar SKILL.md (usando plantilla) |
+
+### Reglas del Wizard
+
+- **SIEMPRE 6 PREGUNTAS**: Nunca reducir el número de preguntas
+- **NUNCA ASUMIR**: Preguntar todo, no inventar valores
+- **USAR PLANTILLA EXACTA**: Del paso 9
 
 ---
 
