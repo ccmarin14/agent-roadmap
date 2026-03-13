@@ -7,8 +7,7 @@ Colección de skills reutilizables para agentes IA. Cada skill es una carpeta co
 ## Estructuras de Directorios
 
 ### Minimal (Básico)
-Para skills simples que solo requieren documentación.
-
+Para skills simples que solo requieren documentación básica.
 ```
 skill-name/
 └── SKILL.md
@@ -16,35 +15,32 @@ skill-name/
 
 ### Standard (Recomendado)
 Para la mayoría de skills que necesitan referencias y ejemplos.
-
 ```
 skill-name/
 ├── SKILL.md
 ├── references/
-│   └── detailed-guide.md
+│   └── guide.md
 └── examples/
-    └── working-example.sh
+    └── samples.md
 ```
 
 ### Complete (Avanzado)
-Para skills complejos con múltiples referencias y scripts.
-
+Para skills complejos con múltiples referencias, ejemplos y scripts.
 ```
 skill-name/
 ├── SKILL.md
 ├── references/
-│   ├── patterns.md
+│   ├── guide.md
 │   └── advanced.md
 ├── examples/
-│   ├── example1.sh
-│   └── example2.json
+│   └── samples.md
 └── scripts/
     └── validate.sh
 ```
 
-## Agregar un nuevo skill
+---
 
-Cada skill debe incluir un archivo `SKILL.md` con frontmatter YAML y contenido estructurado.
+## Plantilla de SKILL.md
 
 ### Frontmatter (Metadatos)
 
@@ -52,60 +48,30 @@ Cada skill debe incluir un archivo `SKILL.md` con frontmatter YAML y contenido e
 ---
 # OBLIGATORIOS
 name: skill-identifier
-description: Use this skill when the user asks to "phrase 1", "phrase 2". Include exact phrases that should trigger this skill. Be concrete and specific. Max 1024 chars.
+description: Use this skill when the user asks to "phrase 1", "phrase 2". Include exact trigger phrases. Be concrete and specific. Max 1024 chars.
 
 # OPCIONALES
 version: 1.0.0
 license: MIT
-# Para compatibilidad multi-agente
 compatibility:
   - Claude Code
   - Cursor
-# Restringe herramientas disponibles (para seguridad)
+  - OpenCode
 allowed-tools:
   - Read
   - Write
   - Bash
-  - Bash(git:*)
+  - Grep
+  - question
 ---
 ```
 
-#### Campos de Frontmatter
-
-| Campo | Tipo | Obligatorio | Descripción |
-|-------|------|--------------|-------------|
-| `name` | string | Sí | Identificador único del skill (kebab-case) |
-| `description` | string | Sí | Cuándo activar el skill, incluye frases exactas |
-| `version` | string | No | Versión semántica (default: 1.0.0) |
-| `license` | string | No | Licencia del skill |
-| `compatibility` | array | No | Agentes compatibles |
-| `allowed-tools` | string/array | No | Herramientas permitidas |
-
-#### Formatos de allowed-tools
-
-```yaml
-# Herramienta única
-allowed-tools: Read
-
-# Múltiples (comma-separated)
-allowed-tools: Read, Write, Edit
-
-# Múltiples (array)
-allowed-tools:
-  - Read
-  - Write
-  - Bash(git:*)
-
-# Con filtro de comandos
-allowed-tools: Bash(git:*), Bash(npm:*)
-```
-
-### Contenido del SKILL.md
+### Contenido Estructurado
 
 ```markdown
 ---
 name: skill-name
-description: Use this skill when the user asks to "create a new feature", "add authentication". Include exact phrases that trigger this skill.
+description: Use this skill when the user asks to "trigger phrase 1", "trigger phrase 2". Include exact phrases that trigger this skill.
 version: 1.0.0
 license: MIT
 compatibility:
@@ -121,39 +87,121 @@ allowed-tools:
 
 ## Overview
 Breve descripción de qué hace este skill y su propósito.
+Puede mencionar skills relacionadas.
 
 ## When to Use
-- Cuándo usar este skill (triggers específicos)
-- Casos de uso apropiados
-- Incluye frases exactas que activan el skill
+- Cuando el usuario pide "trigger 1"
+- Cuando el usuario necesita "trigger 2"
+- Cuando el usuario pregunta "trigger 3"
 
 ## Instructions
-Instrucciones detalladas para el agente.
-Incluye:
-- Pasos a seguir
-- Consideraciones importantes
-- Best practices
+
+### Paso 1: [Nombre del paso]
+Instrucciones detalladas...
+
+### Paso 2: [Nombre del paso]
+Más instrucciones...
+
+[Agregar tantos pasos como sea necesario]
 
 ## Examples
-Ejemplos de uso en conversación:
-- Usuario: "Necesito agregar autenticación"
-- Agente: [usa el skill para guiar el proceso]
+
+**Usuario**: "Ejemplo de frase del usuario"
+**Agente**: [Cómo responde el agente usando la skill]
 
 ## Quick Reference
-Tabla o bullets para referencia rápida:
-- Paso 1: ...
-- Paso 2: ...
+
+| Paso | Acción |
+|------|--------|
+| 1 | Acción del paso 1 |
+| 2 | Acción del paso 2 |
+
+## Convenciones
+- Formato de nombres
+- Estilo de código
+- Reglas específicas del dominio
+
+## Notas
+- Información adicional importante
+- Relacionado con otras skills si aplica
 ```
+
+---
+
+## Mejores Prácticas
+
+### Al crear una skill
+
+1. **Descripción con triggers específicos**
+   - Incluir frases exactas que activarán la skill
+   - Ser concreto, no vago
+
+2. **Instrucciones paso a paso**
+   - Cada paso debe ser accionable
+   - Incluir comandos de ejemplo
+   - Agregar tablas de decisión cuando aplique
+
+3. **Detección de contexto**
+   - Antes de preguntar, explorar el codebase
+   - Usar `find`, `grep` para detectar stack
+   - Detectar convenciones del proyecto
+
+4. **Examples realistas**
+   - Incluir ejemplos de conversación real
+   - Mostrar input del usuario y output del agente
+
+5. **Quick Reference**
+   - Tabla resumen de pasos
+   - Referencia rápida para usuarios avanzados
+
+### Estructura recomendada
+
+| Sección | Propósito | Obligatoria |
+|---------|-----------|-------------|
+| Overview | Qué hace la skill | Sí |
+| When to Use | Cuándo activarse | Sí |
+| Instructions | Pasos detallados | Sí |
+| Examples | Ejemplos de uso | Recomendado |
+| Quick Reference | Resumen | Recomendado |
+| Convenciones | Reglas del dominio | Opcional |
+| Notas | Información adicional | Opcional |
+
+---
 
 ## Recursos adicionales
 
-- **references/**: Documentación detallada, guías técnicas, enlaces a APIs
-- **examples/**: Ejemplos de código output, snippets funcionales
+- **references/**: Documentación detallada, guías técnicas, referencias de APIs
+- **examples/**: Ejemplos de código output, casos de uso completos
 - **scripts/**: Scripts ejecutables para validación o automatización
+
+---
 
 ## Skills disponibles
 
-- Coming soon...
+| Skill | Descripción | Estructura |
+|-------|-------------|------------|
+| [feature-docs](./feature-docs/) | Documentar features del proyecto | Standard |
+| [skill-builder](./skill-builder/) | Wizard para crear nuevas skills | Standard |
+
+---
+
+## Usar Skill Builder
+
+Para crear una nueva skill, usa el wizard interactivo:
+
+```
+> create a new skill
+> skill wizard
+> guíame a crear una skill
+```
+
+El wizard guiará paso a paso:
+1. Propósito
+2. Nombre
+3. Triggers
+4. Estructura (con sugerencia automática)
+5. Herramientas
+6. Compatibilidad
 
 ---
 
