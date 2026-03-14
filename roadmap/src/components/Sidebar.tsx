@@ -1,5 +1,7 @@
 import { LEVELS } from "../data/index";
 import type { ProgressStats } from "../types";
+import type { User } from "@supabase/supabase-js";
+import { C } from "../theme";
 
 interface SidebarProps {
   lvlIdx: number;
@@ -8,9 +10,11 @@ interface SidebarProps {
   setSecIdx: (idx: number) => void;
   setOpenItem: (idx: number | null) => void;
   levelStats: (li: number) => ProgressStats;
+  user: User | null;
+  onLogout: () => void;
 }
 
-export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, levelStats }: SidebarProps) {
+export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, levelStats, user, onLogout }: SidebarProps) {
   return (
     <div className="w-[220px] flex-shrink-0 border-r border-border flex flex-col overflow-hidden">
       <div className="flex-1 overflow-y-auto py-2">
@@ -86,6 +90,18 @@ export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, lev
             </div>
           );
         })}
+      </div>
+      <div className="p-3 border-t border-border justify-between">
+        <p className="text-s truncate" style={{ color: C.textMid }}>
+          {user?.email || "Invitado"}
+        </p>
+        <button
+          onClick={onLogout}
+          className="py-1 rounded text-s tracking-widest transition-all duration-150 bg-green-500"
+          style={{ color: C.textDim }}
+        >
+          SALIR
+        </button>
       </div>
     </div>
   );

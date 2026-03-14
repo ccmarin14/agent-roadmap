@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { LEVELS } from "./data/index";
 import { useProgress } from "./hooks/useProgress";
+import { useAuth } from "./hooks/useAuth";
 import { C } from "./theme";
 import { TopBar } from "./components/TopBar";
 import { Sidebar } from "./components/Sidebar";
 import { SectionHeader } from "./components/SectionHeader";
 import { ContentView } from "./components/ContentView";
 import { ProgressView } from "./components/ProgressView";
+import { Login } from "./components/Login";
 
 export default function App() {
   const [lvlIdx, setLvlIdx] = useState(0);
@@ -15,10 +17,37 @@ export default function App() {
   const [tab, setTab] = useState<"content" | "progress">("content");
 
   const { checked, key, toggle, levelStats, secStats, totalStats } = useProgress();
+  const { user, isGuest, loading, login, logout, continueAsGuest } = useAuth();
 
   const level = LEVELS[lvlIdx];
   const section = level.sections[secIdx];
   const total = totalStats();
+
+  if (loading) {
+    return (
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        background: C.bg,
+        color: C.textDim,
+        fontSize: "13px",
+      }}>
+        Cargando...
+      </div>
+    );
+  }
+
+  if (!user && !isGuest) {
+    return (
+      <Login
+        onComplete={() => {}}
+        login={login}
+        continueAsGuest={continueAsGuest}
+      />
+    );
+  }
 
   return (
     <div style={{
@@ -37,6 +66,8 @@ export default function App() {
           secIdx={secIdx} setSecIdx={setSecIdx}
           setOpenItem={setOpenItem}
           levelStats={levelStats}
+          user={user}
+          onLogout={logout}
         />
 
         <div style={{ flex: 1, overflow: "hidden", display: "flex", flexDirection: "column" }}>
