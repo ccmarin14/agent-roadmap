@@ -15,8 +15,8 @@ export default function App() {
   const [openItem, setOpenItem] = useState<number | null>(null);
   const [tab, setTab] = useState<"content" | "progress">("content");
 
-  const { checked, key, toggle, levelStats, secStats, totalStats } = useProgress();
   const { user, isGuest, loading, login, logout, continueAsGuest } = useAuth();
+  const { checked, key, toggle, levelStats, secStats, totalStats } = useProgress({ user, isGuest });
 
   const level = LEVELS[lvlIdx];
   const section = level.sections[secIdx];
