@@ -11,7 +11,7 @@ export function TopBar({ level, tab, setTab, total }: TopBarProps) {
   return (
     <div className="flex items-center justify-between px-5 h-12 border-b border-border flex-shrink-0 bg-surface relative">
       <div className="flex items-center gap-4">
-        <span className="text-[13px] tracking-widest text-text-dim">
+        <span className="text-[13px] tracking-widest">
           AGENTES DE IA
         </span>
         <span className="text-border">|</span>
@@ -28,7 +28,7 @@ export function TopBar({ level, tab, setTab, total }: TopBarProps) {
               style={{ width: `${total.pct}%`, backgroundColor: level.color }}
             />
           </div>
-          <span className="text-[13px] text-text-dim">
+          <span className="text-[13px]">
             {total.d}/{total.t}
           </span>
         </div>

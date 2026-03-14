@@ -35,7 +35,7 @@ export function SectionHeader({ level, secIdx, setSecIdx, setOpenItem, secStats,
               className="px-3 py-1 rounded text-xs transition-all duration-100 flex items-center gap-[5px]"
               style={{
                 backgroundColor: active ? `${level.color}18` : "#1E2535",
-                color: active ? level.color : "#475569",
+                color: active ? level.color : "#d3d3d3",
                 border: active ? `1px solid ${level.color}40` : "1px solid transparent",
               }}
             >

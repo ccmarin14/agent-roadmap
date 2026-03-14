@@ -11,7 +11,7 @@
   --color-text-dim: #475569;
   --color-text-faint: #65738b;
   --color-primary: #22c55e;
-  --font-family-mono: 'DM Mono', monospace;
+  --font-mono: 'DM Mono', monospace;
 }
 
 html, body, #root {
