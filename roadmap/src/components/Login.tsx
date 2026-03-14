@@ -37,7 +37,7 @@ export function Login({ onComplete, login, continueAsGuest }: LoginProps) {
     <div className="fixed inset-0 flex items-center justify-center bg-bg z-50">
       <div className="w-full max-w-[360px] bg-surface border border-border rounded-lg p-8">
         <div className="text-center mb-7">
-          <div className="text-[11px] tracking-[3px] text-text-dim mb-2">
+          <div className="text-[13px] tracking-[3px] mb-2">
             AGENTES DE IA
           </div>
           <div className="text-sm text-text-mid">
@@ -50,6 +50,7 @@ export function Login({ onComplete, login, continueAsGuest }: LoginProps) {
             <button
               onClick={handleGuest}
               className="w-full py-3 bg-border-light border border-border rounded-md text-text-mid text-[13px] hover:bg-surface-hover transition-colors"
+              style={{backgroundColor: "#323b52" }}
             >
               Continuar como invitado
             </button>
@@ -99,7 +100,8 @@ export function Login({ onComplete, login, continueAsGuest }: LoginProps) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-text border-none rounded-md text-bg text-[13px] font-medium disabled:opacity-60 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
+              className="w-full py-3 rounded-md text-[13px] font-medium disabled:opacity-60 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
+              style={{ backgroundColor: "#22c55e", color: "#000" }}
             >
               {loading ? "Iniciando sesión..." : "Iniciar sesión"}
             </button>

@@ -89,10 +89,11 @@ export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, lev
           );
         })}
       </div>
-      <div className="p-3 border-t border-border items-center justify-between">
+      <div className="p-3 border-t border-border justify-between">
         <span className="text-xs truncate text-text-mid">
           {user?.email || "Invitado"}
         </span>
+        <br />
         <button
           onClick={onLogout}
           className="px-3 py-1 rounded text-xs tracking-widest transition-all duration-150"
