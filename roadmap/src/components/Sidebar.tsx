@@ -9,11 +9,12 @@ interface SidebarProps {
   setSecIdx: (idx: number) => void;
   setOpenItem: (idx: number | null) => void;
   levelStats: (li: number) => ProgressStats;
+  levelColor: string;
   user: User | null;
   onLogout: () => void;
 }
 
-export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, levelStats, user, onLogout }: SidebarProps) {
+export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, levelStats, levelColor, user, onLogout }: SidebarProps) {
   return (
     <div className="w-[220px] flex-shrink-0 border-r border-border flex flex-col overflow-hidden">
       <div className="flex-1 overflow-y-auto py-2">
@@ -94,7 +95,8 @@ export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, lev
         </span>
         <button
           onClick={onLogout}
-          className="py-1 rounded text-xs tracking-wider transition-all duration-150 bg-green hover:opacity-80"
+          className="px-3 py-1 rounded text-xs tracking-widest transition-all duration-150"
+          style={{ backgroundColor: levelColor, color: "#000" }}
         >
           SALIR
         </button>

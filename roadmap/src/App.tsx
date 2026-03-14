@@ -50,6 +50,7 @@ export default function App() {
           secIdx={secIdx} setSecIdx={setSecIdx}
           setOpenItem={setOpenItem}
           levelStats={levelStats}
+          levelColor={level.color}
           user={user}
           onLogout={logout}
         />
