@@ -1,18 +1,18 @@
 import { useState } from "react";
-import { LEVELS } from "./data/index.js";
-import { useProgress } from "./hooks/useProgress.js";
-import { C } from "./theme.js";
-import { TopBar } from "./components/TopBar.jsx";
-import { Sidebar } from "./components/Sidebar.jsx";
-import { SectionHeader } from "./components/SectionHeader.jsx";
-import { ContentView } from "./components/ContentView.jsx";
-import { ProgressView } from "./components/ProgressView.jsx";
+import { LEVELS } from "./data/index";
+import { useProgress } from "./hooks/useProgress";
+import { C } from "./theme";
+import { TopBar } from "./components/TopBar";
+import { Sidebar } from "./components/Sidebar";
+import { SectionHeader } from "./components/SectionHeader";
+import { ContentView } from "./components/ContentView";
+import { ProgressView } from "./components/ProgressView";
 
 export default function App() {
   const [lvlIdx, setLvlIdx] = useState(0);
   const [secIdx, setSecIdx] = useState(0);
-  const [openItem, setOpenItem] = useState(null);
-  const [tab, setTab] = useState("content");
+  const [openItem, setOpenItem] = useState<number | null>(null);
+  const [tab, setTab] = useState<"content" | "progress">("content");
 
   const { checked, key, toggle, levelStats, secStats, totalStats } = useProgress();
 

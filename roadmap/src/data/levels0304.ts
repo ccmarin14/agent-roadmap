@@ -116,7 +116,7 @@ export const level03 = {
       ],
     },
   ],
-};
+} as const;
 
 export const level04 = {
   id: "04",
@@ -206,7 +206,7 @@ export const level04 = {
             "El orquestador puede decidir el siguiente paso leyendo solo el handoff, sin contexto adicional",
           ],
         },
-{
+        {
           label: "Pipeline completo de feature",
           body: "El flujo end-to-end:\n1. Orquestador lee el issue, descompone en tareas, crea el plan.\n2. Agente de implementación ejecuta según el plan, hace commits semánticos.\n3. Agentes de tests, review y seguridad corren en paralelo sobre los cambios.\n4. Agente de documentación actualiza docs del módulo afectado.\n5. PR listo con description generada, tests actualizados, docs al día.\n\nEl equipo solo hace el review final. Todo lo demás fue coordinado por los agentes.",
           references: ["orchestration"],
@@ -229,4 +229,4 @@ export const level04 = {
       ],
     },
   ],
-};
+} as const;

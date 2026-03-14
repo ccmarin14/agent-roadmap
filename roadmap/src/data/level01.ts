@@ -190,7 +190,7 @@ export const level01 = {
             "La sección fue revisada y tiene consenso de todo el equipo",
           ],
         },
-{
+        {
           label: "Contexto de negocio y decisiones tomadas",
           body: "Documenta qué hace la app, quién la usa y las decisiones de arquitectura importantes con su justificación. Ejemplo: 'Usamos Zod para validación porque necesitamos runtime type safety' o 'Elegimos tRPC sobre REST porque el equipo es full-stack TypeScript'.\n\nMás valioso aún: sección 'por qué NO usamos X' para evitar que el agente proponga soluciones que el equipo ya descarta. Cada decisión con su contexto evita debates repetidos.",
           references: ["agents-md"],
@@ -224,4 +224,4 @@ export const level01 = {
       ],
     },
   ],
-};
+} as const;

@@ -202,4 +202,4 @@ export const level02 = {
       ],
     },
   ],
-};
+} as const;

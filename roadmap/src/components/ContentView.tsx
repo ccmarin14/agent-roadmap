@@ -1,12 +1,24 @@
-import { REFERENCES, getReferencesForItem } from "../data/references.js";
+import { REFERENCES } from "../data/references";
+import type { Level, Section } from "../types";
 
-export function ContentView({ section, level, lvlIdx, secIdx, openItem, setOpenItem, checked, key_fn, toggle }) {
-  const key = key_fn;
+interface ContentViewProps {
+  section: Section;
+  level: Level;
+  lvlIdx: number;
+  secIdx: number;
+  openItem: number | null;
+  setOpenItem: (idx: number | null) => void;
+  checked: Record<string, boolean>;
+  key_fn: (li: number, si: number, ii: number, ci: number) => string;
+  toggle: (k: string) => void;
+}
+
+export function ContentView({ section, level, lvlIdx, secIdx, openItem, setOpenItem, checked, key_fn, toggle }: ContentViewProps) {
   return (
     <div className="max-w-full flex flex-col gap-[6px]">
       {section.items.map((item, ii) => {
         const open = openItem === ii;
-        const itemChecked = item.checks.filter((_, ci) => checked[key(lvlIdx, secIdx, ii, ci)]).length;
+        const itemChecked = item.checks.filter((_, ci) => checked[key_fn(lvlIdx, secIdx, ii, ci)]).length;
 
         return (
           <div
@@ -66,7 +78,7 @@ export function ContentView({ section, level, lvlIdx, secIdx, openItem, setOpenI
                       REFERENCIAS
                     </div>
                     {item.references.map((refKey) => {
-                      const refs = REFERENCES[refKey] || [];
+                      const refs = REFERENCES[refKey as keyof typeof REFERENCES] || [];
                       return refs.map((ref, ri) => (
                         <a
                           key={ri}
@@ -90,8 +102,9 @@ export function ContentView({ section, level, lvlIdx, secIdx, openItem, setOpenI
                   CRITERIOS DE DOMINIO
                 </div>
                 {item.checks.map((chk, ci) => {
-                  const k = key(lvlIdx, secIdx, ii, ci);
+                  const k = key_fn(lvlIdx, secIdx, ii, ci);
                   const done = checked[k];
+                  const checkText = typeof chk === 'string' ? chk : chk.text;
                   return (
                     <button
                       key={ci}
@@ -117,7 +130,7 @@ export function ContentView({ section, level, lvlIdx, secIdx, openItem, setOpenI
                           textDecoration: done ? "line-through" : "none",
                         }}
                       >
-                        {chk}
+                        {checkText}
                       </span>
                     </button>
                   );

@@ -1,4 +1,15 @@
-export function SectionHeader({ level, secIdx, setSecIdx, setOpenItem, secStats, lvlIdx }) {
+import type { Level, ProgressStats } from "../types";
+
+interface SectionHeaderProps {
+  level: Level;
+  lvlIdx: number;
+  secIdx: number;
+  setSecIdx: (idx: number) => void;
+  setOpenItem: (idx: number | null) => void;
+  secStats: (li: number, si: number) => ProgressStats;
+}
+
+export function SectionHeader({ level, secIdx, setSecIdx, setOpenItem, secStats, lvlIdx }: SectionHeaderProps) {
   return (
     <div className="px-6 py-3 border-b border-border flex-shrink-0 bg-surface">
       <div className="flex items-center gap-2 mb-1">

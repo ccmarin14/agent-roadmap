@@ -1,5 +1,4 @@
 export const REFERENCES = {
-  // Level 01 - Fundamentos
   "llm-tokens": [
     {
       title: "Temperature, Tokens, and Context Windows: The Three Pillars of LLM Control",
@@ -45,8 +44,6 @@ export const REFERENCES = {
       desc: "Repositorio oficial de DeepSeek R1"
     }
   ],
-
-  // Agentes
   "agents-basics": [
     {
       title: "Building Effective Agents",
@@ -59,8 +56,6 @@ export const REFERENCES = {
       desc: "Guía práctica sobre MCP y su ecosistema"
     }
   ],
-
-  // IDE y Consola
   "ide-opencode": [
     {
       title: "OpenCode",
@@ -87,8 +82,6 @@ export const REFERENCES = {
       desc: "Técnicas de prompt engineering de Anthropic"
     }
   ],
-
-  // AGENTS.md
   "agents-md": [
     {
       title: "The Perfect CLAUDE.md Template for Vibe Coding",
@@ -106,8 +99,6 @@ export const REFERENCES = {
       desc: "Guía completa desde estructura básica hasta patrones avanzados"
     }
   ],
-
-  // Level 02 - MCP
   "mcp-basics": [
     {
       title: "Introducing the Model Context Protocol",
@@ -132,8 +123,6 @@ export const REFERENCES = {
       desc: "Guía de implementación con Python"
     }
   ],
-
-  // Skills
   "skills-basics": [
     {
       title: "Building Skills for Claude Code",
@@ -158,8 +147,6 @@ export const REFERENCES = {
       desc: "Mejores prácticas oficiales de Anthropic"
     }
   ],
-
-  // Documentación
   "docs-context7": [
     {
       title: "Context7 Guide: Setup, Configuration & MCP Integration",
@@ -172,8 +159,6 @@ export const REFERENCES = {
       desc: "Anuncio y caso de uso de Context7"
     }
   ],
-
-  // Level 03 - Hooks
   "hooks-basics": [
     {
       title: "Claude Code hooks: a bookmarkable guide to git automation",
@@ -198,8 +183,6 @@ export const REFERENCES = {
       desc: "Guía completa con ejemplos listos para usar"
     }
   ],
-
-  // Level 04 - Orquestación
   "orchestration": [
     {
       title: "Claude Code Agent Skills",
@@ -207,64 +190,68 @@ export const REFERENCES = {
       desc: "Notas sobre agentes especializados y orquestación"
     }
   ]
+} as const;
+
+type ReferenceKey = keyof typeof REFERENCES;
+
+const mapping: Record<string, ReferenceKey | undefined> = {
+  "llm-tokens": "llm-tokens",
+  "llm-anthropic": "llm-anthropic",
+  "llm-openai": "llm-openai",
+  "llm-gemini": "llm-gemini",
+  "llm-deepseek": "llm-deepseek",
+  "llm-zen": "llm-tokens",
+  "agents-basics": "agents-basics",
+  "agents-types": "agents-basics",
+  "agents-trust": "agents-basics",
+  "ide-opencode": "ide-opencode",
+  "console-claude-code": "console-claude-code",
+  "sessions": "console-claude-code",
+  "prompts-basics": "prompts-basics",
+  "agents-md": "agents-md",
+  "agents-md-structure": "agents-md",
+  "agents-md-conventions": "agents-md",
+  "agents-md-context": "agents-md",
+  "agents-md-hierarchical": "agents-md",
+  "agents-md-cycle": "agents-md",
+  "mcp-basics": "mcp-basics",
+  "mcp-architecture": "mcp-basics",
+  "mcp-essential": "mcp-servers",
+  "mcp-security": "mcp-basics",
+  "mcp-efficiency": "mcp-basics",
+  "mcp-build": "mcp-servers",
+  "skills-basics": "skills-basics",
+  "skills-anatomy": "skills-structure",
+  "skills-essential": "skills-basics",
+  "skills-scope": "skills-basics",
+  "skills-create": "skills-basics",
+  "docs-context7": "docs-context7",
+  "docs-internal": "docs-context7",
+  "docs-generated": "docs-context7",
+  "prompts-library": "prompts-basics",
+  "prompts-onboarding": "prompts-basics",
+  "prompts-types": "prompts-basics",
+  "hooks-precommit": "hooks-config",
+  "hooks-postmerge": "hooks-basics",
+  "hooks-scripts": "hooks-basics",
+  "hooks-skills": "hooks-basics",
+  "flows-issue-pr": "mcp-basics",
+  "flows-migration": "mcp-basics",
+  "flows-sessions": "console-claude-code",
+  "advanced-plan-act": "agents-basics",
+  "advanced-overrides": "agents-md",
+  "specialized-principle": "orchestration",
+  "specialized-tests": "skills-basics",
+  "specialized-review": "skills-basics",
+  "specialized-docs": "skills-basics",
+  "specialized-security": "skills-basics",
+  "orchestration-orquestador": "orchestration",
+  "orchestration-handoff": "orchestration",
+  "orchestration-pipeline": "orchestration",
+  "orchestration-fork": "orchestration"
 };
 
-export const getReferencesForItem = (itemId) => {
-  const mapping = {
-    "llm-tokens": "llm-tokens",
-    "llm-anthropic": "llm-anthropic",
-    "llm-openai": "llm-openai",
-    "llm-gemini": "llm-gemini",
-    "llm-deepseek": "llm-deepseek",
-    "llm-zen": "llm-tokens",
-    "agents-basics": "agents-basics",
-    "agents-types": "agents-basics",
-    "agents-trust": "agents-basics",
-    "ide-opencode": "ide-opencode",
-    "console-claude-code": "console-claude-code",
-    "sessions": "console-claude-code",
-    "prompts-basics": "prompts-basics",
-    "agents-md": "agents-md",
-    "agents-md-structure": "agents-md",
-    "agents-md-conventions": "agents-md",
-    "agents-md-context": "agents-md",
-    "agents-md-hierarchical": "agents-md",
-    "agents-md-cycle": "agents-md",
-    "mcp-basics": "mcp-basics",
-    "mcp-architecture": "mcp-basics",
-    "mcp-essential": "mcp-servers",
-    "mcp-security": "mcp-basics",
-    "mcp-efficiency": "mcp-basics",
-    "mcp-build": "mcp-servers",
-    "skills-basics": "skills-basics",
-    "skills-anatomy": "skills-structure",
-    "skills-essential": "skills-basics",
-    "skills-scope": "skills-basics",
-    "skills-create": "skills-basics",
-    "docs-context7": "docs-context7",
-    "docs-internal": "docs-context7",
-    "docs-generated": "docs-context7",
-    "prompts-library": "prompts-basics",
-    "prompts-onboarding": "prompts-basics",
-    "prompts-types": "prompts-basics",
-    "hooks-precommit": "hooks-config",
-    "hooks-postmerge": "hooks-basics",
-    "hooks-scripts": "hooks-basics",
-    "hooks-skills": "hooks-basics",
-    "flows-issue-pr": "mcp-basics",
-    "flows-migration": "mcp-basics",
-    "flows-sessions": "console-claude-code",
-    "advanced-plan-act": "agents-basics",
-    "advanced-overrides": "agents-md",
-    "specialized-principle": "orchestration",
-    "specialized-tests": "skills-basics",
-    "specialized-review": "skills-basics",
-    "specialized-docs": "skills-basics",
-    "specialized-security": "skills-basics",
-    "orchestration-orquestador": "orchestration",
-    "orchestration-handoff": "orchestration",
-    "orchestration-pipeline": "orchestration",
-    "orchestration-fork": "orchestration"
-  };
-  return mapping[itemId] ? REFERENCES[mapping[itemId]] : [];
-};
+export function getReferencesForItem(itemId: string) {
+  const key = mapping[itemId];
+  return key ? REFERENCES[key] : [];
+}

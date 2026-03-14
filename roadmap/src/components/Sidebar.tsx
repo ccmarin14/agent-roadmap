@@ -1,6 +1,16 @@
-import { LEVELS } from "../data/index.js";
+import { LEVELS } from "../data/index";
+import type { ProgressStats } from "../types";
 
-export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, levelStats }) {
+interface SidebarProps {
+  lvlIdx: number;
+  setLvlIdx: (idx: number) => void;
+  secIdx: number;
+  setSecIdx: (idx: number) => void;
+  setOpenItem: (idx: number | null) => void;
+  levelStats: (li: number) => ProgressStats;
+}
+
+export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, levelStats }: SidebarProps) {
   return (
     <div className="w-[220px] flex-shrink-0 border-r border-border flex flex-col overflow-hidden">
       <div className="flex-1 overflow-y-auto py-2">

@@ -1,4 +1,13 @@
-export function TopBar({ level, tab, setTab, total }) {
+import type { Level, ProgressStats } from "../types";
+
+interface TopBarProps {
+  level: Level;
+  tab: string;
+  setTab: (tab: string) => void;
+  total: ProgressStats;
+}
+
+export function TopBar({ level, tab, setTab, total }: TopBarProps) {
   return (
     <div className="flex items-center justify-between px-5 h-12 border-b border-border flex-shrink-0 bg-surface">
       <div className="flex items-center gap-4">
@@ -25,7 +34,7 @@ export function TopBar({ level, tab, setTab, total }) {
         </div>
 
         <div className="flex gap-[3px]">
-          {["content", "progress"].map((t) => (
+          {(["content", "progress"] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}

@@ -1,6 +1,18 @@
-import { LEVELS } from "../data/index.js";
+import { LEVELS } from "../data/index";
+import type { ProgressStats } from "../types";
 
-export function ProgressView({ lvlIdx, setLvlIdx, setSecIdx, setTab, checked, key_fn, toggle, levelStats }) {
+interface ProgressViewProps {
+  lvlIdx: number;
+  setLvlIdx: (idx: number) => void;
+  setSecIdx: (idx: number) => void;
+  setTab: (tab: string) => void;
+  checked: Record<string, boolean>;
+  key_fn: (li: number, si: number, ii: number, ci: number) => string;
+  toggle: (k: string) => void;
+  levelStats: (li: number) => ProgressStats;
+}
+
+export function ProgressView({ lvlIdx, setLvlIdx, setSecIdx, setTab, checked, key_fn, toggle, levelStats }: ProgressViewProps) {
   return (
     <div className="max-w-[860px]">
       <div className="mb-6">
@@ -62,6 +74,7 @@ export function ProgressView({ lvlIdx, setLvlIdx, setSecIdx, setTab, checked, ke
                   {item.checks.map((chk, ci) => {
                     const k = key_fn(li, si, ii, ci);
                     const done = checked[k];
+                    const checkText = typeof chk === 'string' ? chk : chk.text;
                     return (
                       <button
                         key={ci}
@@ -87,7 +100,7 @@ export function ProgressView({ lvlIdx, setLvlIdx, setSecIdx, setTab, checked, ke
                             textDecoration: done ? "line-through" : "none",
                           }}
                         >
-                          {chk}
+                          {checkText}
                         </span>
                       </button>
                     );

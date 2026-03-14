@@ -1,4 +1,4 @@
-export const C = {
+export const C: Record<string, string> = {
   bg: "#0F1117",
   surface: "#161B27",
   surfaceHover: "#1C2333",
