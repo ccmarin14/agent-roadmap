@@ -2,7 +2,6 @@ import { useState } from "react";
 import { LEVELS } from "./data/index";
 import { useProgress } from "./hooks/useProgress";
 import { useAuth } from "./hooks/useAuth";
-import { C } from "./theme";
 import { TopBar } from "./components/TopBar";
 import { Sidebar } from "./components/Sidebar";
 import { SectionHeader } from "./components/SectionHeader";
@@ -25,15 +24,7 @@ export default function App() {
 
   if (loading) {
     return (
-      <div style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        background: C.bg,
-        color: C.textDim,
-        fontSize: "13px",
-      }}>
+      <div className="flex items-center justify-center h-screen bg-bg text-text-dim text-[13px]">
         Cargando...
       </div>
     );
@@ -50,17 +41,10 @@ export default function App() {
   }
 
   return (
-    <div style={{
-      display: "flex", flexDirection: "column",
-      height: "100vh",
-      background: C.bg, color: C.text,
-      fontFamily: "'DM Mono', monospace",
-      fontSize: "13px",
-      overflow: "hidden",
-    }}>
+    <div className="flex flex-col h-screen bg-bg text-text font-mono text-[13px] overflow-hidden">
       <TopBar level={level} tab={tab} setTab={setTab} total={total} />
 
-      <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
+      <div className="flex flex-1 overflow-hidden">
         <Sidebar
           lvlIdx={lvlIdx} setLvlIdx={setLvlIdx}
           secIdx={secIdx} setSecIdx={setSecIdx}
@@ -70,7 +54,7 @@ export default function App() {
           onLogout={logout}
         />
 
-        <div style={{ flex: 1, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <div className="flex-1 overflow-hidden flex flex-col">
           {tab === "content" && (
             <SectionHeader
               level={level}
@@ -82,8 +66,8 @@ export default function App() {
           )}
 
           <div
-            style={{ flex: 1, overflowY: "auto", padding: "16px 24px" }}
-            className="ani"
+            className="ani flex-1 overflow-y-auto"
+            style={{ padding: "16px 24px" }}
             key={`${lvlIdx}-${secIdx}-${tab}`}
           >
             {tab === "content" ? (

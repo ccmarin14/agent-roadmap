@@ -1,5 +1,4 @@
 import type { Level, ProgressStats } from "../types";
-import { C } from "../theme";
 
 interface TopBarProps {
   level: Level;
@@ -12,11 +11,11 @@ export function TopBar({ level, tab, setTab, total }: TopBarProps) {
   return (
     <div className="flex items-center justify-between px-5 h-12 border-b border-border flex-shrink-0 bg-surface relative">
       <div className="flex items-center gap-4">
-        <span className="text-[13px] tracking-widest" style={{ color: C.textDim }}>
+        <span className="text-[13px] tracking-widest text-text-dim">
           AGENTES DE IA
         </span>
-        <span style={{ color: C.border }}>|</span>
-        <span className="text-sm" style={{ color: C.textMid }}>
+        <span className="text-border">|</span>
+        <span className="text-sm text-text-mid">
           De cero a orquestación en equipo
         </span>
       </div>
@@ -29,7 +28,7 @@ export function TopBar({ level, tab, setTab, total }: TopBarProps) {
               style={{ width: `${total.pct}%`, backgroundColor: level.color }}
             />
           </div>
-          <span className="text-[13px]" style={{ color: C.textDim }}>
+          <span className="text-[13px] text-text-dim">
             {total.d}/{total.t}
           </span>
         </div>
@@ -41,8 +40,8 @@ export function TopBar({ level, tab, setTab, total }: TopBarProps) {
               onClick={() => setTab(t)}
               className="px-3 py-1 rounded text-xs tracking-widest transition-all duration-150"
               style={{
-                backgroundColor: tab === t ? level.color : C.borderLight,
-                color: tab === t ? "#000" : C.textDim,
+                backgroundColor: tab === t ? level.color : undefined,
+                color: tab === t ? "#000" : undefined,
               }}
             >
               {t === "content" ? "CONTENIDO" : "PROGRESO"}

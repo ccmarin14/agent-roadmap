@@ -1,7 +1,6 @@
 import { LEVELS } from "../data/index";
 import type { ProgressStats } from "../types";
 import type { User } from "@supabase/supabase-js";
-import { C } from "../theme";
 
 interface SidebarProps {
   lvlIdx: number;
@@ -25,9 +24,7 @@ export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, lev
             <div key={li}>
               <button
                 onClick={() => { setLvlIdx(li); setSecIdx(0); setOpenItem(null); }}
-                className={`w-full text-left px-4 py-[10px] border-l-[3px] transition-all duration-150 ${
-                  active ? "bg-opacity-10" : "bg-transparent"
-                }`}
+                className="w-full text-left px-4 py-[10px] border-l-[3px] transition-all duration-150"
                 style={{
                   borderLeftColor: active ? lv.color : "transparent",
                   backgroundColor: active ? `${lv.color}10` : "transparent",
@@ -36,24 +33,24 @@ export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, lev
                 <div className="flex justify-between items-center mb-[3px]">
                   <span
                     className="text-xs tracking-widest"
-                    style={{ color: active ? lv.color : "#475569" }}
+                    style={{ color: active ? lv.color : undefined }}
                   >
                     NIVEL {lv.id}
                   </span>
                   <span
                     className="text-xs"
-                    style={{ color: st.pct > 0 ? lv.color : "#65738b" }}
+                    style={{ color: st.pct > 0 ? lv.color : undefined }}
                   >
                     {st.pct}%
                   </span>
                 </div>
                 <div
                   className="text-sm mb-1 leading-[1.3]"
-                  style={{ color: active ? "#E2E8F0" : "#475569" }}
+                  style={{ color: active ? undefined : undefined }}
                 >
                   {lv.title}
                 </div>
-                <div className="text-xs" style={{ color: "#65738b" }}>
+                <div className="text-xs text-text-faint">
                   {lv.duration} · {lv.team}
                 </div>
                 {st.t > 0 && (
@@ -74,12 +71,12 @@ export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, lev
                       onClick={() => { setSecIdx(si); setOpenItem(null); }}
                       className="w-full text-left px-2 py-[5px] border-l-2 mb-[2px] bg-transparent transition-all duration-100"
                       style={{
-                        borderLeftColor: si === secIdx ? `${lv.color}80` : "#1E2535",
+                        borderLeftColor: si === secIdx ? `${lv.color}80` : undefined,
                       }}
                     >
                       <span
                         className="text-xs leading-[1.4]"
-                        style={{ color: si === secIdx ? "#94A3B8" : "#475569" }}
+                        style={{ color: si === secIdx ? undefined : undefined }}
                       >
                         {s.title}
                       </span>
@@ -91,14 +88,13 @@ export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, lev
           );
         })}
       </div>
-      <div className="p-3 border-t border-border justify-between">
-        <p className="text-s truncate" style={{ color: C.textMid }}>
+      <div className="p-3 border-t border-border items-center justify-between">
+        <span className="text-xs truncate text-text-mid">
           {user?.email || "Invitado"}
-        </p>
+        </span>
         <button
           onClick={onLogout}
-          className="py-1 rounded text-s tracking-widest transition-all duration-150 bg-green-500"
-          style={{ color: C.textDim }}
+          className="py-1 rounded text-xs tracking-wider transition-all duration-150 bg-green hover:opacity-80"
         >
           SALIR
         </button>
