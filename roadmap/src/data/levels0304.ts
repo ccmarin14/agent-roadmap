@@ -51,6 +51,16 @@ export const level03 = {
             "Los hooks están documentados en el AGENTS.md del proyecto",
           ],
         },
+        {
+          label: "Hook de sugerencia de spec",
+          body: "En esta fase el equipo puede usar un hook que sugiere crear una spec antes de iniciar trabajo significativo. Cuando el usuario inicia una sesión con una tarea grande, el hook pregunta: '¿Tienes una spec para esto? Si no, quieres generar una?'.\n\nEsto introduce SDD gradualmente sin obligatoriedad. El hook no bloquea el trabajo — solo sugiere y facilita crear la spec usando los templates. Ideal para equipos en transición hacia SDD.",
+          references: ["sdd-basics"],
+          checks: [
+            "El hook de sugerencia de spec está activo",
+            "El hook usa los templates de .project/specs/ para generar specs",
+            "El equipo entiende que usar specs es recomendado pero no obligatorio en Level 03",
+          ],
+        },
       ],
     },
     {
@@ -214,6 +224,17 @@ export const level04 = {
             "El pipeline completo corre en menos de 20 minutos para features medianos",
             "El equipo solo necesita revisar el PR final, sin supervisar cada paso",
             "Tienes métricas del tiempo ahorrado vs el flujo de desarrollo manual anterior",
+          ],
+        },
+        {
+          label: "Spec requerida en pipeline orquestado",
+          body: "En Level 04, usar spec es obligatorio para el pipeline automatizado. El orquestador verifica que exista una spec antes de iniciar. La spec debe estar en `.project/specs/features/[nombre].md` y debe pasar la validación del skill SDD.\n\nValidación en cada fase:\n• Antes de implementar: la spec tiene todos los campos obligatorios\n• Durante implementación: el agente de tests valida contra criterios de aceptación\n• Durante review: el agente de review verifica que el código cumpla la spec\n• Al cerrar: el handoff incluye qué criterios de aceptación se cumplieron\n\nEsto asegura que el trabajo orquestado tenga objetivos claros y medibles.",
+          references: ["sdd-basics"],
+          checks: [
+            "El orquestador tiene una regla: sin spec no hay pipeline",
+            "La spec se versiona junto con el código del feature",
+            "Cada fase del pipeline valida contra los criterios de aceptación de la spec",
+            "El handoff final indica qué criterios se cumplieron y cuáles no",
           ],
         },
         {

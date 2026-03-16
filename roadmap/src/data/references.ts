@@ -189,6 +189,32 @@ export const REFERENCES = {
       url: "https://prg.sh/notes/Claude-Code-Agent-Skills",
       desc: "Notas sobre agentes especializados y orquestación"
     }
+  ],
+  "sdd-basics": [
+    {
+      title: "Kiro - Spec-Driven Development",
+      url: "https://kiro.dev/docs/specs/",
+      desc: "Sistema de specs de Kiro con formato EARS"
+    },
+    {
+      title: "How to Write a Good Spec for AI Agents",
+      url: "https://www.oreilly.com/radar/how-to-write-a-good-spec-for-ai-agents/",
+      desc: "Guía de Addy Osmani sobre specs efectivas para agentes"
+    }
+  ],
+  "ide-cursor": [
+    {
+      title: "Cursor - The AI Code Editor",
+      url: "https://cursor.sh",
+      desc: "IDE con agente de IA integrado"
+    }
+  ],
+  "ide-windsurf": [
+    {
+      title: "Windsurf - AI IDE by Codeium",
+      url: "https://windsurf.com",
+      desc: "IDE con agente de IA integrado de Codeium"
+    }
   ]
 } as const;
 
@@ -248,7 +274,9 @@ const mapping: Record<string, ReferenceKey | undefined> = {
   "orchestration-orquestador": "orchestration",
   "orchestration-handoff": "orchestration",
   "orchestration-pipeline": "orchestration",
-  "orchestration-fork": "orchestration"
+  "orchestration-fork": "orchestration",
+  "ide-cursor": "ide-cursor",
+  "ide-windsurf": "ide-windsurf"
 };
 
 export function getReferencesForItem(itemId: string) {

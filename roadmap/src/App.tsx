@@ -7,20 +7,30 @@ import { Sidebar } from "./components/Sidebar";
 import { SectionHeader } from "./components/SectionHeader";
 import { ContentView } from "./components/ContentView";
 import { ProgressView } from "./components/ProgressView";
+import { ExamsView } from "./components/ExamsView";
 import { Login } from "./components/Login";
+import { canAccessLevel } from "./utils/unlockLogic";
 
 export default function App() {
   const [lvlIdx, setLvlIdx] = useState(0);
   const [secIdx, setSecIdx] = useState(0);
   const [openItem, setOpenItem] = useState<number | null>(null);
-  const [tab, setTab] = useState<"content" | "progress">("content");
+  const [tab, setTab] = useState<"content" | "progress" | "exams">("content");
 
   const { user, isGuest, loading, login, logout, continueAsGuest } = useAuth();
-  const { checked, key, toggle, levelStats, secStats, totalStats } = useProgress({ user, isGuest });
+  const { checked, key, toggle, levelStats, secStats, totalStats, saveQuizResult, saveExamResult, quizResults, examResults } = useProgress({ user, isGuest });
 
   const level = LEVELS[lvlIdx];
   const section = level.sections[secIdx];
   const total = totalStats();
+
+  const handleSetLvlIdx = (newLvlIdx: number) => {
+    if (canAccessLevel(newLvlIdx, examResults)) {
+      setLvlIdx(newLvlIdx);
+      setSecIdx(0);
+      setOpenItem(null);
+    }
+  };
 
   if (loading) {
     return (
@@ -46,10 +56,11 @@ export default function App() {
 
       <div className="flex flex-1 overflow-hidden">
         <Sidebar
-          lvlIdx={lvlIdx} setLvlIdx={setLvlIdx}
+          lvlIdx={lvlIdx} setLvlIdx={handleSetLvlIdx}
           secIdx={secIdx} setSecIdx={setSecIdx}
           setOpenItem={setOpenItem}
           levelStats={levelStats}
+          examResults={examResults}
           levelColor={level.color}
           user={user}
           onLogout={logout}
@@ -82,8 +93,10 @@ export default function App() {
                 checked={checked}
                 key_fn={key}
                 toggle={toggle}
+                levelStats={levelStats}
+                examResults={examResults}
               />
-            ) : (
+            ) : tab === "progress" ? (
               <ProgressView
                 lvlIdx={lvlIdx}
                 setLvlIdx={setLvlIdx}
@@ -93,6 +106,16 @@ export default function App() {
                 key_fn={key}
                 toggle={toggle}
                 levelStats={levelStats}
+                examResults={examResults}
+              />
+            ) : (
+              <ExamsView
+                lvlIdx={lvlIdx}
+                levelStats={levelStats}
+                quizResults={quizResults}
+                examResults={examResults}
+                onQuizComplete={saveQuizResult}
+                onExamComplete={saveExamResult}
               />
             )}
           </div>

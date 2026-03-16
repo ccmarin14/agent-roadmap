@@ -1,6 +1,8 @@
 import { LEVELS } from "../data/index";
-import type { ProgressStats } from "../types";
+import type { ProgressStats, ExamResult } from "../types";
 import type { User } from "@supabase/supabase-js";
+import { canAccessLevel, getUnlockRequirements } from "../utils/unlockLogic";
+import { LevelLock } from "./LevelLock";
 
 interface SidebarProps {
   lvlIdx: number;
@@ -9,60 +11,73 @@ interface SidebarProps {
   setSecIdx: (idx: number) => void;
   setOpenItem: (idx: number | null) => void;
   levelStats: (li: number) => ProgressStats;
+  examResults: ExamResult[];
   levelColor: string;
   user: User | null;
   onLogout: () => void;
 }
 
-export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, levelStats, levelColor, user, onLogout }: SidebarProps) {
+export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, levelStats, examResults, levelColor, user, onLogout }: SidebarProps) {
   return (
     <div className="w-[220px] flex-shrink-0 border-r border-border flex flex-col overflow-hidden">
       <div className="flex-1 overflow-y-auto py-2">
         {LEVELS.map((lv, li) => {
           const st = levelStats(li);
           const active = li === lvlIdx;
+          const isLocked = !canAccessLevel(li, examResults);
+          const requirements = getUnlockRequirements(li);
+
           return (
             <div key={li}>
-              <button
-                onClick={() => { setLvlIdx(li); setSecIdx(0); setOpenItem(null); }}
-                className="w-full text-left px-4 py-[10px] border-l-[3px] transition-all duration-150"
-                style={{
-                  borderLeftColor: active ? lv.color : "transparent",
-                  backgroundColor: active ? `${lv.color}10` : "transparent",
-                }}
-              >
-                <div className="flex justify-between items-center mb-[3px]">
-                  <span
-                    className="text-xs tracking-widest"
-                    style={{ color: active ? lv.color : undefined }}
-                  >
-                    NIVEL {lv.id}
-                  </span>
-                  <span
-                    className="text-xs"
-                    style={{ color: st.pct > 0 ? lv.color : undefined }}
-                  >
-                    {st.pct}%
-                  </span>
-                </div>
-                <div
-                  className="text-sm mb-1 leading-[1.3]"
-                  style={{ color: active ? undefined : undefined }}
+              {isLocked ? (
+                <LevelLock
+                  color={lv.color}
+                  title={lv.title}
+                  requirements={requirements || ""}
+                  number={lv.id}
+                />
+              ) : (
+                <button
+                  onClick={() => { setLvlIdx(li); setSecIdx(0); setOpenItem(null); }}
+                  className="w-full text-left px-4 py-[10px] border-l-[3px] transition-all duration-150"
+                  style={{
+                    borderLeftColor: active ? lv.color : "transparent",
+                    backgroundColor: active ? `${lv.color}10` : "transparent",
+                  }}
                 >
-                  {lv.title}
-                </div>
-                <div className="text-xs text-text-faint">
-                  {lv.duration} · {lv.team}
-                </div>
-                {st.t > 0 && (
-                  <div className="mt-[6px] h-[2px] bg-border-light rounded-[1px] overflow-hidden">
-                    <div
-                      className="h-full transition-all duration-300 rounded-[1px]"
-                      style={{ width: `${st.pct}%`, backgroundColor: lv.color }}
-                    />
+                  <div className="flex justify-between items-center mb-[3px]">
+                    <span
+                      className="text-xs tracking-widest"
+                      style={{ color: active ? lv.color : undefined }}
+                    >
+                      NIVEL {lv.id}
+                    </span>
+                    <span
+                      className="text-xs"
+                      style={{ color: st.pct > 0 ? lv.color : undefined }}
+                    >
+                      {st.pct}%
+                    </span>
                   </div>
-                )}
-              </button>
+                  <div
+                    className="text-sm mb-1 leading-[1.3]"
+                    style={{ color: active ? undefined : undefined }}
+                  >
+                    {lv.title}
+                  </div>
+                  <div className="text-xs text-text-faint">
+                    {lv.duration} · {lv.team}
+                  </div>
+                  {st.t > 0 && (
+                    <div className="mt-[6px] h-[2px] bg-border-light rounded-[1px] overflow-hidden">
+                      <div
+                        className="h-full transition-all duration-300 rounded-[1px]"
+                        style={{ width: `${st.pct}%`, backgroundColor: lv.color }}
+                      />
+                    </div>
+                  )}
+                </button>
+              )}
 
               {active && (
                 <div className="pl-4 pb-1">

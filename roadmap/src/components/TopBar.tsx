@@ -2,8 +2,8 @@ import type { Level, ProgressStats } from "../types";
 
 interface TopBarProps {
   level: Level;
-  tab: "content" | "progress";
-  setTab: React.Dispatch<React.SetStateAction<"content" | "progress">>;
+  tab: "content" | "progress" | "exams";
+  setTab: React.Dispatch<React.SetStateAction<"content" | "progress" | "exams">>;
   total: ProgressStats;
 }
 
@@ -34,7 +34,7 @@ export function TopBar({ level, tab, setTab, total }: TopBarProps) {
         </div>
 
         <div className="flex gap-[3px]">
-          {(["content", "progress"] as const).map((t) => (
+          {(["content", "progress", "exams"] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
@@ -44,7 +44,7 @@ export function TopBar({ level, tab, setTab, total }: TopBarProps) {
                 color: tab === t ? "#000" : undefined,
               }}
             >
-              {t === "content" ? "CONTENIDO" : "PROGRESO"}
+              {t === "content" ? "CONTENIDO" : t === "progress" ? "PROGRESO" : "EVALUACIONES"}
             </button>
           ))}
         </div>

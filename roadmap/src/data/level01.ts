@@ -73,6 +73,99 @@ export const level01 = {
           ],
         },
       ],
+      quiz: {
+        passingScore: 90,
+        questions: [
+          {
+            id: "llm-q1",
+            question: "¿Qué es un token en el contexto de LLMs?",
+            options: [
+              "Una palabra completa",
+              "Una unidad de texto de aproximadamente 4 caracteres",
+              "Una frase completa",
+              "Un párrafo entero"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "llm-q2",
+            question: "¿Qué es la 'ventana de contexto' en un LLM?",
+            options: [
+              "La interfaz de chat",
+              "La cantidad de texto que el modelo puede 'recordar' en una conversación",
+              "El tamaño del archivo de entrada",
+              "La memoria del computador"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "llm-q3",
+            question: "¿Qué efecto tiene aumentar la 'temperatura' de un LLM?",
+            options: [
+              "El modelo responde más rápido",
+              "El modelo se vuelve más determinístico y preciso",
+              "El modelo genera respuestas más creativas y diversas",
+              "El modelo usa menos memoria"
+            ],
+            correctIndex: 2
+          },
+          {
+            id: "llm-q4",
+            question: "¿Cuál es la regla práctica para usar los modelos de Claude?",
+            options: [
+              "Siempre usar Opus por ser el más potente",
+              "Empezar con Sonnet y subir a Opus solo cuando falle repetidamente",
+              "Usar Haiku para todo",
+              "No importa cuál uses"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "llm-q5",
+            question: "¿Cuál es la ventaja principal de Gemini 2.5 Pro?",
+            options: [
+              "Es el más barato",
+              "Su ventana de contexto de 1 millón de tokens",
+              "Es más rápido que Claude",
+              "No tiene límites de uso"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "llm-q6",
+            question: "¿Qué modelo chino es recomendado específicamente para coding agentic?",
+            options: [
+              "DeepSeek V3",
+              "Qwen3-Coder",
+              "Gemini",
+              "GPT-4"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "llm-q7",
+            question: "¿Qué es OpenCode Zen?",
+            options: [
+              "Un modelo de lenguaje",
+              "Una lista de modelos curados y testados específicamente para coding agentic",
+              "Un IDE",
+              "Un lenguaje de programación"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "llm-q8",
+            question: "¿Cuál es la diferencia principal entre GPT-4.1 y la o-series?",
+            options: [
+              "GPT-4.1 es más barato",
+              "La o-series usa razonamiento extendido - el modelo 'piensa' antes de responder",
+              "No hay diferencia",
+              "GPT-4.1 tiene mayor contexto"
+            ],
+            correctIndex: 1
+          }
+        ]
+      }
     },
     {
       id: "agents",
@@ -109,27 +202,87 @@ export const level01 = {
           ],
         },
       ],
+      quiz: {
+        passingScore: 90,
+        questions: [
+          {
+            id: "agents-q1",
+            question: "¿Cuál es la diferencia principal entre un chatbot y un agente?",
+            options: [
+              "Los chatbots son más rápidos",
+              "Los agentes tienen acceso a herramientas para actuar en el sistema",
+              "Los chatbots usan IA más avanzada",
+              "No hay diferencia significativa"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "agents-q2",
+            question: "¿Qué es el patrón ReAct en agentes?",
+            options: [
+              "Un tipo de modelo de lenguaje",
+              "Razonar → Actuar → Observar → Repetir",
+              "Una herramienta de desarrollo",
+              "Un formato de archivo"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "agents-q3",
+            question: "¿Por qué es mejor usar agentes especializados que agentes de propósito general?",
+            options: [
+              "Son más rápidos",
+              "Son más predecibles y fáciles de confiar con herramientas y contexto acotados",
+              "Son más baratos",
+              "No hay diferencia"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "agents-q4",
+            question: "¿Cuál es la regla para confiar de forma segura en un agente?",
+            options: [
+              "Dar acceso completo a todo el proyecto",
+              "Dar contexto mínimo necesario, revisar siempre cambios, empezar con tareas de bajo riesgo",
+              "Nunca revisar lo que hace",
+              "Dejar que haga lo que quiera"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "agents-q5",
+            question: "¿Qué tipo de agente es más valioso para equipos de desarrollo?",
+            options: [
+              "Agentes de propósito general",
+              "Agentes especializados (tests, review, documentación)",
+              "Agentes de chat",
+              "No hay diferencia"
+            ],
+            correctIndex: 1
+          }
+        ]
+      }
     },
     {
       id: "env",
       title: "IDE y Consola",
       items: [
         {
-          label: "Agentes desde el IDE — OpenCode, Cursor, Windsurf",
-          body: "OpenCode: agente de código open-source que corre en terminal pero también tiene integración con VSCode. Soporta múltiples proveedores (Claude, OpenAI, Gemini, DeepSeek, Qwen). Cursor y Windsurf: IDEs que integran el agente directamente en el editor, con acceso al codebase completo, autocompletado agentizado y chat contextual.\n\nPara el entorno de equipo: OpenCode es el más flexible por su soporte multi-proveedor y porque corre en terminal (facilita automatización). Cursor/Windsurf son más amigables para quienes prefieren no salir del editor.",
-          references: ["ide-opencode"],
+          label: "IDEs agentizados — Cursor, Windsurf, Kiro",
+          body: "Cursor y Windsurf: IDEs que integran el agente directamente en el editor, con acceso al codebase completo, autocompletado agentizado y chat contextual.\n\nKiro (AWS): el único IDE built around Spec-Driven Development. A diferencia de los demás, Kiro obliga a trabajar con specs estructuradas (requirements → design → tasks) antes de escribir código. Ideal para equipos que quieren adoptar SDD desde el inicio. Soporta steering files, hooks, y MCP.\n\nPara el entorno de equipo: Cursor/Windsurf son más amigables para quienes prefieren no salir del editor. Kiro para quienes quieren spec-driven desde el IDE.",
+          references: ["ide-cursor", "ide-windsurf", "sdd-basics"],
           checks: [
-            "Tienes instalado y configurado al menos un agente de código (OpenCode, Cursor o Windsurf)",
+            "Tienes instalado y configurado al menos un IDE agentizado (Cursor, Windsurf o Kiro)",
             "Completaste una tarea de desarrollo real de principio a fin con el agente",
-            "Tienes configurados al menos 2 proveedores/modelos distintos en tu herramienta",
+            "Si usas Kiro, experimentaste el flujo spec → design → tasks",
           ],
         },
         {
-          label: "Agentes desde consola — Claude Code, Gemini CLI",
-          body: "Claude Code: el agente de Anthropic para terminal. Corre directamente en bash, puede ejecutar comandos, leer/escribir archivos, interactuar con git. Ideal para automatización y scripting. Gemini CLI: equivalente de Google, también en terminal con ventana de contexto grande.\n\nLa consola permite encadenar el agente en scripts bash, integrar en CI/CD, crear flujos automatizados que se disparan por eventos. La flexibilidad del terminal supera a cualquier IDE para automatización.",
-          references: ["console-claude-code"],
+          label: "Agentes desde consola — OpenCode, Claude Code, Gemini CLI",
+          body: "OpenCode: agente de código open-source que corre en terminal. Soporta múltiples proveedores (Claude, OpenAI, Gemini, DeepSeek, Qwen). Ideal para automatización por su flexibilidad en terminal.\n\nClaude Code: el agente de Anthropic para terminal. Corre directamente en bash, puede ejecutar comandos, leer/escribir archivos, interactuar con git. Ideal para automatización y scripting. Gemini CLI: equivalente de Google, también en terminal con ventana de contexto grande.\n\nLa consola permite encadenar el agente en scripts bash, integrar en CI/CD, crear flujos automatizados. La flexibilidad del terminal supera a cualquier IDE para automatización.",
+          references: ["ide-opencode", "console-claude-code"],
           checks: [
-            "Instalaste Claude Code o Gemini CLI y ejecutaste una tarea desde terminal",
+            "Instalaste OpenCode, Claude Code o Gemini CLI y ejecutaste una tarea desde terminal",
             "Entiendes cómo llamar al agente desde un script bash (ej: claude -p 'prompt' archivo.ts)",
             "Probaste encadenar el agente con pipes o redirecciones en terminal",
           ],
@@ -155,6 +308,77 @@ export const level01 = {
           ],
         },
       ],
+      quiz: {
+        passingScore: 90,
+        questions: [
+          {
+            id: "env-q1",
+            question: "¿Cuál es la ventaja principal de usar OpenCode en terminal sobre un IDE?",
+            options: [
+              "Es más rápido",
+              "Facilita la automatización y scripts",
+              "Es gratis",
+              "Tiene mejor autocompletado"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "env-q2",
+            question: "¿Por qué es mejor usar sesiones cortas con el agente?",
+            options: [
+              "El agente responde más rápido",
+              "Las sesiones largas degradan la calidad de respuestas",
+              "Es más barato",
+              "No hay diferencia"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "env-q3",
+            question: "¿Cuántas partes debe tener un prompt bien estructurado?",
+            options: [
+              "2 partes",
+              "3 partes",
+              "4 partes: contexto, tarea, restricciones, output esperado",
+              "5 partes"
+            ],
+            correctIndex: 2
+          },
+          {
+            id: "env-q4",
+            question: "¿Qué es Claude Code?",
+            options: [
+              "Un IDE",
+              "El agente de Anthropic para terminal que puede ejecutar comandos y leer/escribir archivos",
+              "Un modelo de lenguaje",
+              "Un navegador"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "env-q5",
+            question: "¿Por qué es importante definir el propósito de cada sesión antes de empezar?",
+            options: [
+              "Para que el agente trabaje más rápido",
+              "Para mantener el contexto claro y no mezclar tareas",
+              "Es lo mismo siempre",
+              "No tiene importancia"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "env-q6",
+            question: "¿Cuál es el error más común al escribir prompts?",
+            options: [
+              "Ser muy largo",
+              "Dar solo la tarea sin contexto ni restricciones",
+              "Usar muy pocas palabras",
+              "No usar mayúsculas"
+            ],
+            correctIndex: 1
+          }
+        ]
+      }
     },
     {
       id: "agents_md",
@@ -222,6 +446,55 @@ export const level01 = {
           ],
         },
       ],
+      quiz: {
+        passingScore: 90,
+        questions: [
+          {
+            id: "agentsmd-q1",
+            question: "¿Qué es el AGENTS.md?",
+            options: [
+              "Un archivo de configuración del IDE",
+              "Un archivo que el agente lee automáticamente al iniciar sesión con información del proyecto",
+              "Un archivo de logs",
+              "Un archivo de dependencias"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "agentsmd-q2",
+            question: "¿Cuántas secciones mínimas debe tener un AGENTS.md?",
+            options: [
+              "1 sección",
+              "2 secciones",
+              "4 secciones: rol, stack exacto, comandos, prohibiciones",
+              "6 secciones"
+            ],
+            correctIndex: 2
+          },
+          {
+            id: "agentsmd-q3",
+            question: "¿Por qué es importante incluir 'por qué NO usamos X' en el AGENTS.md?",
+            options: [
+              "Para documentar errores",
+              "Para evitar que el agente proponga soluciones que el equipo ya descarta",
+              "Para justificar decisiones pasadas",
+              "No es importante"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "agentsmd-q4",
+            question: "¿Cuál es el límite práctico recomendado de instrucciones en un AGENTS.md?",
+            options: [
+              "50 instrucciones",
+              "100 instrucciones",
+              "~150 instrucciones",
+              "200 instrucciones"
+            ],
+            correctIndex: 2
+          }
+        ]
+      }
     },
   ],
 } as const;
