@@ -38,6 +38,7 @@ export type Level = {
   readonly team: string;
   readonly desc: string;
   readonly sections: readonly Section[];
+  readonly examQuestions?: readonly QuizQuestion[];
 };
 
 export interface Reference {

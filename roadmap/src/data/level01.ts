@@ -201,6 +201,16 @@ export const level01 = {
             "Empezaste con tareas de bajo riesgo y aumentas la autonomía gradualmente",
           ],
         },
+        {
+          label: "Patrones de razonamiento del agente",
+          body: "Más allá del patrón ReAct, existen otros modelos de razonamiento:\n\n**Reflexion**: El agente se auto-evalúa después de cada acción. Si el resultado no es el esperado, ajusta su approach. Útil para tareas donde el feedback es diferido, como debugging o código complejo donde los errores se ven después de ejecutar.\n\n**Self-Ask**: El agente se hace preguntas intermedias antes de actuar. \"¿Qué necesito saber antes de resolver esto?\" Reduce saltos lógicos incorrectos. Ideal para investigación o análisis donde hay dependencias de información.\n\n**Planning Jerárquico**: Descompone tareas grandes en sub-tareas primero, luego ejecuta. Similar a cómo un PM trabaja. Usa este patrón para features nuevos o refactors grandes.\n\n**Cuándo usar cada uno**:\n- ReAct: tareas simples con feedback inmediato\n- Reflexion: debugging, código complejo donde errores se ven después\n- Self-Ask: investigación, análisis donde hay dependencias de información\n- Planning: features nuevos, refactors grandes",
+          references: ["agents-reasoning"],
+          checks: [
+            "Entiendes la diferencia entre ReAct, Reflexion y Self-Ask",
+            "Sabes cuándo aplicar planning jerárquico vs ejecución directa",
+            "Identificas qué patrón usar según el tipo de tarea"
+          ],
+        },
       ],
       quiz: {
         passingScore: 90,
@@ -259,6 +269,28 @@ export const level01 = {
               "No hay diferencia"
             ],
             correctIndex: 1
+          },
+          {
+            id: "agents-q6",
+            question: "Tienes un bug complejo donde el error aparece horas después de ejecutar. ¿Qué patrón de razonamiento es más apropiado?",
+            options: [
+              "ReAct - ejecución directa con feedback inmediato",
+              "Reflexion - auto-evaluación después de cada acción",
+              "Self-Ask - hacerse preguntas antes de actuar",
+              "Planning jerárquico - decompose en subtareas"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "agents-q7",
+            question: "Necesitas investigar diferentes opciones técnicas para un feature nuevo y presentar tradeoffs. ¿Qué patrón es mejor?",
+            options: [
+              "ReAct",
+              "Reflexion",
+              "Self-Ask - hacerse preguntas intermedias sobre qué saber",
+              "Planning jerárquico"
+            ],
+            correctIndex: 2
           }
         ]
       }
@@ -497,4 +529,50 @@ export const level01 = {
       }
     },
   ],
+  examQuestions: [
+    {
+      id: "exam01-q1",
+      question: "Un cliente te pide que automatices la generación de documentación técnica. ¿Qué herramientas y enfoque usarías?",
+      options: [
+        "Usar solo un LLM sin contexto adicional",
+        "Usar Context7 para documentación actualizada + agente con skill de documentación",
+        "Crear un MCP personalizado desde cero",
+        "Usar solo el CLI del agente"
+      ],
+      correctIndex: 1
+    },
+    {
+      id: "exam01-q2",
+      question: "Tu agente está proponiendo código que usa una librería que ya no existe. ¿Cuál es la causa más probable y cómo la resuelves?",
+      options: [
+        "El agente está alucinando",
+        "El agente no tiene acceso a documentación actualizada - usar Context7",
+        "Necesitas más contexto",
+        "El código está bien, la librería sí existe"
+      ],
+      correctIndex: 1
+    },
+    {
+      id: "exam01-q3",
+      question: "Necesitas que el agente tome decisiones arquitectónicas importantes. ¿Qué modelo y configuración recomiendas?",
+      options: [
+        "Haiku por ser el más rápido",
+        "Claude Sonnet con temperatura baja",
+        "Claude Opus con temperatura alta para más creatividad",
+        "Cualquier modelo funciona igual"
+      ],
+      correctIndex: 2
+    },
+    {
+      id: "exam01-q4",
+      question: "En tu AGENTS.md tienes 200 instrucciones. El agente no las sigue. ¿Qué haces?",
+      options: [
+        "Añadir más instrucciones",
+        "Reducir a ~150 instrucciones con las más importantes y usar habilidades específicas",
+        "Cambiar de modelo",
+        "Usar otro agente"
+      ],
+      correctIndex: 1
+    }
+  ]
 } as const;

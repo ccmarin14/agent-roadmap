@@ -56,6 +56,35 @@ export const REFERENCES = {
       desc: "Guía práctica sobre MCP y su ecosistema"
     }
   ],
+  "agents-reasoning": [
+    {
+      title: "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      url: "https://arxiv.org/abs/2303.11366",
+      desc: "Paper académico sobre el patrón Reflexion"
+    },
+    {
+      title: "Self-Ask: Measuring and Improving the Compositional Reasoning of LLMs",
+      url: "https://arxiv.org/abs/2310.08118",
+      desc: "Paper sobre Self-Ask y razonamiento compuesto"
+    },
+    {
+      title: "Plan-and-Solve Prompting: Improving Zero-Shot Chain-of-Thought Reasoning",
+      url: "https://arxiv.org/abs/2305.04091",
+      desc: "Paper sobre planning jerárquico en LLMs"
+    }
+  ],
+  "agents-metrics": [
+    {
+      title: "Evaluating AI Agents: Metrics That Matter",
+      url: "https://www.anthropic.com/engineering/evaluating-ai-agents",
+      desc: "Guía de Anthropic sobre métricas para evaluar agentes"
+    },
+    {
+      title: "Building Reliable AI Agents: Best Practices",
+      url: "https://e2b.dev/blog/building-reliable-ai-agents",
+      desc: "Métricas y mejores prácticas para agentes en producción"
+    }
+  ],
   "ide-opencode": [
     {
       title: "OpenCode",
@@ -121,6 +150,23 @@ export const REFERENCES = {
       title: "Model Context Protocol (MCP): Complete Implementation Guide",
       url: "https://www.jenova.ai/en/resources/how-to-use-the-model-context-protocol-mcp",
       desc: "Guía de implementación con Python"
+    }
+  ],
+  "mcp-security": [
+    {
+      title: "MCP Security Best Practices",
+      url: "https://docs.anthropic.com/en/docs/mcp/security",
+      desc: "Documentación oficial de Anthropic sobre seguridad en MCP"
+    },
+    {
+      title: "Prompt Injection Attacks Against AI Agents",
+      url: "https://arxiv.org/abs/2311.09953",
+      desc: "Paper académico sobre ataques de prompt injection"
+    },
+    {
+      title: "Tool Poisoning: Security Risks in AI Agent Systems",
+      url: "https://security.google/blog/gws-tech-guide-to-securing-ai-agents",
+      desc: "Guía de Google sobre seguridad en agentes"
     }
   ],
   "skills-basics": [
@@ -230,6 +276,8 @@ const mapping: Record<string, ReferenceKey | undefined> = {
   "agents-basics": "agents-basics",
   "agents-types": "agents-basics",
   "agents-trust": "agents-basics",
+  "agents-reasoning": "agents-reasoning",
+  "agents-metrics": "agents-metrics",
   "ide-opencode": "ide-opencode",
   "console-claude-code": "console-claude-code",
   "sessions": "console-claude-code",

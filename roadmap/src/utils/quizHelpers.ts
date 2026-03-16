@@ -9,22 +9,44 @@ export function getQuizForSection(levelIdx: number, sectionIdx: number): Quiz | 
   return section?.quiz;
 }
 
+function shuffleArray<T>(array: readonly T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 export function getExamForLevel(levelIdx: number): Quiz {
   const level = LEVELS[levelIdx];
   if (!level) {
     return { questions: [], passingScore: 90 };
   }
 
-  const allQuestions: QuizQuestion[] = [];
+  const quizQuestions: QuizQuestion[] = [];
+  const examQuestions = level.examQuestions || [];
   
   for (const section of level.sections) {
     if (section.quiz) {
-      allQuestions.push(...section.quiz.questions);
+      quizQuestions.push(...section.quiz.questions);
     }
   }
 
+  const totalQuestions = quizQuestions.length + examQuestions.length;
+  const quizCount = Math.round(totalQuestions * 0.6);
+  const examCount = Math.round(totalQuestions * 0.4);
+
+  const shuffledQuiz = shuffleArray(quizQuestions);
+  const shuffledExam = shuffleArray(examQuestions);
+
+  const selectedQuiz = shuffledQuiz.slice(0, Math.min(quizCount, quizQuestions.length));
+  const selectedExam = shuffledExam.slice(0, Math.min(examCount, examQuestions.length));
+
+  const combined = shuffleArray([...selectedQuiz, ...selectedExam]);
+
   return {
-    questions: allQuestions,
+    questions: combined,
     passingScore: 90
   };
 }

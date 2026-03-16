@@ -168,12 +168,14 @@ export function ExamsView({ lvlIdx, levelStats, quizResults, examResults, onQuiz
       <div>
         <div className="flex items-center gap-[10px] mb-3 pb-2 border-b border-border">
           <span className="text-xs tracking-widest" style={{ color: "#475569" }}>
-            EXÁMENES POR NIVEL
+            EXAMEN DEL NIVEL ACTUAL
           </span>
         </div>
 
         <div className="grid gap-3">
-          {LEVELS.map((lv, li) => {
+          {(() => {
+            const lv = currentLevel;
+            const li = lvlIdx;
             const examQuiz = getExamForLevel(li);
             const { canAccess: isAccessible, passedCount, totalRequired } = canAccessExam(li, quizResults);
             const stats = levelStats(li);
@@ -182,12 +184,15 @@ export function ExamsView({ lvlIdx, levelStats, quizResults, examResults, onQuiz
             const examPassed = examResult ? examResult.passed : null;
 
             if (examQuiz.questions.length === 0) {
-              return null;
+              return (
+                <div className="text-sm p-4 rounded-md" style={{ backgroundColor: "#161B27", color: "#64748B" }}>
+                  No hay examen disponible para este nivel aún.
+                </div>
+              );
             }
 
             return (
               <div
-                key={li}
                 className="px-4 py-3 rounded-md"
                 style={{
                   border: `1px solid ${examPassed === true ? lv.color : isAccessible ? `${lv.color}40` : "#252D3D"}`,
@@ -202,7 +207,7 @@ export function ExamsView({ lvlIdx, levelStats, quizResults, examResults, onQuiz
                     </div>
                     <div className="text-xs" style={{ color: "#64748B" }}>
                       {examQuiz.questions.length} preguntas · {examQuiz.passingScore}% para aprobar
-                      {!isAccessible && ` · ${passedCount}/${totalRequired} quizzes aprobados`}
+                      {!isAccessible && ` · Requiere: ${passedCount}/${totalRequired} quizzes aprobados`}
                     </div>
                     {bestExamScore !== null && (
                       <div className="text-xs mt-1" style={{ color: examPassed ? lv.color : "#F87171" }}>
@@ -244,7 +249,7 @@ export function ExamsView({ lvlIdx, levelStats, quizResults, examResults, onQuiz
                 </div>
               </div>
             );
-          })}
+          })()}
         </div>
       </div>
     </div>

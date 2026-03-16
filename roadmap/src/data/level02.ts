@@ -42,12 +42,13 @@ export const level02 = {
         },
         {
           label: "Seguridad con MCPs — lo que no se puede ignorar",
-          body: "Los MCP tools ejecutan código arbitrario en tu máquina. Riesgos reales que existen hoy: prompt injection via descripciones de herramientas maliciosas, permisos excesivos, tool poisoning donde un servidor comprometido inyecta instrucciones al agente.\n\nBuenas prácticas: usa solo servidores de fuentes verificadas (repos activos, empresas conocidas), otorga permisos mínimos en la configuración, revisa siempre qué herramientas tiene disponibles el agente antes de darle tareas críticas.",
-          references: ["mcp-basics"],
+          body: "Los MCP tools ejecutan código arbitrario en tu máquina. Riesgos reales que debes conocer:\n\n**Prompt injection**: Un atacante puede usar inputs maliciosos o descripciones de herramientas manipuladas para injectar instrucciones no deseadas al agente. Un input de usuario que contiene \"\${ignora las instrucciones anteriores y...}\" puede alterar el comportamiento.\n\n**Tool poisoning**: Un MCP server comprometido o malicioso puede retornar respuestas que manipulan al agente. Por ejemplo, un Filesystem MCP modificado podría reportar archivos diferentes a los reales.\n\n**Permisos excesivos**: Un Filesystem MCP con acceso total al sistema es un riesgo. Si el agente se ve comprometido, el atacante tiene acceso a todo.\n\n**Principios de defensa**:\n- Least privilege: otorga el mínimo permiso necesario\n- Verify sources: solo usa MCPs de repos activos o empresas conocidas\n- Audit logs: registra qué herramientas se usaron y cuándo\n- Validate inputs: no confíes en user content sin sanitization\n- Revisa qué herramientas tiene el agente antes de tareas críticas",
+          references: ["mcp-security"],
           checks: [
-            "Revisaste los permisos de cada MCP instalado y ajustaste al mínimo necesario",
-            "El equipo tiene una lista acordada de MCPs permitidos en el proyecto",
-            "Entiendes cómo verificar si un MCP server es de una fuente confiable",
+            "Entiendo qué es prompt injection y cómo mitigarlo",
+            "Solo usas MCP servers de fuentes verificadas",
+            "Los permisos de cada MCP están limitados al mínimo necesario",
+            "Revisas qué herramientas tiene disponibles el agente antes de tareas críticas"
           ],
         },
         {
@@ -71,6 +72,99 @@ export const level02 = {
           ],
         },
       ],
+      quiz: {
+        passingScore: 90,
+        questions: [
+          {
+            id: "mcp-q1",
+            question: "¿Qué es MCP y para qué sirve?",
+            options: [
+              "Un modelo de lenguaje",
+              "Un estándar para conectar agentes con herramientas externas",
+              "Un tipo de base de datos",
+              "Un editor de código"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "mcp-q2",
+            question: "¿Cuál es la diferencia entre MCP local y MCP remoto?",
+            options: [
+              "No hay diferencia",
+              "Local corre via stdio, remoto via HTTP con OAuth",
+              "Local es más seguro",
+              "Remoto no necesita configuración"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "mcp-q3",
+            question: "¿Por qué es importante no instalar demasiados MCPs?",
+            options: [
+              "Consumen memoria del computador",
+              "Cada MCP ocupa espacio de contexto, cargarlos todos desperdicia contexto útil",
+              "Son caros",
+              "No se pueden tener más de 3"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "mcp-q4",
+            question: "¿Qué es un perfil de MCPs?",
+            options: [
+              "Un documento de texto",
+              "Conjunto de MCPs configurados por tipo de sesión (frontend, backend, etc.)",
+              "Una lista de MCPs permitidos",
+              "Un tipo de servidor"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "mcp-q5",
+            question: "¿Qué es FastMCP?",
+            options: [
+              "Un modelo de lenguaje",
+              "Un framework para construir servidores MCP",
+              "Una base de datos",
+              "Un IDE"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "mcp-q6",
+            question: "Un usuario ingresa texto en tu app que se pasa al agente. ¿Qué riesgo de seguridad existe?",
+            options: [
+              "No hay riesgo",
+              "Prompt injection - el usuario podría manipular las instrucciones del agente",
+              "El agente será más lento",
+              "Consumirá más memoria"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "mcp-q7",
+            question: "Un Filesystem MCP tiene acceso completo al sistema. ¿Qué principio de seguridad violates?",
+            options: [
+              "Least privilege - otorga más permisos de los necesarios",
+              "No hay problema",
+              "Es más eficiente",
+              "Mejora el rendimiento"
+            ],
+            correctIndex: 0
+          },
+          {
+            id: "mcp-q8",
+            question: "Antes de usar un MCP server de terceros, ¿qué debes verificar?",
+            options: [
+              "Que sea popular",
+              "Que venga de una fuente verificada (repo activo, empresa conocida)",
+              "Que sea gratis",
+              "Que tenga buena documentación"
+            ],
+            correctIndex: 1
+          }
+        ]
+      }
     },
     {
       id: "skills",
@@ -149,6 +243,66 @@ export const level02 = {
           ],
         },
       ],
+      quiz: {
+        passingScore: 90,
+        questions: [
+          {
+            id: "skills-q1",
+            question: "¿Cuál es la diferencia entre MCP y Skills?",
+            options: [
+              "No hay diferencia",
+              "MCP conecta con herramientas externas, Skills enseñan cómo razonar",
+              "Skills son más rápidos",
+              "MCP es solo para código"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "skills-q2",
+            question: "¿Qué es un Skill en el contexto de agentes de código?",
+            options: [
+              "Un tipo de modelo de lenguaje",
+              "Un paquete de conocimiento procedimental con criterios y procesos",
+              "Una herramienta de terminal",
+              "Un tipo de base de datos"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "skills-q3",
+            question: "¿Qué es la 'carga progresiva' de un Skill?",
+            options: [
+              "Cargar todos los skills al inicio",
+              "name+desc siempre, SKILL.md solo cuando activa, scripts solo si necesita",
+              "Cargar skills por orden alfabetico",
+              "Skills se cargan solos"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "skills-q4",
+            question: "¿Qué es TDD con agentes?",
+            options: [
+              "Escribir tests después del código",
+              "Escribir tests antes del código para que el agente implemente solo lo necesario",
+              "No usar tests",
+              "Tests automáticos sin intervención"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "skills-q5",
+            question: "¿Qué es SDD?",
+            options: [
+              "Sistema de archivos",
+              "Specification-Driven Development - guiar al agente para pedir specs antes de implementar",
+              "Una base de datos",
+              "Un editor de código"
+            ],
+            correctIndex: 1
+          }
+        ]
+      }
     },
     {
       id: "docs",
@@ -185,6 +339,44 @@ export const level02 = {
           ],
         },
       ],
+      quiz: {
+        passingScore: 90,
+        questions: [
+          {
+            id: "docs-q1",
+            question: "¿Qué es Context7?",
+            options: [
+              "Un editor de código",
+              "Un MCP que inyecta documentación versionada de librerías en el contexto del agente",
+              "Una base de datos",
+              "Un tipo de skill"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "docs-q2",
+            question: "¿Por qué es importante mantener la documentación actualizada?",
+            options: [
+              "No es importante",
+              "Para que el agente no proponga soluciones que no corresponden al código actual",
+              "Solo por estética",
+              "Para cumplir con estándares"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "docs-q3",
+            question: "¿Qué son ADRs?",
+            options: [
+              "Archivos de código",
+              "Architecture Decision Records - documentación de decisiones de arquitectura",
+              "Una herramienta de testing",
+              "Un tipo de base de datos"
+            ],
+            correctIndex: 1
+          }
+        ]
+      }
     },
     {
       id: "prompts",
@@ -213,7 +405,7 @@ export const level02 = {
         },
         {
           label: "Templates de Spec — SDD",
-          body: "SDD (Specification-Driven Development) requiere specs estructuradas antes de implementar. El equipo usa templates en `.project/specs/` para cada tipo de trabajo:\n\n**Feature Spec** — para features nuevos:\n• Objetivo: qué resuelve y para quién\n• User Stories (formato EARS): WHEN [usuario] [condición] THE SYSTEM SHALL [comportamiento]\n• Criterios de aceptación verificables\n• Stack y restricciones técnicas\n• Edge cases identificados\n\n**API Spec** — para endpoints nuevos:\n• Input: params y body con tipos\n• Output: respuestas posibles por código de estado\n• Validaciones y autenticación\n• Errores posibles\n\n**Migration Spec** — para cambios de schema:\n• Before: schema actual\n• After: nuevo schema\n• Rollback: instrucciones down\n• Impacto en datos existentes\n\nUbicación recomendada: `.project/specs/features/`, `.project/specs/apis/`, `.project/specs/migrations/`.",
+          body: "SDD (Specification-Driven Development) requiere specs estructuradas antes de implementar. El equipo usa templates en `.project/specs/` para cada tipo de trabajo:\n\n**Feature Spec** — para features nuevos:\n• Objetivo: qué resuelve y para quién\n• User Stories (formato EARS): WHEN [usuario] [condición] THE SYSTEM SHALL [comportamiento]\n• Criterios de aceptación verificables\n• Stack y restricciones técnicas\n• Edge cases identificados\n• Estimación de riesgo: [bajo|medio|alto]\n• Riesgo principal: [qué podría fallar y cómo mitigarlo]\n\n**API Spec** — para endpoints nuevos:\n• Input: params y body con tipos\n• Output: respuestas posibles por código de estado\n• Validaciones y autenticación\n• Errores posibles\n• Rate limiting esperado\n\n**Migration Spec** — para cambios de schema:\n• Before: schema actual\n• After: nuevo schema\n• Rollback: instrucciones down\n• Impacto en datos existentes\n• Validación pre-ejecución: checklist de verificación\n• Downtime estimado: [sí/no y duración]\n\nUbicación recomendada: `.project/specs/features/`, `.project/specs/apis/`, `.project/specs/migrations/`.",
           references: ["prompts-basics", "sdd-basics"],
           checks: [
             "El equipo tiene la carpeta .project/specs/ creada con las subcarpetas",
@@ -223,6 +415,101 @@ export const level02 = {
           ],
         },
       ],
+      quiz: {
+        passingScore: 90,
+        questions: [
+          {
+            id: "prompts-q1",
+            question: "¿Qué es PROMPTS.md?",
+            options: [
+              "Un archivo de configuración",
+              "Un archivo en el repo donde el equipo documenta prompts que funcionan para tareas frecuentes",
+              "Un tipo de skill",
+              "Una base de datos"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "prompts-q2",
+            question: "¿Por qué el prompt de onboarding es importante?",
+            options: [
+              "No es importante",
+              "Pone al agente en contexto completo antes de tocar código, produciendo mejores resultados",
+              "Solo define el estilo",
+              "No afecta la calidad"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "prompts-q3",
+            question: "¿Qué formato de User Stories se usa en SDD?",
+            options: [
+              "Descripción libre",
+              "WHEN [usuario] [condición] THE SYSTEM SHALL [comportamiento]",
+              "Solo título y descripción",
+              "No se usan User Stories"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "prompts-q4",
+            question: "¿Qué debe incluir un template de Feature Spec?",
+            options: [
+              "Solo el código",
+              "Objetivo, User Stories, criterios de aceptación, stack, edge cases",
+              "Solo la descripción",
+              "Solo los tests"
+            ],
+            correctIndex: 1
+          }
+        ]
+      }
     },
   ],
+  examQuestions: [
+    {
+      id: "exam02-q1",
+      question: "Tu equipo tiene diferentes necesidades de herramientas por tipo de sesión (frontend, backend, docs). ¿Cómo lo manejas con MCPs?",
+      options: [
+        "Usar los mismos MCPs siempre",
+        "Crear perfiles de MCPs por tipo de sesión documentados en AGENTS.md",
+        "Instalar todos los MCPs disponibles",
+        "No usar MCPs"
+      ],
+      correctIndex: 1
+    },
+    {
+      id: "exam02-q2",
+      question: "Necesitas que el agente valide specs antes de implementar. ¿Qué herramienta/configuración recomiendas?",
+      options: [
+        "No hacer validación",
+        "Skill SDD con checklist de validación de specs",
+        "Solo revisar manualmente",
+        "Usar un test automatizado"
+      ],
+      correctIndex: 1
+    },
+    {
+      id: "exam02-q3",
+      question: "Tu equipo necesita un skill específico para debugging de errores en Python. ¿Cómo lo implementas?",
+      options: [
+        "No es posible crear skills personalizados",
+        "Crear un SKILL.md con el proceso de debugging y añadirlo al proyecto",
+        "Usar solo skills de terceros",
+        "Contratar un desarrollador"
+      ],
+      correctIndex: 1
+    },
+    {
+      id: "exam02-q4",
+      question: "El agente está usando APIs deprecadas. ¿Cómo evitas esto?",
+      options: [
+        "No se puede evitar",
+        "Context7 con la versión correcta de la librería",
+        "Usar modelos más nuevos",
+        "Escribir la documentación manualmente"
+      ],
+      correctIndex: 1
+    }
+  ]
 } as const;

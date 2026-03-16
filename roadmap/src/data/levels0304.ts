@@ -62,6 +62,55 @@ export const level03 = {
           ],
         },
       ],
+      quiz: {
+        passingScore: 90,
+        questions: [
+          {
+            id: "hooks-q1",
+            question: "¿Qué hace el pre-commit hook con el agente?",
+            options: [
+              "Ejecuta tests automáticamente",
+              "El agente revisa automáticamente el diff antes del commit",
+              "Genera documentación",
+              "Compila el código"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "hooks-q2",
+            question: "¿Qué hace el hook post-merge?",
+            options: [
+              "Ejecuta tests",
+              "Genera CHANGELOG.md automáticamente tras cada merge",
+              "Hace backup",
+              "Envía emails"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "hooks-q3",
+            question: "¿Qué son los Skills Hooks?",
+            options: [
+              "Automatización por eventos en el ciclo de vida del agente",
+              "Un tipo de skill",
+              "Una herramienta de testing",
+              "Un servidor MCP"
+            ],
+            correctIndex: 0
+          },
+          {
+            id: "hooks-q4",
+            question: "¿Para qué sirve el hook de sugerencia de spec?",
+            options: [
+              "Para hacer commits",
+              "Sugiere crear una spec antes de iniciar trabajo significativo",
+              "Para ejecutar tests",
+              "Para generar documentación"
+            ],
+            correctIndex: 1
+          }
+        ]
+      }
     },
     {
       id: "flows",
@@ -97,7 +146,99 @@ export const level03 = {
             "Los prompts de onboarding para cada tipo de sesión están en PROMPTS.md",
           ],
         },
+        {
+          label: "Métricas del agente en tu flujo",
+          body: "4 métricas que importan para mejorar tu setup:\n\n**Task Completion Rate**: Porcentaje de tareas que el agente completa sin ayuda humana directa. Meta: más del 70% en tareas rutinarias.\n\n**Revision Rate**: Cuántas veces corriges al agente por sesión. Meta: menos de 3 correcciones por tarea compleja. Si es más, ajusta el prompt o el contexto.\n\n**Costo por Task**: (tokens usados × precio del modelo) / tareas completadas. Monitorea para evitar desperdicio. Modelos más baratos pueden ser suficientes para tareas simples.\n\n**Tiempo Ahorrado**: Tiempo que tardas con agente vs tiempo que tardaría sin él. No siempre menor es mejor — a veces vale más la consistencia.\n\n**Cómo medir**: Al final de cada sesión, anota: ¿completó? ¿cuántas correcciones? ¿cuánto costaste? Semanalmente revisa tendencias y ajusta configuración.",
+          references: ["agents-metrics"],
+          checks: [
+            "Mides al menos 2 de las 4 métricas en tu flujo",
+            "Tienes una meta clara para task completion rate",
+            "Ajustas configuración (modelo, prompts, MCPs) basado en datos"
+          ],
+        },
       ],
+      quiz: {
+        passingScore: 90,
+        questions: [
+          {
+            id: "flows-q1",
+            question: "¿En qué consiste el flujo Issue → PR automatizado?",
+            options: [
+              "El agente crea issues automáticamente",
+              "El agente lee el issue, implementa, hace commits y genera PR automáticamente",
+              "Solo hace commits",
+              "Solo crea documentación"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "flows-q2",
+            question: "¿Qué pasos incluye el flujo seguro de migraciones?",
+            options: [
+              "Solo generar la migración",
+              "Leer schema, generar up, generar down, validar, aprobar",
+              "Ejecutar directamente",
+              "Solo hacer backup"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "flows-q3",
+            question: "¿Por qué es importante tener sesiones especializadas?",
+            options: [
+              "No es importante",
+              "Contexto limpio por sesión = respuestas más precisas",
+              "Son más rápidas",
+              "Consumen menos memoria"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "flows-q4",
+            question: "¿Qué tipo de sesión debe tener la instrucción de 'solo leer y reportar, nunca modificar'?",
+            options: [
+              "Feature",
+              "Review",
+              "Debug",
+              "Investigación"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "flows-q5",
+            question: "Tu agente completa el 40% de las tareas sin ayuda. revision rate de 8 correcciones por tarea. ¿Qué debería hacer el equipo?",
+            options: [
+              "Seguir igual",
+              "Reducir autonomía, mejorar prompts, o cambiar de modelo",
+              "Usar modelos más caros",
+              "Añadir más MCPs"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "flows-q6",
+            question: "¿Cuál es la métrica más importante para tareas rutinarias?",
+            options: [
+              "Tiempo ahorrado",
+              "Costo por task",
+              "Task completion rate (>70% objetivo)",
+              "Revision rate"
+            ],
+            correctIndex: 2
+          },
+          {
+            id: "flows-q7",
+            question: "Si el costo por task es muy alto, ¿qué ajuste tiene más impacto?",
+            options: [
+              "Usar modelo más potente",
+              "Cambiar a modelo más económico para tareas simples",
+              "Añadir más skills",
+              "Usar más MCPs"
+            ],
+            correctIndex: 1
+          }
+        ]
+      }
     },
     {
       id: "advanced_agents_md",
@@ -124,8 +265,92 @@ export const level03 = {
           ],
         },
       ],
+      quiz: {
+        passingScore: 90,
+        questions: [
+          {
+            id: "advanced-q1",
+            question: "¿Qué es el patrón Plan-Act-Reflect?",
+            options: [
+              "Un tipo de test",
+              "El agente propone un plan antes de ejecutar, actúa, y genera un resumen de decisiones",
+              "Una herramienta de CI",
+              "Un tipo de base de datos"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "advanced-q2",
+            question: "¿Cómo funciona la herencia de AGENTS.md en equipos con squads?",
+            options: [
+              "Solo existe uno global",
+              "AGENTS.md raíz → módulo → squad, cada nivel solo documenta diferencias",
+              "No hay herencia",
+              "Solo el raíz importa"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "advanced-q3",
+            question: "¿Qué debe incluir el plan que propone el agente antes de actuar?",
+            options: [
+              "Solo el código a escribir",
+              "Qué archivos toca, qué cambios hace, qué riesgos identifica",
+              "Solo la descripción",
+              "Solo los tests"
+            ],
+            correctIndex: 1
+          }
+        ]
+      }
     },
   ],
+  examQuestions: [
+    {
+      id: "exam03-q1",
+      question: "Tu equipo quiere que el agente revise automáticamente cada commit antes de hacer push. ¿Qué implementas?",
+      options: [
+        "No es posible",
+        "Pre-commit hook que llama al agente con el diff",
+        "Solo usar lint",
+        "Hacer review manualmente"
+      ],
+      correctIndex: 1
+    },
+    {
+      id: "exam03-q2",
+      question: "Necesitas automatizar el flujo completo de un feature: desde el issue hasta PR. ¿Qué herramientas usas?",
+      options: [
+        "Solo GitHub MCP",
+        "GitHub MCP + Sequential Thinking + Filesystem MCP + Git MCP",
+        "Solo CLI",
+        "Solo el editor de código"
+      ],
+      correctIndex: 1
+    },
+    {
+      id: "exam03-q3",
+      question: "Tu squad de pagos necesita reglas de seguridad más estrictas que el squad de frontend. ¿Cómo lo manejas?",
+      options: [
+        "Usar el mismo AGENTS.md para todos",
+        "AGENTS.md con overrides por módulo/squad",
+        "Crear otro proyecto",
+        "No es posible"
+      ],
+      correctIndex: 1
+    },
+    {
+      id: "exam03-q4",
+      question: "Antes de hacer una migración de base de datos, ¿cuál es el proceso seguro con agente?",
+      options: [
+        "Ejecutar directamente",
+        "Leer schema → generar up → generar down → validar → aprobar",
+        "Solo hacer backup",
+        "No usar agente para migraciones"
+      ],
+      correctIndex: 1
+    }
+  ]
 } as const;
 
 export const level04 = {
@@ -191,6 +416,66 @@ export const level04 = {
           ],
         },
       ],
+      quiz: {
+        passingScore: 90,
+        questions: [
+          {
+            id: "specialized-q1",
+            question: "¿En qué consiste el principio de especialización de agentes?",
+            options: [
+              "Un agente hace todo",
+              "AGENTS.md restrictivo + skills específicos + MCPs limitados al rol",
+              "Solo usar un modelo",
+              "Tener un solo agente"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "specialized-q2",
+            question: "¿Qué hace el agente de tests?",
+            options: [
+              "Escribe código de producción",
+              "Solo escribe y mantiene tests, nunca toca código de producción",
+              "Hace code review",
+              "Genera documentación"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "specialized-q3",
+            question: "¿Qué hace el agente de code review?",
+            options: [
+              "Modifica código directamente",
+              "Revisa código y comenta en formato PR, nunca modifica código directamente",
+              "Ejecuta tests",
+              "Despliega a producción"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "specialized-q4",
+            question: "¿Qué hace el agente de seguridad?",
+            options: [
+              "Solo revisa性能的",
+              "Revisa dependencias, patrones inseguros, manejo de inputs, y da reporte con severidad",
+              "Escribe código",
+              "Hace deployment"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "specialized-q5",
+            question: "¿Qué hace el agente de documentación?",
+            options: [
+              "Solo genera código",
+              "Lee código y genera/actualiza JSDoc, README, diagramas, changelog automáticamente",
+              "Ejecuta tests",
+              "Hace code review"
+            ],
+            correctIndex: 1
+          }
+        ]
+      }
     },
     {
       id: "orchestration",
@@ -248,6 +533,112 @@ export const level04 = {
           ],
         },
       ],
+      quiz: {
+        passingScore: 90,
+        questions: [
+          {
+            id: "orch-q1",
+            question: "¿Cuál es la regla de oro del orquestador?",
+            options: [
+              "Lee todo el código",
+              "Nunca lee código directamente, solo resúmenes de sub-agentes",
+              "Implementa código directamente",
+              "Hace tests"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "orch-q2",
+            question: "¿Qué es el protocolo de handoff entre agentes?",
+            options: [
+              "Un tipo de test",
+              "Formato estándar de resumen que cada sub-agente envía al terminar: qué hizo, decisiones, bloqueadores, siguiente paso",
+              "Una herramienta de CI",
+              "Un tipo de base de datos"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "orch-q3",
+            question: "¿Qué es context:fork?",
+            options: [
+              "Un tipo de skill",
+              "Permite análisis en contexto aislado sin contaminar la sesión principal",
+              "Una herramienta de deployment",
+              "Un tipo de test"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "orch-q4",
+            question: "¿En el pipeline completo de feature, qué hace el equipo al final?",
+            options: [
+              "Todo el trabajo",
+              "Solo hace el review final",
+              "Escribe el código",
+              "Ejecuta los tests"
+            ],
+            correctIndex: 1
+          },
+          {
+            id: "orch-q5",
+            question: "¿En Level 04, qué es obligatorio para el pipeline orquestado?",
+            options: [
+              "Nada",
+              "Usar spec, el orquestador verifica que exista antes de iniciar",
+              "Usar solo un agente",
+              "No usar skills"
+            ],
+            correctIndex: 1
+          }
+        ]
+      }
     },
   ],
+  examQuestions: [
+    {
+      id: "exam04-q1",
+      question: "Tienes un pipeline donde el agente de tests y el de review corren al mismo tiempo. ¿Cómo se llama este patrón?",
+      options: [
+        "Secuencial",
+        "Paralelo",
+        "Lineal",
+        "No es posible"
+      ],
+      correctIndex: 1
+    },
+    {
+      id: "exam04-q2",
+      question: "El orquestador está sobrecargado de contexto porque lee todo el código. ¿Qué haces?",
+      options: [
+        "No hay solución",
+        "El orquestador solo lee resúmenes de sub-agentes, nunca código directamente",
+        "Usar más MCPs",
+        "Dividir el proyecto"
+      ],
+      correctIndex: 1
+    },
+    {
+      id: "exam04-q3",
+      question: "Necesitas hacer una auditoría de seguridad completa del proyecto sin afectar la sesión principal. ¿Qué usas?",
+      options: [
+        "No es posible",
+        "context:fork para análisis en contexto aislado",
+        "Cerrar la sesión",
+        "Hacerlo manualmente"
+      ],
+      correctIndex: 1
+    },
+    {
+      id: "exam04-q4",
+      question: "Un sub-agente termina su tarea. ¿Qué debe hacer para que el orquestador pueda decidir el siguiente paso?",
+      options: [
+        "Nada especial",
+        "Enviar un resumen estructurado con qué hizo, decisiones, bloqueadores y siguiente paso",
+        "Cerrar la sesión",
+        "Enviar todo el código"
+      ],
+      correctIndex: 1
+    }
+  ]
 } as const;
