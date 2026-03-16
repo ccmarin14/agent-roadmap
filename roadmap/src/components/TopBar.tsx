@@ -2,8 +2,8 @@ import type { Level, ProgressStats } from "../types";
 
 interface TopBarProps {
   level: Level;
-  tab: string;
-  setTab: (tab: string) => void;
+  tab: "content" | "progress";
+  setTab: React.Dispatch<React.SetStateAction<"content" | "progress">>;
   total: ProgressStats;
 }
 

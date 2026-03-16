@@ -5,7 +5,7 @@ interface ProgressViewProps {
   lvlIdx: number;
   setLvlIdx: (idx: number) => void;
   setSecIdx: (idx: number) => void;
-  setTab: (tab: string) => void;
+  setTab: React.Dispatch<React.SetStateAction<"content" | "progress">>;
   checked: Record<string, boolean>;
   key_fn: (li: number, si: number, ii: number, ci: number) => string;
   toggle: (k: string) => void;

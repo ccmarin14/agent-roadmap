@@ -4,28 +4,28 @@ export interface Check {
 
 export type CheckItem = string | Check;
 
-export interface Item {
-  label: string;
-  body: string;
-  references?: string[];
-  checks: CheckItem[];
-}
+export type Item = {
+  readonly label: string;
+  readonly body: string;
+  readonly references?: readonly string[];
+  readonly checks: readonly CheckItem[];
+};
 
-export interface Section {
-  id: string;
-  title: string;
-  items: Item[];
-}
+export type Section = {
+  readonly id: string;
+  readonly title: string;
+  readonly items: readonly Item[];
+};
 
-export interface Level {
-  id: string;
-  title: string;
-  color: string;
-  duration: string;
-  team: string;
-  desc: string;
-  sections: Section[];
-}
+export type Level = {
+  readonly id: string;
+  readonly title: string;
+  readonly color: string;
+  readonly duration: string;
+  readonly team: string;
+  readonly desc: string;
+  readonly sections: readonly Section[];
+};
 
 export interface Reference {
   id: string;
