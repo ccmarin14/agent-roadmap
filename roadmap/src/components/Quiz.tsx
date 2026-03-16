@@ -1,5 +1,14 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import type { Quiz as QuizType, Level, Section, QuizResult } from "../types";
+
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 interface QuizProps {
   quiz: QuizType;
@@ -14,16 +23,30 @@ export function Quiz({ quiz, level, section, previousResult, onComplete, onClose
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, number>>({});
   const [showResult, setShowResult] = useState(false);
-  const [showAnswers, setShowAnswers] = useState(false);
+  const [shuffledOptions, setShuffledOptions] = useState<Record<string, number[]>>({});
+
+  useMemo(() => {
+    const shuffled: Record<string, number[]> = {};
+    quiz.questions.forEach(q => {
+      shuffled[q.id] = shuffleArray(q.options.map((_, idx) => idx));
+    });
+    setShuffledOptions(shuffled);
+  }, [quiz]);
 
   const question = quiz.questions[currentQuestion];
   const progress = ((currentQuestion + 1) / quiz.questions.length) * 100;
+  const currentShuffled = shuffledOptions[question?.id] || question?.options.map((_, i) => i) || [];
 
-  const handleSelectOption = (optionIndex: number) => {
+  const getOriginalIndex = (shuffledIndex: number): number => {
+    return currentShuffled[shuffledIndex];
+  };
+
+  const handleSelectOption = (shuffledIndex: number) => {
     if (showResult) return;
+    const originalIndex = getOriginalIndex(shuffledIndex);
     setSelectedAnswers((prev) => ({
       ...prev,
-      [question.id]: optionIndex
+      [question.id]: originalIndex
     }));
   };
 
@@ -68,7 +91,7 @@ export function Quiz({ quiz, level, section, previousResult, onComplete, onClose
     return selected === questionData.correctIndex ? "correct" : "incorrect";
   };
 
-  if (showResult || showAnswers) {
+  if (showResult) {
     const correct = quiz.questions.filter((q) => selectedAnswers[q.id] === q.correctIndex).length;
     const score = Math.round((correct / quiz.questions.length) * 100);
     const passed = score >= quiz.passingScore;
@@ -137,16 +160,20 @@ export function Quiz({ quiz, level, section, previousResult, onComplete, onClose
         </div>
 
         <div className="flex justify-center gap-3 pt-4 border-t border-[#252D3D]">
-          {!showAnswers && (
+          {!passed && (
             <button
-              onClick={() => setShowAnswers(true)}
+              onClick={() => {
+                setSelectedAnswers({});
+                setCurrentQuestion(0);
+                setShowResult(false);
+              }}
               className="px-4 py-2 rounded text-sm transition-all duration-150"
               style={{
                 backgroundColor: "#1E2535",
                 color: "#94A3B8"
               }}
             >
-              Ver mis respuestas
+              Repetir quiz
             </button>
           )}
           <button
@@ -190,12 +217,13 @@ export function Quiz({ quiz, level, section, previousResult, onComplete, onClose
           </h3>
 
           <div className="flex flex-col gap-2">
-            {question.options.map((option, idx) => {
-              const isSelected = selectedAnswers[question.id] === idx;
+            {currentShuffled.map((originalIdx, shuffledIdx) => {
+              const option = question.options[originalIdx];
+              const isSelected = selectedAnswers[question.id] === originalIdx;
               return (
                 <button
-                  key={idx}
-                  onClick={() => handleSelectOption(idx)}
+                  key={shuffledIdx}
+                  onClick={() => handleSelectOption(shuffledIdx)}
                   className="w-full text-left px-4 py-3 rounded-md transition-all duration-150"
                   style={{
                     backgroundColor: isSelected ? `${level.color}15` : "#1E2535",
@@ -204,7 +232,7 @@ export function Quiz({ quiz, level, section, previousResult, onComplete, onClose
                   }}
                 >
                   <span className="mr-3" style={{ color: isSelected ? level.color : "#475569" }}>
-                    {String.fromCharCode(65 + idx)}.
+                    {String.fromCharCode(65 + shuffledIdx)}.
                   </span>
                   {option}
                 </button>
