@@ -6,9 +6,19 @@ Hoja de ruta interactiva para aprender a trabajar con agentes de IA, desde los f
 
 ## ¿Qué es esto?
 
-Agent Forge es una herramienta de aprendizaje autoguiado construida como una app en React. Cubre todo lo necesario para pasar de entender qué es un LLM a ejecutar un pipeline completo de orquestación con agentes especializados trabajando en paralelo.
+Agent Forge es una herramienta de aprendizaje autoguiada construida como una app en React. Cubre todo lo necesario para pasar de entender qué es un LLM a ejecutar un pipeline completo de orquestación con agentes especializados trabajando en paralelo.
 
-Cada nivel tiene explicaciones detalladas por tema y un checklist de criterios concretos — avanzas cuando puedes demostrar el aprendizaje, no solo cuando lo has leído.
+Cada nivel tiene explicaciones detalladas por tema, quizzes integrados y un checklist de criterios concretos — avanzas cuando puedes demostrar el aprendizaje, no solo cuando lo has leído.
+
+---
+
+## Características
+
+- **Autenticación**: Login con email/password (Supabase) o modo invitado
+- **Quizzes**: Preguntas de opción múltiple en cada sección (90% para aprobar)
+- **Exámenes**: Exámenes por nivel para desbloquear el siguiente
+- **Referencias**: Recursos externos integrados en cada tema
+- **Progreso**: Persistido en Supabase (usuarios) y LocalStorage (invitados)
 
 ---
 
@@ -20,8 +30,8 @@ La capa base. Antes de tocar cualquier herramienta, necesitas un modelo mental s
 
 - **Qué es un LLM** — tokens, ventana de contexto, temperatura, por qué ocurren las alucinaciones
 - **Modelos** — Anthropic (Claude Haiku / Sonnet / Opus), OpenAI (GPT-4.1, o-series), Google (Gemini 2.5 Pro), DeepSeek (R1, V3), Qwen (Qwen3-Coder), OpenCode Zen
-- **Qué es un agente** — la diferencia entre un chatbot y un agente, el ciclo ReAct, confianza y riesgos
-- **IDE y Consola** — OpenCode, Cursor, Windsurf, Claude Code, Gemini CLI, gestión de sesiones, estructura de prompts
+- **Qué es un agente** — la diferencia entre un chatbot y un agente, el ciclo ReAct, patrones de razonamiento (Reflexion, Self-Ask, Planning Jerárquico), confianza y riesgos
+- **IDE y Consola** — Cursor, Windsurf, Kiro (AWS), OpenCode, Claude Code, Gemini CLI, gestión de sesiones, estructura de prompts
 - **AGENTS.md** — qué es, estructura mínima viable, convenciones de equipo, contexto de negocio, overrides jerárquicos, ciclo de actualización
 
 ---
@@ -30,9 +40,9 @@ La capa base. Antes de tocar cualquier herramienta, necesitas un modelo mental s
 
 La capa donde los flujos individuales se convierten en flujos de equipo.
 
-- **MCP (Model Context Protocol)** — qué es y por qué importa, arquitectura server/client/host, servidores locales vs remotos, los 5 MCPs fundamentales para desarrollo, seguridad, eficiencia de contexto, construir tu propio MCP server
+- **MCP (Model Context Protocol)** — qué es y por qué importa, arquitectura server/client/host, servidores locales vs remotos, los 5 MCPs fundamentales para desarrollo, seguridad (prompt injection, tool poisoning), eficiencia de contexto, construir tu propio MCP server
 - **Skills** — diferencia entre Skills y MCP, anatomía de un SKILL.md, carga progresiva, skills esenciales para desarrollo, scope de proyecto vs global, crear skills propios del equipo
-- **Documentación técnica** — mantener docs sincronizados con Context7, documentación interna del proyecto y ADRs, documentación generada por el agente
+- **Documentación técnica** — mantener docs sincronizadas con Context7, documentación interna del proyecto y ADRs, documentación generada por el agente
 - **Librería de prompts** — PROMPTS.md como conocimiento colectivo, prompts de onboarding de sesión, prompts por tipo de tarea
 
 ---
@@ -63,13 +73,37 @@ Consulta la versión online: **https://test-web.master2000.net/agentforge/**
 ---
 
 ## Cómo correrlo
+
 ### Clona el repositorio y corre la app localmente:
+
 ```bash
 npm install
 npm run dev
 ```
 
 Abre `http://localhost:5173`.
+
+### Build producción:
+
+```bash
+npm run build
+npm run preview
+```
+
+---
+
+## Variables de Entorno
+
+Para configurar la aplicación, crea un archivo `.env`:
+
+```env
+VITE_SUPABASE_URL=tu_url_de_supabase
+VITE_SUPABASE_KEY=tu_key_de_supabase
+VITE_ALLOW_GUESTS=true
+VITE_EXAMS_FOR_USERS=true
+VITE_EXAMS_FOR_GUESTS=true
+VITE_ADMIN_PASSWORD=tu_password_admin
+```
 
 ---
 
@@ -78,34 +112,63 @@ Abre `http://localhost:5173`.
 ```
 src/
 ├── data/
-│   ├── index.js          # Exporta el array LEVELS
-│   ├── level01.js        # Datos del Nivel 01
-│   ├── level02.js        # Datos del Nivel 02
-│   └── levels0304.js     # Datos de Niveles 03 y 04
+│   ├── index.ts          # Exporta el array LEVELS
+│   ├── level01.ts       # Datos del Nivel 01
+│   ├── level02.ts       # Datos del Nivel 02
+│   ├── levels0304.ts    # Datos de Niveles 03 y 04
+│   ├── references.ts    # Referencias externas
+│   └── sampleQuiz.ts   # Ejemplos de quizzes
 ├── components/
-│   ├── TopBar.jsx        # Barra de progreso global y selector de tabs
-│   ├── Sidebar.jsx       # Navegación por niveles y secciones
-│   ├── SectionHeader.jsx # Tabs de sección (solo en vista de contenido)
-│   ├── ContentView.jsx   # Acordeones con checklist integrado
-│   └── ProgressView.jsx  # Tarjetas de progreso y checklist completo
+│   ├── TopBar.tsx       # Barra de progreso global y selector de tabs
+│   ├── Sidebar.tsx      # Navegación por niveles y secciones
+│   ├── SectionHeader.tsx # Tabs de sección
+│   ├── ContentView.tsx  # Acordeones con checklist integrado
+│   ├── ProgressView.tsx # Tarjetas de progreso y checklist completo
+│   ├── ExamsView.tsx    # Vista de exámenes
+│   ├── Quiz.tsx         # Componente de quiz
+│   ├── Exam.tsx         # Componente de examen
+│   ├── Login.tsx        # Pantalla de login
+│   └── LevelLock.tsx    # Componente de nivel bloqueado
 ├── hooks/
-│   └── useProgress.js    # Estado de checks con persistencia en LocalStorage
-├── theme.js              # Tokens de diseño
-├── App.jsx               # Componente raíz
-├── main.jsx              # Entry point
-└── index.css             # Estilos globales
+│   ├── useProgress.ts   # Estado de checks, quizzes, exámenes
+│   └── useAuth.ts       # Autenticación con Supabase
+├── lib/
+│   └── supabaseClient.ts # Cliente de Supabase
+├── utils/
+│   ├── unlockLogic.ts   # Lógica de desbloqueo de niveles
+│   └── quizHelpers.ts   # Helpers para quizzes
+├── config.ts            # Configuración centralizada
+├── types.ts             # Tipos de TypeScript
+├── theme.ts             # Tokens de diseño
+├── App.tsx              # Componente raíz
+├── main.tsx             # Entry point
+└── index.css            # Estilos globales
 ```
 
 ---
 
 ## 🎨 Tema Visual
-El roadmap tiene una estética "cyberpunk/dark", utilizando colores personalizados definidos en `src/theme.js` para mantener la consistencia (ej. `bg: #0F1117`, `surface: #161B27`).
+
+El roadmap tiene una estética "cyberpunk/dark", utilizando colores personalizados definidos en `src/theme.ts` para mantener la consistencia (ej. `bg: #0F1117`, `surface: #161B27`).
 
 ---
 
 ## Stack
 
 - React 18
+- TypeScript 5
 - Vite 5
 - Tailwind CSS v4
+- Supabase (autenticación + base de datos)
 - DM Mono — Google Fonts
+
+---
+
+## Estado
+
+| Nivel | Contenido | Examen |
+|-------|-----------|--------|
+| 01 Fundamentos | ✅ Completo | ✅ |
+| 02 Herramientas | ✅ Completo | ✅ |
+| 03 Automatización | ✅ Completo | ✅ |
+| 04 Orquestación | ✅ Completo | ✅ |
