@@ -1,4 +1,4 @@
-# AGENTS.md - Agent Forge & AI Toolkit
+# AGENTS.md - Agent Forge
 
 Directrices para agentes de IA que operan en este repositorio.
 
@@ -6,15 +6,16 @@ Directrices para agentes de IA que operan en este repositorio.
 
 ## 🛠 Comandos
 
-### Roadmap
 ```bash
+# Desarrollo
 npm run dev
+
+# Producción
 npm run build
 npm run preview
-```
 
-### Tests
-```bash
+# Tests (si están configurados)
+npx vitest run
 npx vitest run path/to/test.tsx
 ```
 
@@ -34,7 +35,7 @@ npx vitest run path/to/test.tsx
 ## Estructura
 
 ```
-roadmap/src/
+src/
 ├── data/              # Contenido: levels, quizzes, exams
 ├── components/        # 11 componentes React
 ├── hooks/            # useProgress, useAuth
@@ -106,12 +107,3 @@ VITE_EXAMS_FOR_USERS=true
 VITE_EXAMS_FOR_GUESTS=true
 VITE_ADMIN_PASSWORD=
 ```
-
----
-
-## Otros Módulos
-
-- **mcp/** — Documentación de servidores MCP
-- **skills/** — Skills del equipo (skill-builder, feature-docs, code-review)
-- **prompts/** — Librería de prompts
-- **agents/** — Configuraciones de agentes especializados
