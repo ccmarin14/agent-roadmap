@@ -102,7 +102,6 @@ VITE_SUPABASE_KEY=tu_key_de_supabase
 VITE_ALLOW_GUESTS=true
 VITE_EXAMS_FOR_USERS=true
 VITE_EXAMS_FOR_GUESTS=true
-VITE_ADMIN_PASSWORD=tu_password_admin
 ```
 
 ---
@@ -172,3 +171,34 @@ El roadmap tiene una estética "cyberpunk/dark", utilizando colores personalizad
 | 02 Herramientas | ✅ Completo | ✅ |
 | 03 Automatización | ✅ Completo | ✅ |
 | 04 Orquestación | ✅ Completo | ✅ |
+
+---
+
+## Sistema de Admin
+
+### Cómo agregar un usuario admin
+
+El sistema de admin usa tablas de base de datos (no password en .env). Para agregar un admin:
+
+1. **Obtén el UUID del usuario** en Supabase Dashboard → Authentication → Users
+
+2. **Ejecuta en SQL Editor:**
+   ```sql
+   INSERT INTO public.admins (user_id) VALUES ('UUID_DEL_USUARIO');
+   ```
+
+3. **Verifica que fue agregado:**
+   ```sql
+   SELECT * FROM public.admins;
+   ```
+
+### Permisos del admin
+
+Un usuario admin puede ver:
+- Todos los perfiles de usuarios (incluyendo emails)
+- Todo el progreso de usuarios
+- Todos los resultados de quizzes y exámenes
+
+### Migraciones
+
+El sistema de admin se crea automáticamente con la migración `supabase/migrations/20260317125500_add_admin_system.sql`. El insert del primer admin está comentado por seguridad - debe ejecutarse manualmente después del despliegue.
