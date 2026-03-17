@@ -15,7 +15,7 @@ prompts/
 
 Cada prompt debe seguir esta estructura:
 
-```markdown
+````markdown
 ---
 name: [prompt-name]
 type: [system | user | task]
@@ -68,6 +68,6 @@ Breve descripción de qué hace este prompt.
 ## Prompts disponibles
 
 - Coming soon...
-```
+````
 
 > **Nota:** Los prompts pueden importarse en conversaciones o referenciarse en AGENTS.md/CLAUDE.md.
