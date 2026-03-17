@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { LEVELS } from "./data/index";
 import { useProgress } from "./hooks/useProgress";
 import { useAuth } from "./hooks/useAuth";
@@ -9,6 +10,7 @@ import { ContentView } from "./components/ContentView";
 import { ProgressView } from "./components/ProgressView";
 import { ExamsView } from "./components/ExamsView";
 import { Login } from "./components/Login";
+import { AdminDashboard } from "./pages/AdminDashboard";
 import { canAccessLevel } from "./utils/unlockLogic";
 
 export default function App() {
@@ -40,87 +42,90 @@ export default function App() {
     );
   }
 
-  if (!user && !isGuest) {
-    return (
-      <Login
-        onComplete={() => {}}
-        login={login}
-        continueAsGuest={continueAsGuest}
-      />
-    );
-  }
-
   return (
-    <div className="flex flex-col h-screen bg-bg text-text font-mono text-[13px] overflow-hidden">
-      <TopBar level={level} tab={tab} setTab={setTab} total={total} />
+    <Routes>
+      <Route path="/" element={
+        !user && !isGuest ? (
+          <Login
+            onComplete={() => {}}
+            login={login}
+            continueAsGuest={continueAsGuest}
+          />
+        ) : (
+          <div className="flex flex-col h-screen bg-bg text-text font-mono text-[13px] overflow-hidden">
+            <TopBar level={level} tab={tab} setTab={setTab} total={total} />
 
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar
-          lvlIdx={lvlIdx} setLvlIdx={handleSetLvlIdx}
-          secIdx={secIdx} setSecIdx={setSecIdx}
-          setOpenItem={setOpenItem}
-          levelStats={levelStats}
-          examResults={examResults}
-          levelColor={level.color}
-          user={user}
-          onLogout={logout}
-        />
-
-        <div className="flex-1 overflow-hidden flex flex-col">
-          {tab === "content" && (
-            <SectionHeader
-              level={level}
-              lvlIdx={lvlIdx}
-              secIdx={secIdx} setSecIdx={setSecIdx}
-              setOpenItem={setOpenItem}
-              secStats={secStats}
-            />
-          )}
-
-          <div
-            className="ani flex-1 overflow-y-auto"
-            style={{ padding: "16px 24px" }}
-            key={`${lvlIdx}-${secIdx}-${tab}`}
-          >
-            {tab === "content" ? (
-              <ContentView
-                section={section}
-                level={level}
-                lvlIdx={lvlIdx}
-                secIdx={secIdx}
-                openItem={openItem}
+            <div className="flex flex-1 overflow-hidden">
+              <Sidebar
+                lvlIdx={lvlIdx} setLvlIdx={handleSetLvlIdx}
+                secIdx={secIdx} setSecIdx={setSecIdx}
                 setOpenItem={setOpenItem}
-                checked={checked}
-                key_fn={key}
-                toggle={toggle}
                 levelStats={levelStats}
                 examResults={examResults}
+                levelColor={level.color}
+                user={user}
+                onLogout={logout}
               />
-            ) : tab === "progress" ? (
-              <ProgressView
-                lvlIdx={lvlIdx}
-                setLvlIdx={setLvlIdx}
-                setSecIdx={setSecIdx}
-                setTab={setTab}
-                checked={checked}
-                key_fn={key}
-                toggle={toggle}
-                levelStats={levelStats}
-                examResults={examResults}
-              />
-            ) : (
-              <ExamsView
-                lvlIdx={lvlIdx}
-                levelStats={levelStats}
-                quizResults={quizResults}
-                examResults={examResults}
-                onQuizComplete={saveQuizResult}
-                onExamComplete={saveExamResult}
-              />
-            )}
+
+              <div className="flex-1 overflow-hidden flex flex-col">
+                {tab === "content" && (
+                  <SectionHeader
+                    level={level}
+                    lvlIdx={lvlIdx}
+                    secIdx={secIdx} setSecIdx={setSecIdx}
+                    setOpenItem={setOpenItem}
+                    secStats={secStats}
+                  />
+                )}
+
+                <div
+                  className="ani flex-1 overflow-y-auto"
+                  style={{ padding: "16px 24px" }}
+                  key={`${lvlIdx}-${secIdx}-${tab}`}
+                >
+                  {tab === "content" ? (
+                    <ContentView
+                      section={section}
+                      level={level}
+                      lvlIdx={lvlIdx}
+                      secIdx={secIdx}
+                      openItem={openItem}
+                      setOpenItem={setOpenItem}
+                      checked={checked}
+                      key_fn={key}
+                      toggle={toggle}
+                      levelStats={levelStats}
+                      examResults={examResults}
+                    />
+                  ) : tab === "progress" ? (
+                    <ProgressView
+                      lvlIdx={lvlIdx}
+                      setLvlIdx={setLvlIdx}
+                      setSecIdx={setSecIdx}
+                      setTab={setTab}
+                      checked={checked}
+                      key_fn={key}
+                      toggle={toggle}
+                      levelStats={levelStats}
+                      examResults={examResults}
+                    />
+                  ) : (
+                    <ExamsView
+                      lvlIdx={lvlIdx}
+                      levelStats={levelStats}
+                      quizResults={quizResults}
+                      examResults={examResults}
+                      onQuizComplete={saveQuizResult}
+                      onExamComplete={saveExamResult}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+        )
+      } />
+      <Route path="/admin" element={<AdminDashboard />} />
+    </Routes>
   );
 }
