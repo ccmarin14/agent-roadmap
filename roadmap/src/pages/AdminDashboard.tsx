@@ -335,16 +335,19 @@ function AdminDashboardContent() {
             onChange={(e) => setFilters(f => ({ ...f, email: e.target.value }))}
             className="px-3 py-2 bg-bg border border-border rounded text-[13px] outline-none focus:border-text-dim flex-1"
           />
-          <select
-            value={filters.level}
-            onChange={(e) => setFilters(f => ({ ...f, level: e.target.value }))}
-            className="px-3 py-2 bg-bg border border-border rounded text-[13px] outline-none focus:border-text-dim"
-          >
-            <option value="">Todos los niveles</option>
-            {LEVELS.map((level, idx) => (
-              <option key={idx} value={idx}>{level.title}</option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              value={filters.level}
+              onChange={(e) => setFilters(f => ({ ...f, level: e.target.value }))}
+              className="px-3 py-2 pr-8 bg-bg border border-border rounded text-[13px] outline-none focus:border-text-dim appearance-none"
+            >
+              <option value="">Todos los niveles</option>
+              {LEVELS.map((level, idx) => (
+                <option key={idx} value={idx}>{level.title}</option>
+              ))}
+            </select>
+            <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-text-dim pointer-events-none text-[10px]">▼</span>
+          </div>
           <div className="relative">
             <input
               type="date"

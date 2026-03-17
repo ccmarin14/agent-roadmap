@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ALLOW_GUESTS, isSupabaseConfigured } from "../config";
+import { useNavigate } from "react-router-dom";
+import { ALLOW_GUESTS, ADMIN_ENABLED, isSupabaseConfigured } from "../config";
 
 interface LoginProps {
   onComplete: () => void;
@@ -8,6 +9,7 @@ interface LoginProps {
 }
 
 export function Login({ onComplete, login, continueAsGuest }: LoginProps) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -112,6 +114,15 @@ export function Login({ onComplete, login, continueAsGuest }: LoginProps) {
             <br />
             Solo disponible modo invitado.
           </div>
+        )}
+
+        {ADMIN_ENABLED && (
+          <button
+            onClick={() => navigate("/admin")}
+            className="mt-4 w-full py-2 text-[11px] text-text-dim hover:text-text transition-colors"
+          >
+            Acceso Admin
+          </button>
         )}
       </div>
     </div>
