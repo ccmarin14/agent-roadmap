@@ -102,6 +102,7 @@ VITE_SUPABASE_KEY=tu_key_de_supabase
 VITE_ALLOW_GUESTS=true
 VITE_EXAMS_FOR_USERS=true
 VITE_EXAMS_FOR_GUESTS=true
+VITE_ADMIN_PASSWORD=tu_password_admin
 ```
 
 ---
@@ -133,6 +134,8 @@ src/
 │   └── useAuth.ts       # Autenticación con Supabase
 ├── lib/
 │   └── supabaseClient.ts # Cliente de Supabase
+├── pages/
+│   └── AdminDashboard.tsx # Dashboard de administración
 ├── utils/
 │   ├── unlockLogic.ts   # Lógica de desbloqueo de niveles
 │   └── quizHelpers.ts   # Helpers para quizzes
@@ -158,7 +161,9 @@ El roadmap tiene una estética "cyberpunk/dark", utilizando colores personalizad
 - TypeScript 5
 - Vite 5
 - Tailwind CSS v4
-- Supabase (autenticación + base de datos)
+- Supabase (auth + db)
+- React Router DOM
+- Recharts
 - DM Mono — Google Fonts
 
 ---
@@ -174,23 +179,39 @@ El roadmap tiene una estética "cyberpunk/dark", utilizando colores personalizad
 
 ---
 
+## Dashboard de Admin
+
+El dashboard de administración está disponible en `/admin`. Muestra métricas y estadísticas del uso del roadmap.
+
+### Características
+
+- **Usuarios**: Lista de todos los usuarios registrados con su progreso
+- **Actividad**: Registro de acciones (checks, quizzes, exámenes)
+- **Estadísticas por nivel**: Progreso promedio de usuarios en cada nivel
+- **Gráficos**: Visualizaciones con Recharts (líneas, barras, progreso)
+- **Inactivos**: Usuarios que no han accedido en X días
+
+### Acceso
+
+1. Un usuario debe ser agregado a la tabla `admins` en Supabase
+2. O configurar `VITE_ADMIN_PASSWORD` en variables de entorno
+
+---
+
 ## Sistema de Admin
 
-### Cómo agregar un usuario admin
+### Cómo acceder al admin
 
-El sistema de admin usa tablas de base de datos (no password en .env). Para agregar un admin:
-
-1. **Obtén el UUID del usuario** en Supabase Dashboard → Authentication → Users
-
-2. **Ejecuta en SQL Editor:**
+**Opción 1 - Por usuario (recomendado):**
+1. Obtén el UUID del usuario en Supabase Dashboard → Authentication → Users
+2. Ejecuta en SQL Editor:
    ```sql
    INSERT INTO public.admins (user_id) VALUES ('UUID_DEL_USUARIO');
    ```
 
-3. **Verifica que fue agregado:**
-   ```sql
-   SELECT * FROM public.admins;
-   ```
+**Opción 2 - Por password:**
+1. Configura `VITE_ADMIN_PASSWORD` en el archivo `.env`
+2. Accede a `/admin` e ingresa el password
 
 ### Permisos del admin
 
