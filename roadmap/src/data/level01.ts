@@ -27,18 +27,17 @@ export const level01 = {
           references: ["llm-anthropic"],
           checks: [
             "Conoces los 3 modelos de Claude (Haiku, Sonnet, Opus) y su caso de uso principal",
-            "Tienes un criterio claro para escalar de Sonnet a Opus",
-            "Probaste Haiku para al menos una tarea repetitiva y comparaste el resultado con Sonnet",
+            "Sabes cuándo conviene escalar de Sonnet a Opus (y que Opus requiere suscripción Pro)",
+            "Entes que Haiku está disponible en el free tier de Claude"
           ],
         },
         {
           label: "Modelos de OpenAI — GPT y o-series",
-          body: "GPT-4.1 y su familia (mini, nano) destacan en tareas de código y multimodal. La o-series (o3, o4-mini) usa razonamiento extendido — el modelo 'piensa' antes de responder, lo que mejora matemáticas y lógica compleja. o4-mini ofrece calidad sorprendente a bajo costo para problemas algorítmicos. GPT-5 cuando necesitas el techo de OpenAI. Todos disponibles en OpenCode.",
+          body: "GPT-4.1 y su familia (mini, nano) destacan en tareas de código y multimodal. La o-series (o3, o4-mini) usa razonamiento extendido — el modelo 'piensa' antes de responder, lo que mejora matemáticas y lógica compleja. o4-mini ofrece calidad sorprendente a bajo costo para problemas algorítmicos. GPT-5 cuando necesitas el techo de OpenAI. Todos disponibles en OpenCode.\n\n**Nota de acceso gratuito:** La API de OpenAI requiere pago. Puedes usar OpenRouter que ofrece algunos modelos gratuitos o acceder via servicios que tengan API keys propias.",
           references: ["llm-openai"],
           checks: [
-            "Entiendes la diferencia entre GPT-4.1 y la o-series (razonamiento extendido)",
-            "Probaste un modelo o-series para un problema de razonamiento complejo",
-            "Configuraste al menos un modelo de OpenAI en tu entorno de trabajo",
+            "Entiendes la diferencia conceptual entre GPT-4.1 y la o-series (razonamiento extendido)",
+            "Sabes que la API de OpenAI requiere pago y conoces alternativas gratuitas"
           ],
         },
         {
@@ -53,23 +52,22 @@ export const level01 = {
         },
         {
           label: "Modelos chinos — DeepSeek y Qwen",
-          body: "DeepSeek R1: modelo de razonamiento open-source, muy competitivo para debugging complejo y problemas algorítmicos. Extremadamente barato por token comparado con equivalentes occidentales. DeepSeek V3: modelo base de alta calidad para generación general.\n\nQwen3-Coder (Alibaba): diseñado específicamente para agentes de código, con buen soporte de herramientas. Qwen3 480B el más potente de la familia. Ambos disponibles via OpenRouter o directamente. Alternativas serias de bajo costo.",
+          body: "DeepSeek R1: modelo de razonamiento open-source, muy competitivo para debugging complejo y problemas algorítmicos. Extremadamente barato por token comparado con equivalentes occidentales. DeepSeek V3: modelo base de alta calidad para generación general.\n\nQwen3-Coder (Alibaba): diseñado específicamente para agentes de código, con buen soporte de herramientas. Qwen3 480B el más potente de la familia. Ambos disponibles via OpenRouter o directamente. Alternativas serias de bajo costo.\n\n**Alternativa gratuita:** Ollama permite correr estos modelos 100% local en tu máquina sin costo alguno.",
           references: ["llm-deepseek"],
           checks: [
-            "Tienes configurada la API de DeepSeek o acceso via OpenRouter",
-            "Probaste DeepSeek R1 en un problema de razonamiento y comparaste con Claude/GPT",
-            "Conoces Qwen3-Coder como alternativa especializada en coding agentic",
-            "El equipo evaluó cuándo usar modelos de bajo costo vs modelos premium",
+            "Entes que DeepSeek y Qwen son alternativas de bajo costo (API barata, no gratuitas)",
+            "Conoces Ollama como opción 100% local y gratuita para estos modelos",
+            "Conoces Qwen3-Coder como alternativa especializada en coding agentic"
           ],
         },
         {
-          label: "OpenCode Zen — modelos curados",
-          body: "OpenCode Zen es la lista de modelos testeados y verificados específicamente para tareas de coding agentic por el equipo de OpenCode. Incluye acceso a Qwen3-Coder 480B, Kimi K2, y otros validados para uso con agentes. Ventaja: no tienes que probar qué modelos funcionan bien para agentes — ya fue evaluado por el equipo. Ideal para empezar sin configurar múltiples APIs.",
+          label: "OpenCode — Go vs Zen",
+          body: "**OpenCode Go** es open-source y gratuito. Usa tus propias API keys de cualquier proveedor (Claude, Gemini, OpenAI, etc.). Tú controlas qué modelo usar y cuánto gastas.\n\n**OpenCode Zen** es el servicio de modelos curados y verificados por el equipo de OpenCode. Requiere $20 de prepago y ofrece modelos optimizados para coding agentic sin configuración adicional.\n\n**Recomendación:** Empieza con OpenCode Go + API keys propias (Gemini es gratis en AI Studio). Zen es para cuando quieras simplificar la configuración.",
           references: ["ide-opencode"],
           checks: [
-            "Tienes cuenta en OpenCode y API key de Zen configurada",
-            "Probaste al menos 2 modelos distintos de Zen en la misma tarea para comparar",
-            "Entiendes qué diferencia a los modelos de Zen de los modelos generales de los mismos proveedores",
+            "Entes que OpenCode Go es gratuito y Zen requiere pago ($20 prepago)",
+            "Tienes OpenCode Go funcionando con al menos un modelo configurado",
+            "Sabes qué escenario justifica usar Zen sobre Go"
           ],
         },
       ],

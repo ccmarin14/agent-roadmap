@@ -26,14 +26,14 @@ export const REFERENCES = {
   "llm-openai": [
     {
       title: "OpenAI o3 and o4-mini",
-      url: "https://openai.com/index/openai-o3-and-o4-mini/",
+      url: "https://openai.com/es-ES/index/introducing-o3-and-o4-mini/",
       desc: "Documentación oficial sobre la serie o de razonamiento extendido"
     }
   ],
   "llm-gemini": [
     {
       title: "Gemini 2.5 Pro",
-      url: "https://blog.google/technology/ai/gemini-2-5-flash/",
+      url: "https://blog.google/technology/google-deepmind/google-gemini-updates-io-2025",
       desc: "Anuncio de Gemini 2.5 con 1M tokens de context window"
     }
   ],
@@ -47,7 +47,7 @@ export const REFERENCES = {
   "agents-basics": [
     {
       title: "Building Effective Agents",
-      url: "https://www.anthropic.com/engineering/building-effective-agents",
+      url: "https://www.estrategiadeproducto.com/p/construyendo-agentes-eficaces",
       desc: "Guía de Anthropic sobre cómo construir agentes efectivos"
     },
     {
@@ -76,12 +76,12 @@ export const REFERENCES = {
   "agents-metrics": [
     {
       title: "Evaluating AI Agents: Metrics That Matter",
-      url: "https://www.anthropic.com/engineering/evaluating-ai-agents",
+      url: "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
       desc: "Guía de Anthropic sobre métricas para evaluar agentes"
     },
     {
       title: "Building Reliable AI Agents: Best Practices",
-      url: "https://e2b.dev/blog/building-reliable-ai-agents",
+      url: "https://e2b.dev/blog/how-manus-uses-e2b-to-provide-agents-with-virtual-computers",
       desc: "Métricas y mejores prácticas para agentes en producción"
     }
   ],
@@ -95,7 +95,7 @@ export const REFERENCES = {
   "console-claude-code": [
     {
       title: "Claude Code CLI: The Complete Guide",
-      url: "https://blakecrosley.com/guides/claude-code",
+      url: "https://andresospina.co/claude-code-tutorial",
       desc: "Guía completa de Claude Code CLI"
     },
     {
@@ -107,7 +107,7 @@ export const REFERENCES = {
   "prompts-basics": [
     {
       title: "Prompt engineering for Claude's long context window",
-      url: "https://www.anthropic.com/news/prompting-long-context",
+      url: "https://www.javadex.es/blog/como-escribir-prompts-efectivos-chatgpt-claude-guia-completa-ejemplos",
       desc: "Técnicas de prompt engineering de Anthropic"
     }
   ],
@@ -136,7 +136,7 @@ export const REFERENCES = {
     },
     {
       title: "MCP (Model Context Protocol) — A Deep Dive Beyond the Basics",
-      url: "https://masterprompting.net/blog/mcp-model-context-protocol-complete-guide",
+      url: "https://adictosaltrabajo.com/2025/05/19/model-context-protocol-mcp-que-es-y-como-usarlo-paso-a-paso-con-ejemplos-en-python/",
       desc: "Guía profunda sobre arquitectura y configuración de MCP"
     },
     {
@@ -160,19 +160,19 @@ export const REFERENCES = {
     },
     {
       title: "Prompt Injection Attacks Against AI Agents",
-      url: "https://arxiv.org/abs/2311.09953",
+      url: "https://ar5iv.labs.arxiv.org/html/2302.12173",
       desc: "Paper académico sobre ataques de prompt injection"
     },
     {
       title: "Tool Poisoning: Security Risks in AI Agent Systems",
-      url: "https://security.google/blog/gws-tech-guide-to-securing-ai-agents",
+      url: "https://cloud.google.com/blog/products/identity-security/cloud-ciso-perspectives-how-google-secures-ai-agents",
       desc: "Guía de Google sobre seguridad en agentes"
     }
   ],
   "skills-basics": [
     {
       title: "Building Skills for Claude Code",
-      url: "https://www.claude.com/blog/building-skills-for-claude-code",
+      url: "https://docs.claude.com/en/docs/claude-code/skills",
       desc: "Documentación oficial de Anthropic sobre Skills"
     },
     {
@@ -220,7 +220,7 @@ export const REFERENCES = {
   "hooks-config": [
     {
       title: "Claude Code power user customization: How to configure hooks",
-      url: "https://claude.com/blog/how-to-configure-hooks",
+      url: "https://andresospina.co/claude-code-tutorial",
       desc: "Documentación oficial de Anthropic sobre configuración de hooks"
     },
     {
