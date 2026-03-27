@@ -28,7 +28,7 @@ export const level01 = {
           checks: [
             "Conoces los 3 modelos de Claude (Haiku, Sonnet, Opus) y su caso de uso principal",
             "Sabes cuándo conviene escalar de Sonnet a Opus (y que Opus requiere suscripción Pro)",
-            "Entes que Haiku está disponible en el free tier de Claude"
+            "Entiendes que Haiku está disponible en el free tier de Claude"
           ],
         },
         {
@@ -55,7 +55,7 @@ export const level01 = {
           body: "DeepSeek R1: modelo de razonamiento open-source, muy competitivo para debugging complejo y problemas algorítmicos. Extremadamente barato por token comparado con equivalentes occidentales. DeepSeek V3: modelo base de alta calidad para generación general.\n\nQwen3-Coder (Alibaba): diseñado específicamente para agentes de código, con buen soporte de herramientas. Qwen3 480B el más potente de la familia. Ambos disponibles via OpenRouter o directamente. Alternativas serias de bajo costo.\n\n**Alternativa gratuita:** Ollama permite correr estos modelos 100% local en tu máquina sin costo alguno.",
           references: ["llm-deepseek"],
           checks: [
-            "Entes que DeepSeek y Qwen son alternativas de bajo costo (API barata, no gratuitas)",
+            "Entiendes que DeepSeek y Qwen son alternativas de bajo costo (API barata, no gratuitas)",
             "Conoces Ollama como opción 100% local y gratuita para estos modelos",
             "Conoces Qwen3-Coder como alternativa especializada en coding agentic"
           ],
@@ -65,7 +65,7 @@ export const level01 = {
           body: "**OpenCode Go** es open-source y gratuito. Usa tus propias API keys de cualquier proveedor (Claude, Gemini, OpenAI, etc.). Tú controlas qué modelo usar y cuánto gastas.\n\n**OpenCode Zen** es el servicio de modelos curados y verificados por el equipo de OpenCode. Requiere $20 de prepago y ofrece modelos optimizados para coding agentic sin configuración adicional.\n\n**Recomendación:** Empieza con OpenCode Go + API keys propias (Gemini es gratis en AI Studio). Zen es para cuando quieras simplificar la configuración.",
           references: ["ide-opencode"],
           checks: [
-            "Entes que OpenCode Go es gratuito y Zen requiere pago ($20 prepago)",
+            "Entiendes que OpenCode Go es gratuito y Zen requiere pago ($20 prepago)",
             "Tienes OpenCode Go funcionando con al menos un modelo configurado",
             "Sabes qué escenario justifica usar Zen sobre Go"
           ],
