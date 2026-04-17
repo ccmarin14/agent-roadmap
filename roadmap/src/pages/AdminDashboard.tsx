@@ -37,6 +37,7 @@ interface UserData {
 
 interface ActivityRecord {
   id: string;
+  userId: string;
   userEmail: string;
   type: "check" | "quiz" | "exam";
   detail: string;
@@ -79,24 +80,121 @@ function getCurrentLevel(progress: UserData["progress"]): number {
   return 0;
 }
 
+/** Días de calendario locales entre `dateStr` y hoy (0 = mismo día civil). */
+function calendarDaysAgoLocal(dateStr: string): number {
+  const d = new Date(dateStr);
+  if (Number.isNaN(d.getTime())) return Number.POSITIVE_INFINITY;
+  const now = new Date();
+  const t0 = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  const t1 = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  return Math.round((t1 - t0) / 86_400_000);
+}
+
 function formatDate(dateStr: string | null): string {
   if (!dateStr) return "Sin actividad";
   const date = new Date(dateStr);
-  const now = new Date();
-  const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
-  
-  if (diffDays === 0) return "Hoy";
-  if (diffDays === 1) return "Ayer";
-  if (diffDays < 7) return `Hace ${diffDays} días`;
+  if (Number.isNaN(date.getTime())) return "—";
+  const daysAgo = calendarDaysAgoLocal(dateStr);
+  if (daysAgo < 0) {
+    return date.toLocaleDateString("es-ES", { day: "2-digit", month: "short", year: "numeric" });
+  }
+  if (daysAgo === 0) return "Hoy";
+  if (daysAgo === 1) return "Ayer";
+  if (daysAgo < 7) return `Hace ${daysAgo} días`;
   return date.toLocaleDateString("es-ES", { day: "2-digit", month: "short", year: "numeric" });
 }
 
 function isInactive(lastAccess: string | null): boolean {
   if (!lastAccess) return true;
-  const date = new Date(lastAccess);
-  const now = new Date();
-  const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
-  return diffDays >= INACTIVE_DAYS_THRESHOLD;
+  const daysAgo = calendarDaysAgoLocal(lastAccess);
+  return daysAgo >= INACTIVE_DAYS_THRESHOLD;
+}
+
+/** quiz_results no tiene columna `passed` en BD; se calcula como en useProgress. */
+function quizPassedFromLevel(levelId: string, sectionId: string, score: number): boolean {
+  const level = LEVELS.find((l) => l.id === levelId);
+  const section = level?.sections.find((s) => s.id === sectionId);
+  const passing = section?.quiz?.passingScore ?? 90;
+  return score >= passing;
+}
+
+function activityTimeMs(iso: string): number {
+  const t = new Date(iso).getTime();
+  return Number.isNaN(t) ? 0 : t;
+}
+
+/** Más reciente primero; desempate estable para no agrupar por tipo cuando el tiempo coincide. */
+function sortActivitiesRecentFirst(a: ActivityRecord, b: ActivityRecord): number {
+  const tb = activityTimeMs(b.timestamp);
+  const ta = activityTimeMs(a.timestamp);
+  if (tb !== ta) return tb - ta;
+  return b.id.localeCompare(a.id);
+}
+
+/** Fecha y hora explícitas (incl. año) para no confundir con “hoy” por zona horaria o formato corto. */
+function formatActivityWhen(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "—";
+  return d.toLocaleString("es-ES", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+/** Misma jerarquía que en ContentView (sección → ítem abierto con setOpenItem → criterio). */
+function formatCheckActivityDetail(p: UserData["progress"][number]): string {
+  const level = LEVELS[p.levelIdx];
+  const section = level?.sections[p.sectionIdx];
+  const item = section?.items[p.itemIdx];
+  const itemLabel = item?.label ?? `Ítem ${p.itemIdx + 1}`;
+  return `Check · Nivel ${p.levelIdx + 1} - ${itemLabel}`;
+}
+
+/** Una sola fila por usuario: el evento más reciente (check, quiz o examen). */
+function buildLastActivityForUser(user: UserData): ActivityRecord | null {
+  const candidates: ActivityRecord[] = [];
+
+  user.progress
+    .filter(p => p.completed)
+    .forEach(p => {
+      candidates.push({
+        id: `progress-${user.id}-${p.levelIdx}-${p.sectionIdx}-${p.itemIdx}-${p.checkIdx}-${p.updatedAt}`,
+        userId: user.id,
+        userEmail: user.email,
+        type: "check",
+        detail: formatCheckActivityDetail(p),
+        timestamp: p.updatedAt,
+      });
+    });
+
+  user.quizResults.forEach(q => {
+    candidates.push({
+      id: `quiz-${user.id}-${q.levelId}-${q.sectionId}-${q.createdAt}`,
+      userId: user.id,
+      userEmail: user.email,
+      type: "quiz",
+      detail: `Quiz · ${q.levelId}/${q.sectionId} - ${q.score}/${q.total}`,
+      timestamp: q.createdAt,
+    });
+  });
+
+  user.examResults.forEach(e => {
+    candidates.push({
+      id: `exam-${user.id}-${e.levelId}-${e.createdAt}`,
+      userId: user.id,
+      userEmail: user.email,
+      type: "exam",
+      detail: `Examen · Nivel ${e.levelId} - ${e.score}/${e.total}`,
+      timestamp: e.createdAt,
+    });
+  });
+
+  if (candidates.length === 0) return null;
+  candidates.sort(sortActivitiesRecentFirst);
+  return candidates[0];
 }
 
 function AdminDashboardContent() {
@@ -137,11 +235,14 @@ function AdminDashboardContent() {
             .eq("user_id", profile.id)
             .order("updated_at", { ascending: false });
 
-          const { data: quizData } = await client
+          const { data: quizData, error: quizErr } = await client
             .from("quiz_results")
-            .select("level_id, section_id, score, total, passed, created_at")
+            .select("level_id, section_id, score, total, created_at")
             .eq("user_id", profile.id)
             .order("created_at", { ascending: false });
+          if (quizErr) {
+            console.error("Admin: error cargando quiz_results", quizErr);
+          }
 
           const { data: examData } = await client
             .from("exam_results")
@@ -149,19 +250,11 @@ function AdminDashboardContent() {
             .eq("user_id", profile.id)
             .order("created_at", { ascending: false });
 
-          const lastProgress = progressData?.[0];
-          const lastQuiz = quizData?.[0];
-          const lastExam = examData?.[0];
-
-          const timestamps = [lastProgress?.updated_at, lastQuiz?.created_at, lastExam?.created_at]
-            .filter(Boolean)
-            .sort((a, b) => new Date(b!).getTime() - new Date(a!).getTime());
-
-          return {
+          const userRow: UserData = {
             id: profile.id,
             email: profile.email,
             created_at: profile.created_at,
-            lastAccess: timestamps[0] || null,
+            lastAccess: null,
             progress: (progressData || []).map(p => ({
               levelIdx: p.level_idx,
               sectionIdx: p.section_idx,
@@ -175,7 +268,7 @@ function AdminDashboardContent() {
               sectionId: q.section_id,
               score: q.score,
               total: q.total,
-              passed: q.passed,
+              passed: quizPassedFromLevel(q.level_id, q.section_id, q.score),
               createdAt: q.created_at,
             })),
             examResults: (examData || []).map(e => ({
@@ -186,53 +279,23 @@ function AdminDashboardContent() {
               createdAt: e.created_at,
             })),
           };
+
+          return {
+            ...userRow,
+            lastAccess: buildLastActivityForUser(userRow)?.timestamp ?? null,
+          };
         })
       );
 
       setUsers(usersData);
 
-      const activities: ActivityRecord[] = [];
-      
-      usersData.forEach(user => {
-        user.progress.slice(0, 2).forEach(p => {
-          const level = LEVELS[p.levelIdx];
-          const section = level?.sections[p.sectionIdx];
-          activities.push({
-            id: `progress-${user.id}-${p.updatedAt}`,
-            userEmail: user.email,
-            type: "check",
-            detail: `Nivel ${p.levelIdx + 1} - ${section?.title || 'Sección'} - Check completado`,
-            timestamp: p.updatedAt,
-          });
-        });
-      });
-
-      usersData.forEach(user => {
-        user.quizResults.slice(0, 1).forEach(q => {
-          activities.push({
-            id: `quiz-${user.id}-${q.createdAt}`,
-            userEmail: user.email,
-            type: "quiz",
-            detail: `Quiz ${q.levelId}/${q.sectionId} - ${q.score}/${q.total}`,
-            timestamp: q.createdAt,
-          });
-        });
-      });
-
-      usersData.forEach(user => {
-        user.examResults.slice(0, 1).forEach(e => {
-          activities.push({
-            id: `exam-${user.id}-${e.createdAt}`,
-            userEmail: user.email,
-            type: "exam",
-            detail: `Examen ${e.levelId} - ${e.score}/${e.total}`,
-            timestamp: e.createdAt,
-          });
-        });
-      });
-
-      activities.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-      setRecentActivity(activities.slice(0, 5));
+      const byUser = new Map<string, ActivityRecord>();
+      for (const user of usersData) {
+        const last = buildLastActivityForUser(user);
+        if (last) byUser.set(user.id, last);
+      }
+      const activities = Array.from(byUser.values()).sort(sortActivitiesRecentFirst);
+      setRecentActivity(activities);
 
       setLoading(false);
     };
@@ -312,14 +375,22 @@ function AdminDashboardContent() {
               <span className="w-2 h-2 rounded-full bg-blue-500"></span>
               <span className="text-[11px] uppercase tracking-wider text-text">Progreso Reciente</span>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1 max-h-52 overflow-y-auto pr-1">
               {recentActivity.length === 0 ? (
                 <div className="text-text-dim text-[11px]">Sin actividad reciente</div>
               ) : (
-                recentActivity.map((activity, idx) => (
-                  <div key={idx} className="text-[11px] flex justify-between gap-2">
-                    <span className="text-text-dim">{activity.userEmail}</span>
-                    <span className="text-text-dim shrink-0">{activity.detail}</span>
+                recentActivity.map((activity) => (
+                  <div
+                    key={activity.userId}
+                    className="text-[11px] grid grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_auto] gap-x-2 items-start"
+                  >
+                    <span className="text-text-dim truncate" title={activity.userEmail}>
+                      {activity.userEmail}
+                    </span>
+                    <span className="text-text-dim text-right min-w-0 wrap-break-word">{activity.detail}</span>
+                    <span className="text-text-dim tabular-nums whitespace-nowrap shrink-0" title={activity.timestamp}>
+                      ({formatActivityWhen(activity.timestamp)})
+                    </span>
                   </div>
                 ))
               )}
