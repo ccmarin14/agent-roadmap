@@ -174,9 +174,9 @@ export const level01 = {
           body: "Un chatbot responde. Un agente actúa. La diferencia técnica: un agente tiene acceso a herramientas (tools) que puede invocar para leer archivos, ejecutar código, buscar en internet, consultar bases de datos. El flujo es: recibe tarea → razona → elige herramienta → ejecuta → observa resultado → razona de nuevo → repite hasta completar.\n\nEsto cambia todo: el agente puede tomar múltiples pasos autónomos para completar una tarea compleja, no solo generar texto.",
           references: ["agents-basics", "agents-tool-use"],
           checks: [
-            "Puedes explicar la diferencia entre chatbot y agente (con herramientas). Ruta A: lo explicas con un ejemplo real de tu proyecto. Ruta B: lo explicas con un ejemplo simple (buscar, leer archivo, ejecutar comando). Evidencia: 5–8 líneas escritas con el ejemplo.",
-            "Entiendes el ciclo ReAct (razonar → actuar → observar → repetir). Ruta A: describes 1 tarea real en 4 pasos ReAct. Ruta B: describes una tarea de ejemplo (p. ej. “encontrar dónde se usa una función”) en 4 pasos. Evidencia: lista numerada de 4 pasos.",
-            "Sabes qué es un tool call y cuándo usar una herramienta. Ruta A: identificas 2 herramientas que usarías en tu proyecto y por qué. Ruta B: identificas 2 herramientas genéricas (leer archivo / buscar / ejecutar) y por qué. Evidencia: 2 bullets por herramienta (cuándo sí / cuándo no).",
+            "Puedes explicar la diferencia entre chatbot y agente (con herramientas). Evidencia: 5–8 líneas con un ejemplo concreto.",
+            "Entiendes el ciclo ReAct (razonar → actuar → observar → repetir). Evidencia: 1 tarea descrita en 4 pasos ReAct.",
+            "Sabes qué es un tool call y cuándo usar una herramienta. Evidencia: 2 herramientas + (cuándo sí / cuándo no) para cada una.",
           ],
         },
         {
@@ -184,9 +184,9 @@ export const level01 = {
           body: "Agente de tarea única: resuelve una tarea específica con un conjunto limitado de herramientas. Más predecible, más fácil de confiar. Agente de propósito general: puede usar muchas herramientas, aborda tareas diversas. Más poderoso, más difícil de controlar.\n\nPara equipos de desarrollo los más valiosos son agentes especializados: uno para tests, uno para review, uno para documentación. Cada uno con herramientas y contexto acotados. La especialización es lo que hace que los agentes sean confiables.",
           references: ["agents-basics"],
           checks: [
-            "Entiendes generalista vs especializado. Ruta A: lo explicas usando roles reales de tu equipo (tests/review/docs). Ruta B: lo explicas con roles genéricos (investigación/implementación/revisión). Evidencia: comparación en 3 bullets (capacidad, riesgos, control).",
-            "Sabes cuándo conviene especializado vs general. Ruta A: eliges el tipo correcto para 2 tareas reales del repo. Ruta B: eliges el tipo para 2 tareas ejemplo (bug, refactor). Evidencia: 2 casos con “elige X porque…”.",
-            "Conoces al menos 3 tipos de agentes útiles. Ruta A: nombras 3 agentes (tests/review/seguridad o docs) y su input/output. Ruta B: nombras 3 agentes y su contrato (entrada/salida) en 1 línea cada uno. Evidencia: lista de 3 contratos.",
+            "Entiendes generalista vs especializado. Evidencia: comparación en 3 bullets (capacidad, riesgos, control).",
+            "Sabes cuándo conviene especializado vs general. Evidencia: 2 casos con “elige X porque…”.",
+            "Conoces al menos 3 tipos de agentes útiles. Evidencia: lista de 3 contratos (entrada/salida) en 1 línea cada uno.",
           ],
         },
         {
@@ -194,9 +194,9 @@ export const level01 = {
           body: "Los agentes heredan los problemas de los LLMs: pueden alucinar herramientas, inventar código que no existe, o tomar acciones no intencionadas. Reglas para confiar de forma segura: da al agente el contexto mínimo necesario (no toda la codebase si no la necesita), revisa siempre los cambios propuestos antes de aplicarlos, empieza con tareas de bajo riesgo, aumenta autonomía gradualmente según ganes confianza en ese agente específico.",
           references: ["agents-basics"],
           checks: [
-            "Entiendes 3 riesgos principales (alucinación, permisos excesivos, acciones no intencionadas). Ruta A: los explicas con ejemplos del repo. Ruta B: los explicas con ejemplos genéricos. Evidencia: 3 riesgos + 1 mitigación cada uno.",
-            "Revisas antes de aplicar. Ruta A: haces review de un diff/cambio propuesto y anotas 2 cosas a verificar. Ruta B: haces review de un cambio pequeño (1 archivo) y anotas 2 verificaciones. Evidencia: checklist de 2–4 puntos.",
-            "Aumentas autonomía gradualmente. Ruta A: defines 3 niveles de riesgo (bajo/medio/alto) con ejemplos del proyecto. Ruta B: defines 3 niveles con ejemplos genéricos. Evidencia: tabla o lista con ejemplos por nivel.",
+            "Entiendes 3 riesgos principales (alucinación, permisos excesivos, acciones no intencionadas). Evidencia: 3 riesgos + 1 mitigación cada uno.",
+            "Revisas antes de aplicar. Evidencia: checklist de 2–4 puntos para revisar cambios propuestos.",
+            "Aumentas autonomía gradualmente. Evidencia: definición de 3 niveles de riesgo (bajo/medio/alto) con 1 ejemplo por nivel.",
           ],
         },
         {
@@ -204,9 +204,9 @@ export const level01 = {
           body: "Más allá del patrón ReAct, existen otros modelos de razonamiento:\n\n**Reflexion**: El agente se auto-evalúa después de cada acción. Si el resultado no es el esperado, ajusta su approach. Útil para tareas donde el feedback es diferido, como debugging o código complejo donde los errores se ven después de ejecutar.\n\n**Self-Ask**: El agente se hace preguntas intermedias antes de actuar. \"¿Qué necesito saber antes de resolver esto?\" Reduce saltos lógicos incorrectos. Ideal para investigación o análisis donde hay dependencias de información.\n\n**Planning Jerárquico**: Descompone tareas grandes en sub-tareas primero, luego ejecuta. Similar a cómo un PM trabaja. Usa este patrón para features nuevos o refactors grandes.\n\n**Cuándo usar cada uno**:\n- ReAct: tareas simples con feedback inmediato\n- Reflexion: debugging, código complejo donde errores se ven después\n- Self-Ask: investigación, análisis donde hay dependencias de información\n- Planning: features nuevos, refactors grandes",
           references: ["agents-reasoning"],
           checks: [
-            "Entiendes la diferencia entre ReAct, Reflexion y Self‑Ask. Ruta A: das 1 ejemplo del repo por patrón. Ruta B: das 1 ejemplo genérico por patrón. Evidencia: 3 ejemplos (uno por patrón) en 1–2 líneas.",
-            "Sabes cuándo usar planning jerárquico vs ejecución directa. Ruta A: eliges para 1 tarea real grande y 1 pequeña del proyecto. Ruta B: eliges para 1 tarea grande y 1 pequeña de ejemplo. Evidencia: 2 casos con justificación breve.",
-            "Identificas el patrón adecuado según tarea. Ruta A: clasificas 3 tareas reales (feature/debug/investigación). Ruta B: clasificas 3 tareas de ejemplo. Evidencia: lista de 3 tareas → patrón elegido → por qué.",
+            "Entiendes la diferencia entre ReAct, Reflexion y Self‑Ask. Evidencia: 3 ejemplos (uno por patrón) en 1–2 líneas.",
+            "Sabes cuándo usar planning jerárquico vs ejecución directa. Evidencia: 2 casos (uno grande, uno pequeño) con justificación breve.",
+            "Identificas el patrón adecuado según tarea. Evidencia: lista de 3 tareas → patrón elegido → por qué.",
           ],
         },
       ],
@@ -322,9 +322,9 @@ export const level01 = {
           body: "Cada sesión es un contexto fresco — el agente no recuerda sesiones anteriores. Para equipos esto es ventaja y riesgo al mismo tiempo: ventaja porque cada sesión parte limpia, riesgo porque hay que re-contextualizar en cada sesión.\n\nBuenas prácticas: define el propósito de cada sesión antes de empezar, usa sesiones cortas y específicas en lugar de una sesión larga y mezclada, nunca mezcles features distintos en la misma sesión. Sesiones largas degradan la calidad de respuestas.",
           references: ["console-claude-code"],
           checks: [
-            "Defines propósito antes de empezar. Ruta A: plantilla de inicio usada en 2 sesiones reales. Ruta B: plantilla usada en 2 ejercicios (texto). Evidencia: 2 prompts de onboarding guardados.",
-            "Usas sesiones cortas y específicas. Ruta A: 2 sesiones con 1 objetivo cada una (registradas). Ruta B: 2 sesiones simuladas con 1 objetivo cada una. Evidencia: lista con objetivo + resultado por sesión.",
-            "Retomas contexto sin repetir todo. Ruta A: escribes un handoff corto para retomar (qué se hizo/qué sigue). Ruta B: mismo handoff para un ejercicio. Evidencia: handoff de 8–15 líneas.",
+            "Defines propósito antes de empezar. Evidencia: 2 prompts de inicio guardados.",
+            "Usas sesiones cortas y específicas. Evidencia: registro de 2 sesiones (objetivo + resultado).",
+            "Retomas contexto sin repetir todo. Evidencia: handoff de 8–15 líneas (qué se hizo/qué sigue).",
           ],
         },
         {
@@ -332,9 +332,9 @@ export const level01 = {
           body: "El prompt es la interfaz con el agente. Un prompt bien estructurado tiene cuatro partes: Contexto (quién eres, qué proyecto es, qué módulo se toca), Tarea (qué se necesita, específico y accionable), Restricciones (qué no hacer, límites, convenciones del equipo), Output esperado (formato, extensión, qué incluir).\n\nError más común: dar solo la tarea sin contexto ni restricciones. El agente llena los vacíos con suposiciones que frecuentemente no coinciden con lo que el equipo espera.",
           references: ["prompts-structure"],
           checks: [
-            "Tus prompts incluyen 4 partes (contexto/tarea/restricciones/output). Ruta A: 3 prompts reales del proyecto. Ruta B: 3 prompts de ejemplo. Evidencia: 3 prompts (copiados) con las 4 secciones marcadas.",
-            "Mejoras consistencia del output. Ruta A: mismo prompt antes/después (sin y con restricciones) y comparas resultados. Ruta B: igual en un ejemplo. Evidencia: 2 salidas + 3 diferencias observables.",
-            "Tienes 5 prompts reutilizables. Ruta A: guardados en un archivo del repo. Ruta B: guardados localmente. Evidencia: lista de 5 títulos + 1–2 líneas de propósito cada uno.",
+            "Tus prompts incluyen 4 partes (contexto/tarea/restricciones/output). Evidencia: 3 prompts con las 4 secciones marcadas.",
+            "Mejoras consistencia del output con restricciones. Evidencia: antes/después del mismo prompt + 3 diferencias observables.",
+            "Tienes 5 prompts reutilizables. Evidencia: lista de 5 títulos + 1–2 líneas de propósito cada uno.",
           ],
         },
       ],
@@ -419,9 +419,9 @@ export const level01 = {
           body: "AGENTS.md es el archivo que lee el agente automáticamente al iniciar una sesión en tu proyecto. Es el equivalente al onboarding de un nuevo desarrollador: le dice al agente qué proyecto es, cómo está organizado, qué convenciones seguir y qué está prohibido. Sin él, el agente trabaja con suposiciones genéricas que rara vez coinciden con lo que el equipo espera.",
           references: ["agents-md"],
           checks: [
-            "Tienes un AGENTS.md/CLAUDE.md en la raíz. Ruta A: en un repo real. Ruta B: en repo de práctica. Evidencia: archivo creado + 4 secciones mínimas.",
-            "El agente sigue convenciones sin recordarlas cada vez. Ruta A: 1 sesión donde se ve que aplica 2 reglas del AGENTS.md. Ruta B: 1 sesión simulada donde validas contra 2 reglas. Evidencia: 2 reglas + resultado observado.",
-            "Comparaste calidad con y sin AGENTS.md. Ruta A: misma tarea, dos corridas (sin/con) y registras 3 diferencias. Ruta B: igual con una tarea de ejemplo. Evidencia: tabla pequeña con “sin/con” y 3 diferencias.",
+            "Tienes un AGENTS.md/CLAUDE.md en la raíz. Evidencia: archivo con las 4 secciones mínimas.",
+            "El agente sigue convenciones sin recordarlas cada vez. Evidencia: 2 reglas del AGENTS.md aplicadas en 1 salida/cambio.",
+            "Comparaste calidad con y sin AGENTS.md. Evidencia: tabla pequeña con “sin/con” y 3 diferencias.",
           ],
         },
         {
@@ -429,9 +429,9 @@ export const level01 = {
           body: "Cuatro secciones que ningún AGENTS.md debería omitir:\n\n1. Rol del agente: qué se espera de él en este proyecto específico.\n2. Stack con versiones exactas: no 'React', sino 'React 18.3.1 con TypeScript 5.4'. El agente usa la documentación correcta.\n3. Comandos del proyecto: dev, build, test, lint con sus flags exactos. El agente los ejecuta sin preguntarte.\n4. Prohibiciones explícitas: 'no usar console.log en producción', 'no instalar librerías sin aprobación', 'no modificar archivos en /config'. Tan importante como lo que sí hacer.",
           references: ["agents-md"],
           checks: [
-            "AGENTS.md tiene 4 secciones (rol, stack exacto, comandos, prohibiciones). Ruta A: en el repo real. Ruta B: en repo de práctica. Evidencia: encabezados presentes y completos.",
-            "Versiones son exactas cuando aplica. Ruta A: incluyes 3 versiones reales del proyecto. Ruta B: incluyes 3 versiones ejemplo (Node/TS/React). Evidencia: lista de 3 dependencias con versión exacta.",
-            "Prohibiciones accionables (≥5). Ruta A: basadas en errores reales del equipo. Ruta B: basadas en errores comunes del agente. Evidencia: 5 reglas + ejemplo de “qué evitar” por regla.",
+            "AGENTS.md tiene 4 secciones (rol, stack exacto, comandos, prohibiciones). Evidencia: encabezados presentes y completos.",
+            "Versiones son exactas cuando aplica. Evidencia: lista de 3 dependencias/herramientas con versión exacta.",
+            "Prohibiciones accionables (≥5). Evidencia: 5 reglas + ejemplo de “qué evitar” por regla.",
           ],
         },
         {
@@ -439,9 +439,9 @@ export const level01 = {
           body: "La sección más valiosa para equipos: naming de variables y funciones, estructura de carpetas, patrones preferidos (custom hooks sí, clases no), manejo de errores, formato de commits. Incluye ejemplos de código real del proyecto, no abstractos. Con esto el agente genera código que parece escrito por el equipo.\n\nTip: empieza con los patrones que más frecuentemente corriges en code review. Esos son los que más valor aporta documentar.",
           references: ["agents-md"],
           checks: [
-            "Convenciones claras y aplicables. Ruta A: 2 convenciones del equipo aplicadas en 1 cambio. Ruta B: 2 convenciones aplicadas en un ejemplo. Evidencia: convención → ejemplo de aplicación (antes/después o snippet).",
-            "Hay ejemplos de código real o referencia concreta. Ruta A: enlazas 2 archivos del repo como ejemplo. Ruta B: enlazas 2 snippets cortos dentro del AGENTS.md. Evidencia: 2 ejemplos con explicación de 1 línea.",
-            "Consenso del equipo. Ruta A: 1 revisión (PR o issue) donde se aceptan cambios. Ruta B: checklist firmado por 2 personas (texto). Evidencia: referencia a PR/issue o registro de acuerdo.",
+            "Convenciones claras y aplicables. Evidencia: 2 convenciones + ejemplo de aplicación (antes/después o snippet).",
+            "Hay ejemplos concretos. Evidencia: 2 ejemplos (archivos o snippets) con explicación de 1 línea.",
+            "Consenso del equipo. Evidencia: referencia a PR/issue o registro de acuerdo.",
           ],
         },
         {
@@ -449,9 +449,9 @@ export const level01 = {
           body: "Documenta qué hace la app, quién la usa y las decisiones de arquitectura importantes con su justificación. Ejemplo: 'Usamos Zod para validación porque necesitamos runtime type safety' o 'Elegimos tRPC sobre REST porque el equipo es full-stack TypeScript'.\n\nMás valioso aún: sección 'por qué NO usamos X' para evitar que el agente proponga soluciones que el equipo ya descarta. Cada decisión con su contexto evita debates repetidos.",
           references: ["agents-md"],
           checks: [
-            "Decisiones técnicas documentadas con justificación. Ruta A: 3–5 decisiones reales del proyecto. Ruta B: 3–5 decisiones ejemplo. Evidencia: lista con “decisión → por qué”.",
-            "Sección “por qué no usamos X” (≥3). Ruta A: basada en decisiones reales. Ruta B: basada en tradeoffs comunes. Evidencia: 3 entradas con 2–3 líneas cada una.",
-            "El agente no contradice decisiones. Ruta A: 1 sesión donde el agente elige una opción consistente con una decisión. Ruta B: validación manual contra 1 decisión. Evidencia: decisión citada + resultado observado.",
+            "Decisiones técnicas documentadas con justificación. Evidencia: lista con “decisión → por qué” (3–5 entradas).",
+            "Sección “por qué no usamos X” (≥3). Evidencia: 3 entradas con 2–3 líneas cada una.",
+            "El agente no contradice decisiones. Evidencia: 1 decisión citada + ejemplo de salida/cambio consistente.",
           ],
         },
         {
@@ -459,9 +459,9 @@ export const level01 = {
           body: "Para proyectos multi-módulo: cada subdirectorio puede tener su propio AGENTS.md con reglas locales. El agente lee el más cercano en el árbol de directorios primero. services/payments/ puede tener restricciones de seguridad distintas a services/notifications/. Regla: el AGENTS.md local solo documenta diferencias respecto al global, no repite todo.",
           references: ["agents-md"],
           checks: [
-            "Separación global vs local. Ruta A: AGENTS.md raíz + 1 AGENTS.md en subcarpeta. Ruta B: misma estructura en repo de práctica. Evidencia: 2 archivos y qué reglas viven en cada uno.",
-            "Reglas específicas por módulo cuando aplica. Ruta A: 1 módulo con 3 reglas específicas. Ruta B: 1 módulo de ejemplo con 3 reglas. Evidencia: lista de 3 diferencias vs global.",
-            "Locales cortos. Ruta A: ≤30–60 líneas con solo diferencias. Ruta B: igual. Evidencia: conteo aproximado de líneas y justificación de 1 línea.",
+            "Separación global vs local. Evidencia: 2 archivos y qué reglas viven en cada uno.",
+            "Reglas específicas por módulo cuando aplica. Evidencia: 3 diferencias vs global.",
+            "Locales cortos. Evidencia: conteo aproximado de líneas y justificación de 1 línea.",
           ],
         },
         {
@@ -469,10 +469,10 @@ export const level01 = {
           body: "AGENTS.md es código, no documentación estática. Vive en el repositorio con historial de git. Tiene PRs y code review. Se actualiza cuando el equipo descubre un error recurrente del agente, cuando se toma una decisión nueva de arquitectura, o cuando una convención cambia.\n\nRevision mensual obligatoria: eliminar secciones desactualizadas. Un AGENTS.md viejo es peor que no tener — le da información incorrecta al agente. Límite práctico: ~150 instrucciones. Más que eso y el agente empieza a ignorar las últimas.",
           references: ["agents-md"],
           checks: [
-            "AGENTS.md vive en el repo. Ruta A: hay historial (git blame) y 1 cambio registrado. Ruta B: simulas historial con 1 commit local. Evidencia: commit o referencia a cambio.",
-            "Proceso de cambios. Ruta A: PR/issue. Ruta B: checklist de propuesta (pasos) en markdown. Evidencia: enlace al PR/issue o documento del proceso.",
-            "Revisión de limpieza. Ruta A: remueves 1 sección desactualizada con justificación. Ruta B: haces una revisión y marcas 3 secciones “vigente/no vigente”. Evidencia: registro de revisión (lista).",
-            "Tamaño manejable. Ruta A: ≤150 instrucciones o modularizado. Ruta B: ≤150 o dividido en archivos. Evidencia: número aproximado + dónde está dividido.",
+            "AGENTS.md vive en el repo. Evidencia: commit o referencia a cambio (historial visible).",
+            "Proceso de cambios. Evidencia: enlace al PR/issue o documento del proceso.",
+            "Revisión de limpieza. Evidencia: registro de revisión (qué se removió o qué se marcó como desactualizado).",
+            "Tamaño manejable. Evidencia: número aproximado + cómo se modulariza si aplica.",
           ],
         },
       ],

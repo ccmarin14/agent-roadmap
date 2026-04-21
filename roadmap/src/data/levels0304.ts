@@ -27,8 +27,8 @@ export const level03 = {
           references: ["hooks-basics"],
           checks: [
             "Generas CHANGELOG tras merge. Ruta A: automatizado (hook o CI). Ruta B: script reproducible ejecutado manualmente. Evidencia: diff en CHANGELOG + comando/script.",
-            "Changelog legible para no técnicos. Ruta A: validado por 1 stakeholder. Ruta B: checklist de legibilidad (qué cambió/por qué/impacto). Evidencia: 1 entrada que cumple checklist.",
-            "Reduciste esfuerzo manual. Ruta A: se usa siempre en merges. Ruta B: se usa en 2 merges/pruebas seguidas. Evidencia: 2 entradas generadas con el mismo proceso.",
+            "Changelog legible para no técnicos. Evidencia: 1 entrada que incluya (qué cambió / por qué / impacto).",
+            "El proceso se usa de forma consistente. Evidencia: 2 entradas generadas con el mismo proceso.",
           ],
         },
         {
@@ -36,9 +36,9 @@ export const level03 = {
           body: "El agente CLI permite llamar al agente desde bash. Esto habilita scripts del proyecto versionados en el repo que todos usan:\n\n• /scripts/review.sh — toma un archivo, devuelve score de calidad y sugerencias.\n• /scripts/gen-tests.sh — genera tests para un módulo con la cobertura esperada.\n• /scripts/doc-update.sh — actualiza docs post-feature.\n• /scripts/security-check.sh — revisa el diff en busca de patrones de seguridad.\n\nTodos en /scripts/, documentados en el README.",
           references: ["hooks-basics"],
           checks: [
-            "Tienes scripts compartidos. Ruta A: ≥3 scripts con agente CLI. Ruta B: ≥3 scripts sin agente (lint/typecheck/docs) + 1 script con agente opcional. Evidencia: carpeta /scripts + lista.",
-            "Documentación clara. Ruta A: README con ejemplo por script. Ruta B: README con propósito + comando de uso. Evidencia: sección README.",
-            "Uso real. Ruta A: 2 personas los ejecutan. Ruta B: 1 persona + CI los ejecuta. Evidencia: registro (comandos ejecutados o CI log).",
+            "Tienes scripts compartidos en `/scripts/`. Evidencia: carpeta `/scripts/` con al menos 3 scripts y un índice/lista.",
+            "Documentación clara de scripts. Evidencia: sección en README con propósito + comando de uso por script.",
+            "Uso real. Evidencia: registro de ejecuciones (comandos usados o log de CI) en 2 ocasiones.",
           ],
         },
         {
@@ -47,8 +47,8 @@ export const level03 = {
           references: ["hooks-basics"],
           checks: [
             "Automatización por eventos real. Ruta A: hooks de tu herramienta de agente (si soporta). Ruta B: hooks de git/CI que disparan scripts. Evidencia: configuración + 1 ejecución.",
-            "Visibilidad de acciones. Ruta A: resumen automático por sesión/turno. Ruta B: resumen generado por script al final del flujo. Evidencia: 1 resumen con archivos tocados y próximos pasos.",
-            "Documentado. Ruta A: en AGENTS.md/README. Ruta B: en docs del repo. Evidencia: sección con eventos, qué corren y cómo desactivarlos.",
+            "Visibilidad de acciones del agente. Evidencia: 1 resumen con archivos tocados y próximos pasos.",
+            "Documentaste los hooks/eventos. Evidencia: sección con eventos, qué corren y cómo desactivarlos.",
           ],
         },
         {
@@ -57,8 +57,8 @@ export const level03 = {
           references: ["sdd-basics"],
           checks: [
             "Sugerencia de spec existe. Ruta A: hook real en herramienta/CI. Ruta B: checklist de arranque (“¿hay spec?”) aplicado al inicio de tareas grandes. Evidencia: 2 tareas donde se aplicó.",
-            "Usa templates. Ruta A: genera desde `.project/specs/`. Ruta B: copia/llena template manualmente desde `.project/specs/`. Evidencia: 1 spec creada desde template.",
-            "Regla clara (recomendado, no obligatorio). Ruta A: política acordada por equipo. Ruta B: política escrita en README. Evidencia: sección “Cuándo pedir spec”.",
+            "Usa templates. Evidencia: 1 spec creada desde `.project/specs/`.",
+            "Regla clara (recomendado, no obligatorio). Evidencia: sección “Cuándo pedir spec”.",
           ],
         },
       ],
@@ -123,7 +123,7 @@ export const level03 = {
           checks: [
             "Ejecutaste el flujo issue → PR. Ruta A: GitHub gratis (issue real + PR real) al menos 1 vez (ideal 3). Ruta B: simulación en repo: `issue.md` + branch + `pr.md` con checklist. Evidencia: links o archivos + commits.",
             "Referencia y decisiones. Ruta A: PR incluye link a issue + decisiones. Ruta B: `pr.md` incluye sección “decisiones” y “criterios”. Evidencia: 1 PR/archivo con esas secciones.",
-            "Criterio de automatización. Ruta A: lista acordada por el equipo (aptos vs no aptos). Ruta B: lista personal con 5 ejemplos. Evidencia: tabla 2 columnas con ejemplos.",
+            "Definiste qué issues son aptos para automatización vs no aptos. Evidencia: tabla 2 columnas con ejemplos.",
           ],
         },
         {
@@ -141,9 +141,9 @@ export const level03 = {
           body: "Tipos de sesión que el equipo debería tener documentados:\n\n• Feature: contexto acotado al módulo, acceso a Filesystem + Git + Context7.\n• Review: instrucción de solo leer y reportar, nunca modificar. El agente es reviewer, no developer.\n• Debug: Systematic Debugging skill activo, ChromeDevTools si es frontend.\n• Investigación: solo buscar opciones y presentar tradeoffs, no implementar.\n• Documentación: leer código y actualizar docs, nunca modificar lógica.\n\nContexto limpio por sesión = respuestas más precisas.",
           references: ["console-claude-code"],
           checks: [
-            "Tienes ≥4 tipos de sesión con prompt de inicio. Ruta A: documentado en PROMPTS.md del equipo. Ruta B: documentado en un archivo local/ repo de práctica. Evidencia: 4 prompts (feature/review/debug/docs o investigación).",
-            "Sesión de review es read‑only. Ruta A: permisos/herramientas limitadas. Ruta B: regla explícita + verificación manual (no commits/cambios). Evidencia: prompt de review + checklist de no‑modificación.",
-            "Onboarding está centralizado. Ruta A: PROMPTS.md. Ruta B: índice equivalente. Evidencia: sección que enlaza a los 4 prompts.",
+            "Tienes ≥4 tipos de sesión con prompt de inicio. Evidencia: 4 prompts (feature/review/debug/docs o investigación).",
+            "Sesión de review es read‑only. Evidencia: prompt de review + checklist de no‑modificación.",
+            "Onboarding está centralizado. Evidencia: índice/archivo único que enlaza a los prompts.",
           ],
         },
         {
@@ -151,9 +151,9 @@ export const level03 = {
           body: "4 métricas que importan para mejorar tu setup:\n\n**Task Completion Rate**: Porcentaje de tareas que el agente completa sin ayuda humana directa. Meta: más del 70% en tareas rutinarias.\n\n**Revision Rate**: Cuántas veces corriges al agente por sesión. Meta: menos de 3 correcciones por tarea compleja. Si es más, ajusta el prompt o el contexto.\n\n**Costo por Task**: (tokens usados × precio del modelo) / tareas completadas. Monitorea para evitar desperdicio. Modelos más baratos pueden ser suficientes para tareas simples.\n\n**Tiempo Ahorrado**: Tiempo que tardas con agente vs tiempo que tardaría sin él. No siempre menor es mejor — a veces vale más la consistencia.\n\n**Cómo medir**: Al final de cada sesión, anota: ¿completó? ¿cuántas correcciones? ¿cuánto costaste? Semanalmente revisa tendencias y ajusta configuración.",
           references: ["agents-metrics"],
           checks: [
-            "Mides al menos 2 métricas. Ruta A: en equipo con plantilla semanal. Ruta B: registro personal de 3 sesiones. Evidencia: tabla con métricas por sesión.",
-            "Meta clara para completion rate. Ruta A: meta del equipo por tipo de tarea. Ruta B: meta personal (p. ej. 50%→70%). Evidencia: meta escrita + cómo se calcula.",
-            "Iteras basado en datos. Ruta A: cambias prompts/herramientas y registras efecto. Ruta B: 1 ajuste con antes/después en 2 sesiones. Evidencia: nota con “cambio → impacto”.",
+            "Mides al menos 2 métricas del agente. Evidencia: tabla con métricas por sesión (3 sesiones).",
+            "Tienes una meta clara para completion rate. Evidencia: meta escrita + cómo se calcula.",
+            "Ajustas configuración basado en datos. Evidencia: 1 cambio + antes/después (2 sesiones).",
           ],
         },
       ],
@@ -249,9 +249,9 @@ export const level03 = {
           body: "Instrucción para el AGENTS.md: el agente siempre propone un plan explícito antes de ejecutar cambios que afecten más de 3 archivos. El plan incluye: qué archivos toca, qué cambios hace en cada uno, qué riesgos identifica. El equipo puede aprobar o ajustar el plan antes de ejecutar.\n\nAl terminar: el agente genera un resumen de decisiones tomadas. Este resumen va en el PR description. El code review humano se vuelve mucho más eficiente.",
           references: ["agents-basics"],
           checks: [
-            "Plan antes de actuar. Ruta A: regla en AGENTS.md aplicada en 1 tarea grande. Ruta B: plantilla de plan (3–6 pasos) usada manualmente. Evidencia: plan guardado + ejecución.",
-            "Resumen de decisiones. Ruta A: generado por el agente. Ruta B: resumen manual con el mismo formato. Evidencia: resumen de 8–15 líneas (qué cambió/por qué/riesgos).",
-            "PR description usa el resumen. Ruta A: en PR real (GitHub gratis). Ruta B: en `pr.md` local. Evidencia: descripción con “summary + test plan”.",
+            "Plan antes de actuar en tareas grandes. Evidencia: plan guardado (3–6 pasos) + ejecución.",
+            "Resumen de decisiones al finalizar. Evidencia: resumen de 8–15 líneas (qué cambió/por qué/riesgos).",
+            "PR description usa el resumen. Evidencia: descripción con “summary + test plan” (PR real o `pr.md`).",
           ],
         },
         {
@@ -259,9 +259,9 @@ export const level03 = {
           body: "En equipos con squads distintos (frontend, backend, infra), cada módulo tiene su AGENTS.md propio con overrides. El squad de pagos tiene reglas más estrictas de seguridad. El squad de frontend tiene patrones de componentes específicos.\n\nHerencia clara: AGENTS.md raíz → módulo → squad. Cada nivel solo documenta diferencias. El agente construye el contexto combinando todos los AGENTS.md del árbol de directorios.",
           references: ["agents-md"],
           checks: [
-            "AGENTS.md por módulo/squad cuando aplica. Ruta A: 2 módulos reales con reglas distintas. Ruta B: 2 módulos de práctica. Evidencia: 2 archivos locales + 3 diferencias cada uno.",
-            "Locales cortos. Ruta A: solo diferencias. Ruta B: ≤30–60 líneas. Evidencia: conteo aproximado + lista de diferencias.",
-            "Proceso acordado. Ruta A: PR/issue. Ruta B: checklist de actualización (quién aprueba, cuándo). Evidencia: sección “Proceso” escrita.",
+            "AGENTS.md por módulo/squad cuando aplica. Evidencia: 2 archivos locales + 3 diferencias cada uno.",
+            "Locales cortos (solo diferencias). Evidencia: conteo aproximado + lista de diferencias.",
+            "Proceso acordado de actualización. Evidencia: sección “Proceso” escrita.",
           ],
         },
       ],
@@ -370,9 +370,9 @@ export const level04 = {
           body: "Un agente que hace todo no hace nada bien. La especialización viene de tres elementos: AGENTS.md con rol explícito y restrictivo, skills específicos cargados para esa tarea, MCPs limitados a los necesarios. El agente de tests no sabe nada de UI. El agente de review no modifica código. La restricción intencional es lo que hace que los agentes sean confiables y predecibles.",
           references: ["orchestration"],
           checks: [
-            "Roles y restricciones por sub‑agente. Ruta A: 3–4 sub-agentes reales (tests/review/docs/seguridad). Ruta B: 3 sub‑agentes de práctica. Evidencia: 3–4 archivos/plantillas con rol + ‘no hacer’.",
-            "Herramientas mínimas. Ruta A: permisos limitados por herramienta. Ruta B: checklist de herramientas permitidas por rol. Evidencia: lista “rol → herramientas permitidas”.",
-            "Catálogo de sub‑agentes. Ruta A: doc del equipo con ≥4. Ruta B: doc personal con ≥3 (y plan para 4). Evidencia: tabla con propósito e input/output.",
+            "Roles y restricciones por sub‑agente. Evidencia: 3–4 plantillas con rol + ‘no hacer’.",
+            "Herramientas mínimas por rol. Evidencia: lista “rol → herramientas permitidas”.",
+            "Catálogo de sub‑agentes. Evidencia: tabla con propósito e input/output (≥4 ideal).",
           ],
         },
         {
@@ -380,9 +380,9 @@ export const level04 = {
           body: "Solo escribe y mantiene tests. Conoce la cobertura actual, los patrones del proyecto (unit, integration, e2e), las convenciones de naming. Nunca toca código de producción — restricción explícita en su AGENTS.md.\n\nEn el flujo del equipo: corre automáticamente después de cada feature completada. El Systematic Debugging skill le ayuda a entender qué casos edge probar.",
           references: ["skills-basics"],
           checks: [
-            "Separación tests vs prod. Ruta A: agente solo toca tests (verificado en diff). Ruta B: regla estricta + revisión manual de diffs. Evidencia: 1 diff donde solo cambia `/tests`.",
-            "Mejora incremental. Ruta A: cobertura sube con el tiempo. Ruta B: agregas 1–2 tests valiosos por feature. Evidencia: 1 ejemplo de test agregado y qué cubre.",
-            "Ejecución integrada al flujo. Ruta A: automatizado (CI/hook). Ruta B: checklist ‘al final del feature correr tests’. Evidencia: registro de 2 ejecuciones.",
+            "Separación tests vs prod (solo cambia tests). Evidencia: 1 diff donde solo cambia `/tests` o carpeta equivalente.",
+            "Mejora incremental de tests. Evidencia: 1 ejemplo de test agregado y qué cubre.",
+            "Ejecución integrada al flujo. Evidencia: registro de 2 ejecuciones (CI o manual).",
           ],
         },
         {
@@ -390,9 +390,9 @@ export const level04 = {
           body: "Revisa código con perspectiva de senior: patrones incorrectos, violaciones del AGENTS.md, performance, edge cases no manejados, seguridad básica. Es el primer filtro antes del review humano.\n\nInstrucción clave: 'comenta en formato de PR review, nunca modifiques código directamente'. Reduce los comentarios repetitivos en PRs — el agente los detecta antes de que lleguen al review humano.",
           references: ["skills-basics"],
           checks: [
-            "Review antes del humano. Ruta A: corre en cada PR (GitHub gratis) o CI. Ruta B: corre sobre diff local antes de pedir review. Evidencia: reporte de review guardado.",
-            "Reduce rondas o mejora calidad. Ruta A: métrica del equipo. Ruta B: antes/después en 2 PRs (menos comentarios repetidos). Evidencia: 2 ejemplos comparados.",
-            "Criterio de severidad. Ruta A: política acordada. Ruta B: tabla simple (bloquea vs sugerencia) con 5 ejemplos. Evidencia: tabla en docs.",
+            "Review antes del humano (PR o diff local). Evidencia: reporte de review guardado.",
+            "Mejora calidad del review humano. Evidencia: comparación de 2 PRs/diffs (menos comentarios repetidos).",
+            "Criterio de severidad. Evidencia: tabla simple (bloquea vs sugerencia) con 5 ejemplos.",
           ],
         },
         {
@@ -400,9 +400,9 @@ export const level04 = {
           body: "Lee código y genera/actualiza: JSDoc, README de módulos, diagramas de arquitectura en Mermaid, entradas de changelog. Corre al completar cada feature. La documentación nunca va atrasada respecto al código.\n\nHabilidad clave: distinguir qué merece documentación (interfaz pública, decisiones no obvias) de qué es auto-explicativo. Un agente que documenta todo genera ruido — entrenarlo con ejemplos de tu proyecto mejora la señal.",
           references: ["skills-basics"],
           checks: [
-            "Docs se actualizan en el flujo. Ruta A: automático. Ruta B: DoD: actualizar README/JSDoc cuando cambia interfaz. Evidencia: 1 diff de docs en un feature.",
-            "Docs coherentes. Ruta A: revisión periódica. Ruta B: checklist antes de merge. Evidencia: 1 revisión registrada.",
-            "Documenta lo no obvio. Ruta A: guía de qué documentar. Ruta B: 3 ejemplos de “sí documentar / no documentar”. Evidencia: lista de ejemplos.",
+            "Docs se actualizan en el flujo (automático o DoD). Evidencia: 1 diff de docs en un feature.",
+            "Docs coherentes con código. Evidencia: 1 revisión registrada (checklist o revisión periódica).",
+            "Documenta lo no obvio. Evidencia: 3 ejemplos de “sí documentar / no documentar”.",
           ],
         },
         {
@@ -410,9 +410,9 @@ export const level04 = {
           body: "Revisa: dependencias con vulnerabilidades conocidas, patrones inseguros (inyección SQL, XSS, autenticación débil, exposición de secrets), manejo de inputs y validación. Corre en cada PR. Da un reporte accionable con severidad, no solo una lista de hallazgos.\n\nRecomendación: configurar el agente para bloquear merges con hallazgos de severidad alta automáticamente.",
           references: ["skills-basics"],
           checks: [
-            "Security review con severidad. Ruta A: corre en PR/CI. Ruta B: corre sobre diff local y produce reporte (alto/medio/bajo). Evidencia: 1 reporte guardado.",
-            "Hallazgo detectado temprano. Ruta A: caso real. Ruta B: ejercicio de práctica: detectar 2 patrones (secrets, input sin validar). Evidencia: hallazgos + mitigación.",
-            "Política de bloqueo. Ruta A: automatizada. Ruta B: regla manual (alto bloquea). Evidencia: tabla severidad → acción.",
+            "Security review con severidad (PR/CI o diff local). Evidencia: 1 reporte guardado (alto/medio/bajo).",
+            "Hallazgos detectados temprano. Evidencia: 2 patrones identificados + mitigación.",
+            "Política de bloqueo por severidad. Evidencia: tabla severidad → acción.",
           ],
         },
       ],
@@ -486,9 +486,9 @@ export const level04 = {
           body: "El orquestador es el agente que coordina a los demás. Regla de oro: nunca lee código directamente. Solo lee resúmenes estructurados que le envían los sub-agentes. Esto mantiene su contexto limpio y le permite gestionar proyectos de cualquier tamaño.\n\nSu AGENTS.md es restrictivo en sentido opuesto a los sub-agentes: 'solo tomas decisiones de alto nivel, descompones tareas, delegas a sub-agentes, nunca implementas código directamente'.",
           references: ["orchestration"],
           checks: [
-            "Orquestador con rol restrictivo. Ruta A: AGENTS.md real para orquestador. Ruta B: plantilla de orquestador en markdown. Evidencia: reglas ‘qué sí / qué no’.",
-            "Trabaja con resúmenes, no con código. Ruta A: sub‑agentes entregan resúmenes. Ruta B: resúmenes manuales siguiendo template. Evidencia: 2 resúmenes consumidos por el orquestador.",
-            "Ejecutaste 1 feature mini orquestado. Ruta A: en repo real con 2 sub‑agentes. Ruta B: en repo de práctica con 2 roles (implementación + review). Evidencia: plan + handoff + resultado final.",
+            "Orquestador con rol restrictivo. Evidencia: reglas ‘qué sí / qué no’ (AGENTS.md o plantilla).",
+            "Trabaja con resúmenes, no con código. Evidencia: 2 resúmenes consumidos por el orquestador.",
+            "Ejecutaste 1 feature mini orquestado con ≥2 roles. Evidencia: plan + handoff + resultado final.",
           ],
         },
         {
@@ -496,9 +496,9 @@ export const level04 = {
           body: "Sin un formato estándar de handoff, la orquestación colapsa. Cada sub-agente termina con un resumen estructurado: qué hizo, qué encontró importante, qué decisiones tomó, qué bloqueadores existen, cuál es el siguiente paso recomendado.\n\nEl orquestador puede tomar la siguiente decisión solo leyendo este resumen. El template debe estar en el AGENTS.md del orquestador y todos los sub-agentes deben seguirlo.",
           references: ["orchestration"],
           checks: [
-            "Template de handoff existe. Ruta A: en AGENTS.md del orquestador. Ruta B: en `docs/handoff-template.md`. Evidencia: template con secciones (estado, decisiones, next steps).",
-            "Formato consistente. Ruta A: 2 sub‑agentes lo usan. Ruta B: 2 roles lo usan manualmente. Evidencia: 2 handoffs con el mismo formato.",
-            "Decisión solo con handoff. Ruta A: orquestador decide siguiente paso sin leer código. Ruta B: humano decide con handoff sin abrir archivos. Evidencia: “next step” ejecutable derivado del handoff.",
+            "Template de handoff existe. Evidencia: template con secciones (estado, decisiones, next steps).",
+            "Formato consistente. Evidencia: 2 handoffs con el mismo formato.",
+            "Se puede decidir el siguiente paso leyendo solo el handoff. Evidencia: “next step” ejecutable derivado del handoff.",
           ],
         },
         {
@@ -506,9 +506,9 @@ export const level04 = {
           body: "El flujo end-to-end:\n1. Orquestador lee el issue, descompone en tareas, crea el plan.\n2. Agente de implementación ejecuta según el plan, hace commits semánticos.\n3. Agentes de tests, review y seguridad corren en paralelo sobre los cambios.\n4. Agente de documentación actualiza docs del módulo afectado.\n5. PR listo con description generada, tests actualizados, docs al día.\n\nEl equipo solo hace el review final. Todo lo demás fue coordinado por los agentes.",
           references: ["orchestration"],
           checks: [
-            "Pipeline definido y ejecutado. Ruta A: end‑to‑end con herramientas. Ruta B: end‑to‑end mini (plan→impl→tests→review→docs). Evidencia: checklist marcada + artefactos (diff/tests/docs).",
-            "Supervisión mínima con gates. Ruta A: solo review final humano. Ruta B: 2 gates humanos (inicio y final) documentados. Evidencia: política de gates + 1 ejecución.",
-            "Mides tiempo/ahorro. Ruta A: métrica del equipo. Ruta B: tiempo de 1 corrida manual vs 1 asistida (estimado) con notas. Evidencia: tabla simple con tiempos.",
+            "Pipeline definido y ejecutado (end‑to‑end). Evidencia: checklist marcada + artefactos (diff/tests/docs).",
+            "Gates claros (supervisión mínima). Evidencia: política de gates + 1 ejecución.",
+            "Mides tiempo/ahorro. Evidencia: tabla simple con tiempos (manual vs asistido).",
           ],
         },
         {
@@ -516,10 +516,10 @@ export const level04 = {
           body: "En Level 04, usar spec es obligatorio para el pipeline automatizado. El orquestador verifica que exista una spec antes de iniciar. La spec debe estar en `.project/specs/features/[nombre].md` y debe pasar la validación del skill SDD.\n\nValidación en cada fase:\n• Antes de implementar: la spec tiene todos los campos obligatorios\n• Durante implementación: el agente de tests valida contra criterios de aceptación\n• Durante review: el agente de review verifica que el código cumpla la spec\n• Al cerrar: el handoff incluye qué criterios de aceptación se cumplieron\n\nEsto asegura que el trabajo orquestado tenga objetivos claros y medibles.",
           references: ["sdd-basics"],
           checks: [
-            "Regla “sin spec no hay pipeline”. Ruta A: aplicada por orquestador. Ruta B: aplicada por checklist humano. Evidencia: plantilla de spec + regla escrita.",
-            "Spec versionada. Ruta A: en PR/commit real. Ruta B: commit local. Evidencia: diff con spec incluida.",
-            "Validación por fase. Ruta A: tests/review contra criterios. Ruta B: checklist por fase (impl/tests/review). Evidencia: 1 spec con criterios + checklist completado.",
-            "Handoff final con criterios. Ruta A: generado por agentes. Ruta B: manual con template. Evidencia: sección “criterios cumplidos/no cumplidos”.",
+            "Regla “sin spec no hay pipeline”. Evidencia: plantilla de spec + regla escrita.",
+            "Spec versionada junto al código. Evidencia: diff con spec incluida.",
+            "Cada fase valida contra criterios de aceptación. Evidencia: 1 spec con criterios + checklist completado.",
+            "Handoff final con criterios. Evidencia: sección “criterios cumplidos/no cumplidos”.",
           ],
         },
         {
@@ -527,9 +527,9 @@ export const level04 = {
           body: "context:fork (Claude Code) permite que un skill o análisis corra en un contexto completamente aislado, sin contaminar la sesión principal. El resultado llega como un resumen limpio.\n\nIdeal para: auditorías de seguridad completas, análisis de arquitectura de todo el proyecto, revisiones de bundle size. Estos análisis generan mucho contexto temporal que no debería afectar las respuestas posteriores del agente principal.",
           references: ["orchestration"],
           checks: [
-            "Identificaste tareas que contaminan contexto. Ruta A: usas `--fork-session`/equivalente. Ruta B: usas sesión separada + handoff. Evidencia: lista de 3 tareas (auditoría, arquitectura, seguridad) y técnica elegida.",
-            "Aislamiento aplicado. Ruta A: 1 fork real. Ruta B: 1 sesión separada con handoff. Evidencia: handoff/resumen limpio sin logs largos.",
-            "Comparaste calidad. Ruta A: misma pregunta con y sin fork y anotas diferencias. Ruta B: igual con sesión separada. Evidencia: 2 respuestas + 3 diferencias (claridad, relevancia, ruido).",
+            "Identificaste tareas que contaminan contexto y cómo aislarlas (fork o sesión separada). Evidencia: lista de 3 tareas y técnica elegida.",
+            "Aislamiento aplicado. Evidencia: 1 resumen limpio (handoff) sin logs largos.",
+            "Comparaste calidad con y sin aislamiento. Evidencia: 2 respuestas + 3 diferencias (claridad, relevancia, ruido).",
           ],
         },
       ],

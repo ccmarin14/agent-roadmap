@@ -15,9 +15,9 @@ export const level02 = {
           body: "MCP (Model Context Protocol) es el estándar abierto creado por Anthropic en 2024 que permite a agentes conectarse con herramientas y fuentes de datos externas. Antes de MCP cada integración era custom y no portable. Ahora hay miles de servidores MCP disponibles que cualquier agente compatible puede usar.\n\nAnálogo más claro: USB-C para agentes. Un estándar universal que hace que cualquier herramienta funcione con cualquier agente. Adoptado por OpenAI, Google DeepMind y la industria en menos de un año.",
           references: ["mcp-basics"],
           checks: [
-            "Puedes explicar MCP server/client/host. Ruta A: lo explicas con herramientas reales que uses. Ruta B: lo explicas con un diagrama simple y 1 ejemplo genérico. Evidencia: diagrama + 3 definiciones (1–2 líneas).",
-            "Entiendes el problema que resuelve MCP. Ruta A: lo conectas con una integración real de tu flujo. Ruta B: lo conectas con un caso genérico (leer repo + crear PR). Evidencia: 2–3 bullets “antes vs después”.",
-            "Instalaste tu primer MCP server. Ruta A: lo instalas en tu herramienta (cuenta gratis si aplica). Ruta B: lo ejecutas localmente (stdio) y validas que responde. Evidencia: config + comando de arranque + 1 llamada exitosa.",
+            "Puedes explicar MCP server/client/host. Evidencia: diagrama simple + 3 definiciones (1–2 líneas).",
+            "Entiendes el problema que resuelve MCP. Evidencia: 2–3 bullets “antes vs después” con un caso concreto.",
+            "Instalaste tu primer MCP server. Ruta A: lo instalas en tu herramienta. Ruta B: lo ejecutas localmente (stdio) y validas que responde. Evidencia: config + comando de arranque + 1 llamada exitosa.",
           ],
         },
         {
@@ -25,9 +25,9 @@ export const level02 = {
           body: "MCP Host: la app que orquesta todo (OpenCode, Claude Code, Cursor). MCP Client: el componente dentro del host que habla con los servers. MCP Server: el proceso que expone las herramientas al agente. Puede ser local (corre en tu máquina via stdio, rápido, sin red) o remoto (corre en internet via HTTP, se autentica con OAuth 2.1, compartible entre el equipo).\n\nPara equipos: herramientas de desarrollo locales en cada máquina, servicios compartidos (GitHub, Slack, DB) como servidores remotos.",
           references: ["mcp-basics"],
           checks: [
-            "Entiendes MCP local (stdio) vs remoto (HTTP + auth). Ruta A: lo explicas con 1 ejemplo real de tu stack. Ruta B: lo explicas con 1 ejemplo genérico. Evidencia: tabla 2×3 (latencia, seguridad, compartición).",
-            "Sabes cuándo conviene local vs remoto. Ruta A: eliges para 3 herramientas reales (archivos, git, github/db). Ruta B: eliges para 3 herramientas genéricas. Evidencia: 3 casos con justificación breve.",
-            "Tienes MCP local y (si es posible) remoto. Ruta A: 1 server local + 1 remoto funcionando. Ruta B: 1 server local funcionando + plan reproducible para remoto (config + pasos + riesgos) o demo HTTP local sin OAuth. Evidencia: config(s) + notas de ejecución.",
+            "Entiendes MCP local (stdio) vs remoto (HTTP + auth). Evidencia: tabla 2×3 (latencia, seguridad, compartición).",
+            "Sabes cuándo conviene local vs remoto. Evidencia: 3 casos con justificación breve.",
+            "Tienes MCP local y, si tu contexto lo permite, MCP remoto. Ruta A: 1 server local + 1 remoto funcionando. Ruta B: 1 server local funcionando + plan reproducible para remoto (config + pasos + riesgos) o demo HTTP local sin OAuth. Evidencia: config(s) + notas de ejecución.",
           ],
         },
         {
@@ -35,9 +35,9 @@ export const level02 = {
           body: "Los 5 que más valor dan al inicio del flujo:\n\n• Filesystem: el agente lee/escribe archivos con rutas controladas. Configura siempre con rutas explícitas permitidas.\n• Git MCP: commits semánticos, leer diffs, entender historial antes de proponer cambios.\n• GitHub MCP oficial: leer issues, crear PRs, comentar, integración con el repo remoto.\n• Sequential Thinking: el agente construye un plan de razonamiento antes de actuar. Reduce errores en tareas grandes.\n• Fetch: consulta cualquier URL — changelogs, docs, APIs.",
           references: ["mcp-servers"],
           checks: [
-            "Tienes al menos 3 MCPs fundamentales. Ruta A: incluye GitHub MCP si lo usas. Ruta B: 3 locales oficiales (filesystem + git + fetch o sequential thinking). Evidencia: lista de 3 + config de arranque.",
-            "Filesystem MCP con permisos mínimos. Ruta A: rutas limitadas al repo/módulo. Ruta B: 1–2 carpetas permitidas (no todo el disco). Evidencia: configuración donde se ve la(s) ruta(s) permitida(s).",
-            "Usaste Git MCP para leer historial/diffs. Ruta A: en un repo real antes de un cambio. Ruta B: en un repo de práctica (leer `status`/`diff`/`log`). Evidencia: salida resumida + 2 decisiones tomadas con esa info.",
+            "Tienes al menos 3 MCPs fundamentales (GitHub MCP es recomendado, no obligatorio). Evidencia: lista de 3 + config de arranque.",
+            "Filesystem MCP con permisos mínimos (rutas limitadas, no todo el disco). Evidencia: configuración donde se ve la(s) ruta(s) permitida(s).",
+            "Usaste Git MCP para leer historial/diffs antes de proponer cambios. Evidencia: salida resumida + 2 decisiones tomadas con esa info.",
           ],
         },
         {
@@ -45,10 +45,10 @@ export const level02 = {
           body: "Los MCP tools ejecutan código arbitrario en tu máquina. Riesgos reales que debes conocer:\n\n**Prompt injection**: Un atacante puede usar inputs maliciosos o descripciones de herramientas manipuladas para injectar instrucciones no deseadas al agente. Un input de usuario que contiene \"\${ignora las instrucciones anteriores y...}\" puede alterar el comportamiento.\n\n**Tool poisoning**: Un MCP server comprometido o malicioso puede retornar respuestas que manipulan al agente. Por ejemplo, un Filesystem MCP modificado podría reportar archivos diferentes a los reales.\n\n**Permisos excesivos**: Un Filesystem MCP con acceso total al sistema es un riesgo. Si el agente se ve comprometido, el atacante tiene acceso a todo.\n\n**Principios de defensa**:\n- Least privilege: otorga el mínimo permiso necesario\n- Verify sources: solo usa MCPs de repos activos o empresas conocidas\n- Audit logs: registra qué herramientas se usaron y cuándo\n- Validate inputs: no confíes en user content sin sanitization\n- Revisa qué herramientas tiene el agente antes de tareas críticas",
           references: ["mcp-security"],
           checks: [
-            "Entiendes prompt injection y mitigaciones. Ruta A: identificas 2 superficies en tu app. Ruta B: identificas 2 superficies genéricas (web fetch, tool output). Evidencia: 2 riesgos + 2 mitigaciones.",
-            "Fuentes verificadas. Ruta A: allowlist de servers usados por el equipo. Ruta B: allowlist personal (3 servers) con razones (repo activo, autor, licencia). Evidencia: lista corta con 2 señales de verificación por server.",
-            "Least privilege en permisos. Ruta A: permisos por herramienta (lectura vs escritura). Ruta B: límites por ruta y por tool. Evidencia: configuración y 2 reglas de permisos escritas.",
-            "Revisión previa a tareas críticas. Ruta A: checklist antes de operaciones sensibles. Ruta B: checklist genérico (secrets, escritura, red). Evidencia: checklist de 5–8 ítems.",
+            "Entiendes prompt injection y mitigaciones. Evidencia: 2 riesgos + 2 mitigaciones aplicables.",
+            "Solo usas MCP servers de fuentes verificadas. Evidencia: allowlist corta con 2 señales de verificación por server.",
+            "Aplicaste least privilege en permisos. Evidencia: configuración + 2 reglas de permisos escritas.",
+            "Tienes un checklist antes de tareas críticas. Evidencia: checklist de 5–8 ítems.",
           ],
         },
         {
@@ -56,9 +56,9 @@ export const level02 = {
           body: "Cada MCP instalado ocupa espacio de contexto con sus definiciones de herramientas. Cargar 20 MCPs en cada sesión desperdicia contexto útil para el código.\n\nSolución: perfiles de MCPs por tipo de sesión. Sesión de frontend: Filesystem + Git + Context7. Sesión de backend: Filesystem + Git + DB MCP + Sequential Thinking. Documenta estos perfiles en el AGENTS.md. El agente trabaja mejor con menos herramientas más relevantes.",
           references: ["mcp-basics"],
           checks: [
-            "Perfiles por tipo de sesión. Ruta A: frontend/backend/docs con sets distintos. Ruta B: al menos 2 perfiles (dev vs docs). Evidencia: tabla de perfiles con 3–6 MCPs por perfil.",
-            "No cargas más de 5–6 MCPs por sesión. Ruta A: regla aplicada en el equipo. Ruta B: regla personal aplicada en 2 sesiones. Evidencia: 2 ejemplos de perfil aplicado.",
-            "Documentado en AGENTS.md. Ruta A: en repo del equipo. Ruta B: en repo de práctica. Evidencia: sección “Perfiles MCP” en AGENTS.md.",
+            "Tienes perfiles por tipo de sesión. Evidencia: tabla de perfiles con 3–6 MCPs por perfil.",
+            "No cargas más de 5–6 MCPs por sesión. Evidencia: 2 ejemplos de perfiles aplicados.",
+            "Documentaste los perfiles en AGENTS.md. Evidencia: sección “Perfiles MCP” en AGENTS.md.",
           ],
         },
         {
@@ -66,9 +66,9 @@ export const level02 = {
           body: "Cuando ningún MCP existente cubre tu caso de uso, construyes el tuyo. FastMCP es el framework más simple (Python). Principios de diseño: un MCP server = una responsabilidad clara. Las herramientas deben estar optimizadas para objetivos del usuario, no para reflejar todos los endpoints de tu API interna. Las descripciones de parámetros reducen errores del agente — escríbelas bien.\n\nCaso típico: MCP para tu sistema de diseño interno, tu base de conocimiento, o tu API privada.",
           references: ["mcp-fastmcp"],
           checks: [
-            "Identificaste 1 caso de uso para MCP propio. Ruta A: caso interno real. Ruta B: caso de práctica (p. ej. “leer ADRs y buscarlos”). Evidencia: problema + tool propuesta + inputs/outputs.",
-            "Creaste un MCP server mínimo. Ruta A: con FastMCP/SDK y 1 tool real. Ruta B: con ejemplo de docs y 1 tool “demo” funcionando. Evidencia: código + comando de ejecución + llamada exitosa.",
-            "Documentación e instalación. Ruta A: README con pasos para el equipo. Ruta B: README con pasos locales reproducibles. Evidencia: README con “instalar/ejecutar/probar”.",
+            "Identificaste 1 caso de uso para MCP propio. Evidencia: problema + tool propuesta + inputs/outputs.",
+            "Creaste un MCP server mínimo con 1 tool funcionando. Evidencia: código + comando de ejecución + llamada exitosa.",
+            "Documentaste instalación y prueba. Evidencia: README con “instalar/ejecutar/probar”.",
           ],
         },
       ],
@@ -175,8 +175,8 @@ export const level02 = {
           body: "MCP conecta al agente con herramientas externas (acciones). Skills enseñan al agente cómo razonar en tareas específicas (conocimiento).\n\nUn skill es un paquete de conocimiento procedimental: criterios, procesos, reglas y marcos de decisión. No es un prompt largo — es experiencia estructurada. Ejemplo: el Systematic Debugging skill no le da al agente acceso a nuevas herramientas, le enseña el proceso correcto de debugging: hipótesis → aislamiento → verificación → solución.",
           references: ["skills-basics"],
           checks: [
-            "Puedes explicar Skill vs MCP. Ruta A: con ejemplos del proyecto (debug vs tool). Ruta B: con ejemplos genéricos. Evidencia: 2 ejemplos y por qué caen en cada categoría.",
-            "Entiendes carga progresiva. Ruta A: defines qué siempre va (name+desc) y qué es bajo demanda. Ruta B: aplicas el concepto en una lista de 3 skills. Evidencia: lista de 3 con “siempre / bajo demanda”.",
+            "Puedes explicar Skill vs MCP. Evidencia: 2 ejemplos y por qué caen en cada categoría.",
+            "Entiendes carga progresiva. Evidencia: lista de 3 skills con “siempre / bajo demanda”.",
             "Instalaste tu primer skill. Ruta A: `npx skills add ...` desde un repo público. Ruta B: si tu herramienta no lo soporta, creas un SKILL.md equivalente (plantilla) y lo usas manualmente en 2 tareas. Evidencia: comando o archivo + 2 usos registrados.",
           ],
         },
@@ -195,9 +195,9 @@ export const level02 = {
           body: "Los más valiosos según la comunidad:\n\n• Systematic Debugging (Superpowers): hipótesis → aislamiento → solución estructurada.\n• Error Handling Patterns: try/catch por capas, logs útiles, respuestas coherentes.\n• API Design Principles: endpoints consistentes, buen naming.\n• Frontend Design Skill: el agente piensa como diseñador, no solo genera HTML funcional.\n• Vercel React Best Practices: server vs client components, patterns modernos de Next.js.\n• Changelog Generator: convierte commits en changelog legible para stakeholders.\n• PostgreSQL Skill: schemas, índices, queries sin N+1.\n\nInstalables desde skills.sh o npx skills add.",
           references: ["skills-basics"],
           checks: [
-            "Tienes 3 capacidades reutilizables (skills o equivalentes). Ruta A: 3 skills instalados. Ruta B: 3 guías internas en markdown reutilizables. Evidencia: lista de 3 + cuándo se activan.",
-            "Aplicaste debugging sistemático. Ruta A: bug real con pasos (hipótesis→aislamiento→verificación). Ruta B: bug de ejemplo con el mismo proceso. Evidencia: registro de 5–10 líneas con esos pasos.",
-            "Patrones de manejo de errores. Ruta A: aplicas patrón en 1 cambio real. Ruta B: aplicas patrón en 1 ejemplo (función que falla). Evidencia: snippet antes/después o checklist aplicado.",
+            "Tienes 3 capacidades reutilizables (skills o guías). Evidencia: lista de 3 + cuándo se activan.",
+            "Aplicaste debugging sistemático (hipótesis→aislamiento→verificación→solución). Evidencia: registro de 5–10 líneas con esos pasos.",
+            "Aplicaste patrones de manejo de errores. Evidencia: snippet antes/después o checklist aplicado.",
           ],
         },
         {
@@ -205,9 +205,9 @@ export const level02 = {
           body: "Proyecto (default): ./<agent>/skills/ — commiteable al repo, compartido con todo el equipo. Global (-g): ~/.claude/skills/ — personal, disponible en todos tus proyectos pero no en el repo.\n\nRegla para equipos: skills que reflejan decisiones del equipo van commiteados al proyecto. Skills de preferencia personal van en global. El README del proyecto documenta qué skills están y cuándo activarlos.",
           references: ["skills-basics"],
           checks: [
-            "Separaste scope de skills. Ruta A: skills de equipo en repo y personales global. Ruta B: simulas ambos en un repo de práctica (carpeta `skills/` + notas de global). Evidencia: estructura + explicación breve.",
-            "No contaminas el repo con skills personales. Ruta A: verificado por git status limpio. Ruta B: convención documentada para no commitear global. Evidencia: regla escrita.",
-            "Documentación de skills disponibles. Ruta A: README/AGENTS.md con lista y cuándo usar. Ruta B: doc local equivalente. Evidencia: sección con 3 skills y triggers.",
+            "Separaste scope de skills (equipo en repo, personales global). Evidencia: estructura + explicación breve.",
+            "No contaminas el repo con skills personales. Evidencia: regla escrita (qué no se commitea).",
+            "Documentaste skills disponibles y cuándo usarlos. Evidencia: sección con 3 skills y triggers.",
           ],
         },
         {
@@ -215,9 +215,9 @@ export const level02 = {
           body: "Crea un skill cuando tienes un proceso repetitivo, cuando el agente comete el mismo error en una tarea específica, o cuando tienes conocimiento de dominio que no existe en skills.sh.\n\nLa description del frontmatter es lo más crítico: si es vaga el skill nunca se activa. Sé explícito: lista los casos en que debe activarse. Testa la activación con 5 prompts distintos antes de commitear. Itera el skill como si fuera código: PR, changelog, revisión periódica.",
           references: ["skills-basics"],
           checks: [
-            "Creaste 1 skill propio (o guía equivalente). Ruta A: skill instalable por el equipo. Ruta B: markdown reutilizable con checklist. Evidencia: archivo + ejemplo de uso.",
-            "Activación en contextos correctos. Ruta A: trigger automático por description. Ruta B: checklist manual (cuando X, usar skill Y) aplicado 2 veces. Evidencia: 2 casos donde se usó correctamente.",
-            "Otra persona lo usa. Ruta A: 1 miembro lo usa sin tu guía y deja nota. Ruta B: prueba con “nuevo usuario” (instrucciones claras) y registro de que se pudo seguir. Evidencia: 1 feedback o checklist completado.",
+            "Creaste 1 skill propio (o guía equivalente). Evidencia: archivo + ejemplo de uso.",
+            "Se usa en contextos correctos. Evidencia: 2 casos donde se activó/aplicó correctamente (automático o manual).",
+            "Otra persona lo usa sin tu guía. Evidencia: 1 feedback o checklist completado por otra persona.",
           ],
         },
         {
