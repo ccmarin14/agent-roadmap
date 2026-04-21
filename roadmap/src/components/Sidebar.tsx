@@ -1,7 +1,7 @@
 import { LEVELS } from "../data/index";
 import type { ProgressStats, ExamResult } from "../types";
 import type { User } from "@supabase/supabase-js";
-import { canAccessLevel, getUnlockRequirements } from "../utils/unlockLogic";
+import { canAccessLevel, getUnlockRequirements, getUnlockTooltip } from "../utils/unlockLogic";
 import { LevelLock } from "./LevelLock";
 import { formatHourRange, parseDurationToHourRange } from "../utils/durationHours";
 
@@ -27,6 +27,7 @@ export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, lev
           const active = li === lvlIdx;
           const isLocked = !canAccessLevel(li, examResults);
           const requirements = getUnlockRequirements(li);
+          const tooltip = getUnlockTooltip(li);
           const hoursRange = parseDurationToHourRange(lv.duration);
 
           return (
@@ -37,6 +38,7 @@ export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, lev
                   title={lv.title}
                   requirements={requirements || ""}
                   number={lv.id}
+                  tooltip={tooltip || undefined}
                 />
               ) : (
                 <button

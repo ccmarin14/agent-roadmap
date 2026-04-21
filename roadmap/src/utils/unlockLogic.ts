@@ -7,6 +7,8 @@ export interface ProgressStats {
   pct: number;
 }
 
+const EXAM_PASSING_SCORE_PCT = 90;
+
 export function canAccessLevel(
   levelIdx: number,
   examResults: ExamResult[]
@@ -24,4 +26,10 @@ export function getUnlockRequirements(levelIdx: number): string {
 
   const prevLevel = LEVELS[levelIdx - 1];
   return `Aprobar el examen del Nivel ${prevLevel.id} para desbloquear`;
+}
+
+export function getUnlockTooltip(levelIdx: number): string {
+  if (levelIdx === 0) return "";
+  const prevLevel = LEVELS[levelIdx - 1];
+  return `Para desbloquear: aprueba el examen del Nivel ${prevLevel.id} (≥${EXAM_PASSING_SCORE_PCT}%) en EVALUACIONES.`;
 }

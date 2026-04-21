@@ -3,13 +3,15 @@ interface LevelLockProps {
   requirements: string;
   title: string;
   number: string;
+  tooltip?: string;
 }
 
-export function LevelLock({ color, requirements, title, number }: LevelLockProps) {
+export function LevelLock({ color, requirements, title, number, tooltip }: LevelLockProps) {
   return (
     <div
       className="w-full text-left px-4 py-[10px] border-l-[3px] transition-all duration-150 opacity-60 cursor-not-allowed"
       style={{ borderLeftColor: "transparent" }}
+      title={tooltip}
     >
       <div className="flex justify-between items-center mb-[3px]">
         <span className="text-xs tracking-widest flex items-center gap-1" style={{ color }}>
