@@ -315,6 +315,12 @@ export function useProgress({ user, isGuest }: UseProgressProps = {}) {
     return results.reduce((best, current) => current.score > best.score ? current : best);
   }, [examResults]);
 
+  const getPassedExamResult = useCallback((levelId: string): ExamResult | null => {
+    const passed = examResults.filter(r => r.levelId === levelId && r.passed);
+    if (passed.length === 0) return null;
+    return passed.reduce((best, current) => current.timestamp > best.timestamp ? current : best);
+  }, [examResults]);
+
   const hasPassedQuiz = useCallback((levelId: string, sectionId: string): boolean => {
     const best = getBestQuizResult(levelId, sectionId);
     return best !== null && best.passed;
@@ -325,5 +331,5 @@ export function useProgress({ user, isGuest }: UseProgressProps = {}) {
     return best !== null && best.passed;
   }, [getBestExamResult]);
 
-  return { checked, key, toggle, levelStats, secStats, totalStats, syncProgress, loading, quizResults, examResults, saveQuizResult, saveExamResult, getBestQuizResult, getBestExamResult, hasPassedQuiz, hasPassedExam };
+  return { checked, key, toggle, levelStats, secStats, totalStats, syncProgress, loading, quizResults, examResults, saveQuizResult, saveExamResult, getBestQuizResult, getBestExamResult, getPassedExamResult, hasPassedQuiz, hasPassedExam };
 }

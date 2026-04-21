@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import type { Quiz as QuizType, Level, ExamResult } from "../types";
 
 function shuffleArray<T>(array: T[]): T[] {
@@ -19,6 +20,7 @@ interface ExamProps {
 }
 
 export function Exam({ quiz, level, previousResult, onComplete, onClose }: ExamProps) {
+  const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, number>>({});
   const [showResult, setShowResult] = useState(false);
@@ -159,7 +161,20 @@ export function Exam({ quiz, level, previousResult, onComplete, onClose }: ExamP
           </div>
         </div>
 
-        <div className="flex justify-center gap-3 pt-4 border-t border-[#252D3D]">
+        <div className="flex justify-center gap-3 pt-4 border-t border-border">
+          {passed && (
+            <button
+              onClick={() => navigate(`/certificate/${level.id}?autoprint=1`)}
+              className="no-print px-4 py-2 rounded text-sm transition-all duration-150"
+              style={{
+                backgroundColor: "#1E2535",
+                color: "#E2E8F0",
+                border: `1px solid ${level.color}40`,
+              }}
+            >
+              Descargar certificado
+            </button>
+          )}
           {!passed && (
             <button
               onClick={() => {
@@ -202,7 +217,7 @@ export function Exam({ quiz, level, previousResult, onComplete, onClose }: ExamP
             {currentQuestion + 1} / {quiz.questions.length}
           </span>
         </div>
-        <div className="h-[2px] bg-[#252D3D] rounded-full overflow-hidden">
+        <div className="h-[2px] bg-border rounded-full overflow-hidden">
           <div
             className="h-full transition-all duration-300"
             style={{ width: `${progress}%`, backgroundColor: level.color }}
@@ -242,7 +257,7 @@ export function Exam({ quiz, level, previousResult, onComplete, onClose }: ExamP
         </div>
       </div>
 
-      <div className="flex justify-between pt-4 border-t border-[#252D3D]">
+      <div className="flex justify-between pt-4 border-t border-border">
         <button
           onClick={handlePrev}
           disabled={currentQuestion === 0}

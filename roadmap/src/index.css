@@ -44,6 +44,37 @@ button {
   background: none;
 }
 
+@media print {
+  html, body, #root {
+    height: auto;
+    overflow: visible;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .certificate-paper {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+  }
+
+  .certificate-card {
+    background: #ffffff !important;
+    border-color: #000000 !important;
+  }
+
+  @page {
+    margin: 14mm;
+  }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(4px); }
   to   { opacity: 1; transform: translateY(0); }

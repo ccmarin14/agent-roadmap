@@ -11,6 +11,7 @@ import { ProgressView } from "./components/ProgressView";
 import { ExamsView } from "./components/ExamsView";
 import { Login } from "./components/Login";
 import { AdminDashboard } from "./pages/AdminDashboard";
+import { CertificatePage } from "./pages/CertificatePage";
 import { canAccessLevel } from "./utils/unlockLogic";
 
 export default function App() {
@@ -126,6 +127,7 @@ export default function App() {
         )
       } />
       <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/certificate/:levelId" element={<CertificatePage />} />
     </Routes>
   );
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { LEVELS } from "../data/index";
 import type { Level, Quiz as QuizType, QuizResult, ExamResult, ProgressStats } from "../types";
 import { getAvailableQuizzesForLevel, getExamForLevel, canAccessExam } from "../utils/quizHelpers";
@@ -34,6 +35,7 @@ type ActiveExam = {
 type ActiveEvaluation = ActiveQuiz | ActiveExam | null;
 
 export function ExamsView({ lvlIdx, levelStats, quizResults, examResults, onQuizComplete, onExamComplete }: ExamsViewProps) {
+  const navigate = useNavigate();
   const [activeEval, setActiveEval] = useState<ActiveEvaluation>(null);
 
   const currentLevel = LEVELS[lvlIdx];
@@ -221,23 +223,38 @@ export function ExamsView({ lvlIdx, levelStats, quizResults, examResults, onQuiz
                     )}
                   </div>
                   {isAccessible ? (
-                    <button
-                      onClick={() =>
-                        setActiveEval({
-                          type: "exam",
-                          level: lv,
-                          quiz: examQuiz,
-                          previousResult: examResult
-                        })
-                      }
-                      className="px-3 py-1 rounded text-xs transition-all duration-150"
-                      style={{ 
-                        backgroundColor: examPassed === true ? lv.color : examPassed === false ? "#F87171" : lv.color, 
-                        color: "#000" 
-                      }}
-                    >
-                      {examPassed === true ? "APROBADO" : examPassed === false ? "REPETIR" : "TOMAR EXAMEN"}
-                    </button>
+                    <div className="flex items-center gap-2">
+                      {examPassed === true && (
+                        <button
+                          className="no-print px-3 py-1 rounded text-xs transition-all duration-150"
+                          style={{
+                            backgroundColor: "#1E2535",
+                            color: "#E2E8F0",
+                            border: `1px solid ${lv.color}40`,
+                          }}
+                          onClick={() => navigate(`/certificate/${lv.id}`)}
+                        >
+                          DESCARGAR CERTIFICADO
+                        </button>
+                      )}
+                      <button
+                        onClick={() =>
+                          setActiveEval({
+                            type: "exam",
+                            level: lv,
+                            quiz: examQuiz,
+                            previousResult: examResult
+                          })
+                        }
+                        className="px-3 py-1 rounded text-xs transition-all duration-150"
+                        style={{ 
+                          backgroundColor: examPassed === true ? lv.color : examPassed === false ? "#F87171" : lv.color, 
+                          color: "#000" 
+                        }}
+                      >
+                        {examPassed === true ? "APROBADO" : examPassed === false ? "REPETIR" : "TOMAR EXAMEN"}
+                      </button>
+                    </div>
                   ) : (
                     <div
                       className="px-3 py-1 rounded text-xs"
