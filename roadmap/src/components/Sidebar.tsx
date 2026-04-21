@@ -3,6 +3,7 @@ import type { ProgressStats, ExamResult } from "../types";
 import type { User } from "@supabase/supabase-js";
 import { canAccessLevel, getUnlockRequirements } from "../utils/unlockLogic";
 import { LevelLock } from "./LevelLock";
+import { formatHourRange, parseDurationToHourRange } from "../utils/durationHours";
 
 interface SidebarProps {
   lvlIdx: number;
@@ -19,13 +20,14 @@ interface SidebarProps {
 
 export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, levelStats, examResults, levelColor, user, onLogout }: SidebarProps) {
   return (
-    <div className="w-[220px] flex-shrink-0 border-r border-border flex flex-col overflow-hidden">
+    <div className="w-[220px] shrink-0 border-r border-border flex flex-col overflow-hidden">
       <div className="flex-1 overflow-y-auto py-2">
         {LEVELS.map((lv, li) => {
           const st = levelStats(li);
           const active = li === lvlIdx;
           const isLocked = !canAccessLevel(li, examResults);
           const requirements = getUnlockRequirements(li);
+          const hoursRange = parseDurationToHourRange(lv.duration);
 
           return (
             <div key={li}>
@@ -66,7 +68,10 @@ export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, lev
                     {lv.title}
                   </div>
                   <div className="text-xs text-text-faint">
-                    {lv.duration} · {lv.team}
+                    {lv.duration}
+                    {hoursRange ? ` · ${formatHourRange(hoursRange)}` : ""}
+                    {" · "}
+                    {lv.team}
                   </div>
                   {st.t > 0 && (
                     <div className="mt-[6px] h-[2px] bg-border-light rounded-[1px] overflow-hidden">

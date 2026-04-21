@@ -1,4 +1,5 @@
 import type { Level, ProgressStats } from "../types";
+import { formatHourRange, parseDurationToHourRange } from "../utils/durationHours";
 
 interface SectionHeaderProps {
   level: Level;
@@ -10,14 +11,21 @@ interface SectionHeaderProps {
 }
 
 export function SectionHeader({ level, secIdx, setSecIdx, setOpenItem, secStats, lvlIdx }: SectionHeaderProps) {
+  const hoursRange = parseDurationToHourRange(level.duration);
+
   return (
-    <div className="px-6 py-3 border-b border-border flex-shrink-0 bg-surface">
+    <div className="px-6 py-3 border-b border-border shrink-0 bg-surface">
       <div className="flex items-center gap-2 mb-1">
         <span className="text-xs tracking-wider" style={{ color: level.color }}>
           NIVEL {level.id} · {level.title.toUpperCase()}
         </span>
         <span style={{ color: "#252D3D" }}>·</span>
-        <span className="text-xs" style={{ color: "#475569" }}>👥 {level.team}</span>
+        <span className="text-xs" style={{ color: "#475569" }}>
+          👥 {level.team}
+          {" · "}
+          {level.duration}
+          {hoursRange ? ` · ${formatHourRange(hoursRange)}` : ""}
+        </span>
       </div>
 
       <div className="text-[13px] leading-relaxed max-w-[600px] mb-2" style={{ color: "#94A3B8" }}>

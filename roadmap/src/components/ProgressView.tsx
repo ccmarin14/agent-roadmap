@@ -1,6 +1,8 @@
 import { LEVELS } from "../data/index";
 import type { ProgressStats, ExamResult } from "../types";
 import { canAccessLevel, getUnlockRequirements } from "../utils/unlockLogic";
+import type { HourRange } from "../utils/durationHours";
+import { formatHourRange, parseDurationToHourRange } from "../utils/durationHours";
 
 interface ProgressViewProps {
   lvlIdx: number;
@@ -23,11 +25,19 @@ export function ProgressView({ lvlIdx, setLvlIdx, setSecIdx, setTab, checked, ke
     }
   };
 
+  const totalHourRange = LEVELS.reduce<HourRange | null>((acc, lv) => {
+    const r = parseDurationToHourRange(lv.duration);
+    if (!r) return acc;
+    if (!acc) return r;
+    return { minHours: acc.minHours + r.minHours, maxHours: acc.maxHours + r.maxHours };
+  }, null);
+
   return (
     <div className="max-w-[860px]">
       <div className="mb-6">
         <div className="text-xs tracking-widest mb-[10px]" style={{ color: "#475569" }}>
           PROGRESO TOTAL DEL ROADMAP
+          {totalHourRange ? ` · ${formatHourRange(totalHourRange)}` : ""}
         </div>
         <div className="flex gap-3 flex-wrap">
           {LEVELS.map((lv, li) => {
@@ -137,7 +147,7 @@ export function ProgressView({ lvlIdx, setLvlIdx, setSecIdx, setTab, checked, ke
                         <button
                           key={ci}
                           onClick={() => toggle(k)}
-                          className="flex items-start gap-[10px] w-full text-left px-3 py-[5px] rounded transition-colors duration-100 mb-[1px]"
+                          className="flex items-start gap-[10px] w-full text-left px-3 py-[5px] rounded transition-colors duration-100 mb-px"
                           style={{
                             backgroundColor: done ? `${lv.color}06` : "transparent",
                           }}
