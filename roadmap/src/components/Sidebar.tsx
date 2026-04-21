@@ -16,11 +16,26 @@ interface SidebarProps {
   levelColor: string;
   user: User | null;
   onLogout: () => void;
+  onNavigate?: () => void;
+  className?: string;
 }
 
-export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, levelStats, examResults, levelColor, user, onLogout }: SidebarProps) {
+export function Sidebar({
+  lvlIdx,
+  setLvlIdx,
+  secIdx,
+  setSecIdx,
+  setOpenItem,
+  levelStats,
+  examResults,
+  levelColor,
+  user,
+  onLogout,
+  onNavigate,
+  className,
+}: SidebarProps) {
   return (
-    <div className="w-[220px] shrink-0 border-r border-border flex flex-col overflow-hidden">
+    <div className={`w-[220px] h-full shrink-0 border-r border-border flex flex-col overflow-hidden bg-surface ${className ?? ""}`}>
       <div className="flex-1 overflow-y-auto py-2">
         {LEVELS.map((lv, li) => {
           const st = levelStats(li);
@@ -42,7 +57,12 @@ export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, lev
                 />
               ) : (
                 <button
-                  onClick={() => { setLvlIdx(li); setSecIdx(0); setOpenItem(null); }}
+                  onClick={() => {
+                    setLvlIdx(li);
+                    setSecIdx(0);
+                    setOpenItem(null);
+                    onNavigate?.();
+                  }}
                   className="w-full text-left px-4 py-[10px] border-l-[3px] transition-all duration-150"
                   style={{
                     borderLeftColor: active ? lv.color : "transparent",
@@ -91,7 +111,11 @@ export function Sidebar({ lvlIdx, setLvlIdx, secIdx, setSecIdx, setOpenItem, lev
                   {lv.sections.map((s, si) => (
                     <button
                       key={si}
-                      onClick={() => { setSecIdx(si); setOpenItem(null); }}
+                      onClick={() => {
+                        setSecIdx(si);
+                        setOpenItem(null);
+                        onNavigate?.();
+                      }}
                       className="w-full text-left px-2 py-[5px] border-l-2 mb-[2px] bg-transparent transition-all duration-100"
                       style={{
                         borderLeftColor: si === secIdx ? `${lv.color}80` : undefined,

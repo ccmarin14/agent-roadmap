@@ -19,6 +19,7 @@ export default function App() {
   const [secIdx, setSecIdx] = useState(0);
   const [openItem, setOpenItem] = useState<number | null>(null);
   const [tab, setTab] = useState<"content" | "progress" | "exams">("content");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const { user, isGuest, loading, login, logout, continueAsGuest } = useAuth();
   const { checked, key, toggle, levelStats, secStats, totalStats, saveQuizResult, saveExamResult, quizResults, examResults } = useProgress({ user, isGuest });
@@ -34,6 +35,9 @@ export default function App() {
       setOpenItem(null);
     }
   };
+
+  const closeSidebar = () => setSidebarOpen(false);
+  const toggleSidebar = () => setSidebarOpen((v) => !v);
 
   if (loading) {
     return (
@@ -54,19 +58,56 @@ export default function App() {
           />
         ) : (
           <div className="flex flex-col h-screen bg-bg text-text font-mono text-[13px] overflow-hidden">
-            <TopBar level={level} tab={tab} setTab={setTab} total={total} />
+            <TopBar
+              level={level}
+              tab={tab}
+              setTab={setTab}
+              total={total}
+              onToggleSidebar={toggleSidebar}
+              sidebarOpen={sidebarOpen}
+            />
 
             <div className="flex flex-1 overflow-hidden">
-              <Sidebar
-                lvlIdx={lvlIdx} setLvlIdx={handleSetLvlIdx}
-                secIdx={secIdx} setSecIdx={setSecIdx}
-                setOpenItem={setOpenItem}
-                levelStats={levelStats}
-                examResults={examResults}
-                levelColor={level.color}
-                user={user}
-                onLogout={logout}
-              />
+              <div className="hidden md:block">
+                <Sidebar
+                  lvlIdx={lvlIdx} setLvlIdx={handleSetLvlIdx}
+                  secIdx={secIdx} setSecIdx={setSecIdx}
+                  setOpenItem={setOpenItem}
+                  levelStats={levelStats}
+                  examResults={examResults}
+                  levelColor={level.color}
+                  user={user}
+                  onLogout={logout}
+                />
+              </div>
+
+              <div className="md:hidden">
+                {sidebarOpen && (
+                  <div
+                    className="fixed inset-0 bg-black/60 z-40"
+                    onClick={closeSidebar}
+                    aria-hidden="true"
+                  />
+                )}
+                <div
+                  className={`fixed inset-y-0 left-0 z-50 transform transition-transform duration-200 ease-out ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+                  role="dialog"
+                  aria-modal="true"
+                >
+                  <Sidebar
+                    lvlIdx={lvlIdx} setLvlIdx={handleSetLvlIdx}
+                    secIdx={secIdx} setSecIdx={setSecIdx}
+                    setOpenItem={setOpenItem}
+                    levelStats={levelStats}
+                    examResults={examResults}
+                    levelColor={level.color}
+                    user={user}
+                    onLogout={logout}
+                    onNavigate={closeSidebar}
+                    className="w-[280px] max-w-[85vw] h-full shadow-2xl"
+                  />
+                </div>
+              </div>
 
               <div className="flex-1 overflow-hidden flex flex-col">
                 {tab === "content" && (
@@ -80,8 +121,7 @@ export default function App() {
                 )}
 
                 <div
-                  className="ani flex-1 overflow-y-auto"
-                  style={{ padding: "16px 24px" }}
+                  className="ani flex-1 overflow-y-auto p-4 sm:p-6"
                   key={`${lvlIdx}-${secIdx}-${tab}`}
                 >
                   {tab === "content" ? (
