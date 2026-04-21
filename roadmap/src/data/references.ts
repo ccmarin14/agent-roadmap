@@ -46,17 +46,39 @@ export const REFERENCES = {
   ],
   "agents-basics": [
     {
-      title: "Building Effective Agents",
-      url: "https://www.estrategiadeproducto.com/p/construyendo-agentes-eficaces",
-      desc: "Guía de Anthropic sobre cómo construir agentes efectivos"
+      title: "Building effective agents",
+      url: "https://www.anthropic.com/index/building-effective-agents",
+      desc: "Guía de Anthropic sobre cuándo usar workflows vs agentes y cómo diseñarlos con simplicidad y control"
     },
     {
-      title: "What Is MCP (Model Context Protocol)? A Practical Guide for 2026",
-      url: "https://www.agentwhispers.com/agent-guides/what-is-mcp",
-      desc: "Guía práctica sobre MCP y su ecosistema"
+      title: "LLMs que razonan y actúan (ReAct) — Learn Prompting (ES)",
+      url: "https://learnprompting.org/es/docs/agents/react",
+      desc: "Explicación corta del ciclo pensar → actuar → observar (ReAct) y por qué sirve cuando el modelo puede usar herramientas"
+    }
+  ],
+  "agents-tool-use": [
+    {
+      title: "Build a tool-using agent (tutorial) — Claude API Docs",
+      url: "https://console.anthropic.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent",
+      desc: "Tutorial oficial: de una tool call a un loop agentic (tool_use/tool_result) con ejemplos ejecutables"
+    },
+    {
+      title: "How tool use works — Claude API Docs",
+      url: "https://console.anthropic.com/docs/en/agents-and-tools/tool-use/how-tool-use-works",
+      desc: "Explica el contrato de tool use y la forma canónica del loop controlado por stop_reason"
     }
   ],
   "agents-reasoning": [
+    {
+      title: "Reflexion (técnica) — Prompt Engineering Guide",
+      url: "http://promptingguide.ai/techniques/reflexion",
+      desc: "Explicación práctica de Reflexion (actor/evaluator/reflector) y cuándo usarla como bucle de mejora"
+    },
+    {
+      title: "Self‑Ask Prompting — Learn Prompting",
+      url: "https://learnprompting.org/docs/advanced/few_shot/self_ask",
+      desc: "Plantilla práctica para descomponer una tarea en sub‑preguntas y sintetizar la respuesta final"
+    },
     {
       title: "Reflexion: Language Agents with Verbal Reinforcement Learning",
       url: "https://arxiv.org/abs/2303.11366",
@@ -106,50 +128,67 @@ export const REFERENCES = {
   ],
   "prompts-basics": [
     {
-      title: "Prompt engineering for Claude's long context window",
+      title: "Prompt Engineering en Español: Guía completa (2026) — Javadex",
       url: "https://www.javadex.es/blog/como-escribir-prompts-efectivos-chatgpt-claude-guia-completa-ejemplos",
-      desc: "Técnicas de prompt engineering de Anthropic"
+      desc: "Guía práctica en español: rol, tarea, contexto, restricciones y formato con ejemplos"
+    }
+  ],
+  "prompts-structure": [
+    {
+      title: "Cómo usar prompts correctamente (plantilla universal) — PromptsParaTodos (ES)",
+      url: "https://promptsparatodos.com/como-usar-prompts-correctamente/",
+      desc: "Plantilla concreta para escribir prompts con contexto, restricciones y formato verificable"
     }
   ],
   "agents-md": [
     {
-      title: "The Perfect CLAUDE.md Template for Vibe Coding",
-      url: "https://vibemeta.app/blog/perfect-claude-md-vibe-coding-template",
-      desc: "Plantilla y mejores prácticas para AGENTS.md/CLAUDE.md"
-    },
-    {
-      title: "Writing a good CLAUDE.md",
+      title: "Writing a good CLAUDE.md (aplica a AGENTS.md) — HumanLayer",
       url: "https://www.humanlayer.dev/blog/writing-a-good-claude-md",
-      desc: "Guía detallada sobre cómo escribir CLAUDE.md efectivo"
+      desc: "Mejores prácticas para archivos tipo CLAUDE.md/AGENTS.md: concisión, reglas y progressive disclosure"
     },
     {
-      title: "The Complete Guide to CLAUDE.md",
+      title: "The Complete Guide to CLAUDE.md — Claude Directory",
       url: "https://www.claudedirectory.org/blog/claude-md-guide",
-      desc: "Guía completa desde estructura básica hasta patrones avanzados"
+      desc: "Guía (con ejemplos) sobre estructura, convenciones y errores comunes; útil para equipos"
+    },
+    {
+      title: "CLAUDE.md Best Practices — self.md",
+      url: "https://self.md/guides/claude-md-guide/",
+      desc: "Checklist de secciones esenciales, modularización y anti‑patrones (demasiado largo, demasiado vago)"
     }
   ],
   "mcp-basics": [
     {
-      title: "Introducing the Model Context Protocol",
-      url: "https://www.anthropic.com/news/model-context-protocol",
-      desc: "Anuncio oficial de MCP por Anthropic"
+      title: "MCP Specification (latest) — modelcontextprotocol.io",
+      url: "https://modelcontextprotocol.io/specification/latest",
+      desc: "Especificación oficial MCP: hosts/clients/servers, features, JSON-RPC y consideraciones de seguridad"
     },
     {
-      title: "MCP (Model Context Protocol) — A Deep Dive Beyond the Basics",
+      title: "Model Context Protocol — Repositorio oficial (spec + docs)",
+      url: "https://github.com/modelcontextprotocol/modelcontextprotocol",
+      desc: "Repo oficial con la especificación, schema y documentación; referencia estable para implementaciones"
+    },
+    {
+      title: "MCP — qué es y cómo usarlo (con ejemplos) — Adictos al Trabajo (ES)",
       url: "https://adictosaltrabajo.com/2025/05/19/model-context-protocol-mcp-que-es-y-como-usarlo-paso-a-paso-con-ejemplos-en-python/",
-      desc: "Guía profunda sobre arquitectura y configuración de MCP"
-    },
-    {
-      title: "How to Use Model Context Protocol (MCP) with Claude",
-      url: "https://www.codecademy.com/article/how-to-use-model-context-protocol-mcp-with-claude-step-by-step-guide-with-examples",
-      desc: "Tutorial paso a paso de Codecademy"
+      desc: "Guía en español con enfoque práctico y ejemplos para entender la arquitectura"
     }
   ],
   "mcp-servers": [
     {
-      title: "Model Context Protocol (MCP): Complete Implementation Guide",
-      url: "https://www.jenova.ai/en/resources/how-to-use-the-model-context-protocol-mcp",
-      desc: "Guía de implementación con Python"
+      title: "Model Context Protocol Servers — repositorio oficial",
+      url: "https://github.com/modelcontextprotocol/servers",
+      desc: "Lista de servidores de referencia (filesystem, git, fetch, memory, sequential thinking, etc.) y ejemplos de configuración"
+    },
+    {
+      title: "Filesystem MCP Server (README) — servidor oficial",
+      url: "https://github.com/modelcontextprotocol/servers/blob/main/src%2Ffilesystem%2FREADME.md",
+      desc: "Cómo configurar acceso por rutas (roots/args) y operar con lectura/escritura segura"
+    },
+    {
+      title: "Git MCP Server (README) — servidor oficial",
+      url: "https://github.com/modelcontextprotocol/servers/blob/main/src/git/README.md",
+      desc: "Herramientas y configuración del servidor git (status/diff/branch/commit) para flujos con agentes"
     }
   ],
   "mcp-security": [
@@ -159,31 +198,31 @@ export const REFERENCES = {
       desc: "Documentación oficial de Anthropic sobre seguridad en MCP"
     },
     {
-      title: "Prompt Injection Attacks Against AI Agents",
-      url: "https://ar5iv.labs.arxiv.org/html/2302.12173",
-      desc: "Paper académico sobre ataques de prompt injection"
+      title: "MCP Security Notification: Tool Poisoning Attacks — Invariant Labs",
+      url: "https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks",
+      desc: "Explica el vector de tool poisoning en MCP y mitigaciones prácticas"
     },
     {
-      title: "Tool Poisoning: Security Risks in AI Agent Systems",
-      url: "https://cloud.google.com/blog/products/identity-security/cloud-ciso-perspectives-how-google-secures-ai-agents",
-      desc: "Guía de Google sobre seguridad en agentes"
+      title: "MCP security best practices (currículum) — Microsoft MCP for Beginners",
+      url: "https://github.com/microsoft/mcp-for-beginners/blob/bc391f31/02-Security/mcp-security-best-practices-2025.md",
+      desc: "Checklist técnico: prompt injection, tool poisoning, least privilege, auditoría y requisitos MUST/MUST NOT"
     }
   ],
   "skills-basics": [
     {
-      title: "Building Skills for Claude Code",
-      url: "https://docs.claude.com/en/docs/claude-code/skills",
-      desc: "Documentación oficial de Anthropic sobre Skills"
+      title: "Skills CLI (repositorio oficial) — vercel-labs/skills",
+      url: "https://github.com/vercel-labs/add-skill",
+      desc: "CLI del ecosistema skills: instalar/listar/actualizar skills basados en SKILL.md"
     },
     {
-      title: "How I Gave Claude 14 New Capabilities Using SKILL.md Files",
-      url: "https://dev.to/agent-andy/how-i-gave-claude-14-new-capabilities-using-skillmd-files-5636",
-      desc: "Tutorial práctico sobre crear skills"
+      title: "Skills CLI Reference — skills.sh",
+      url: "https://skills.sh/docs/cli",
+      desc: "Referencia del CLI (npx skills add/find/list/update) y comportamiento esperado"
     },
     {
-      title: "Building Custom Skills for Claude Code: A Complete Tutorial",
-      url: "https://blakecrosley.com/blog/building-custom-skills",
-      desc: "Tutorial completo con ejemplos"
+      title: "Qué es un SKILL.md y cómo se instala — README (vercel-labs/skills)",
+      url: "https://github.com/vercel-labs/add-skill/blob/main/README.md",
+      desc: "Define SKILL.md (frontmatter + contenido) y muestra comandos reales para instalación en equipo"
     }
   ],
   "skills-structure": [
@@ -205,35 +244,71 @@ export const REFERENCES = {
       desc: "Anuncio y caso de uso de Context7"
     }
   ],
-  "hooks-basics": [
+  "docs-adrs": [
     {
-      title: "Claude Code hooks: a bookmarkable guide to git automation",
-      url: "https://jpcaparas.medium.com/claude-code-hooks-a-bookmarkable-guide-to-git-automation-11b4516adc5d",
-      desc: "Guía de automatización con hooks"
+      title: "ADR template (incluye español) — pmerson/ADR-template",
+      url: "https://github.com/pmerson/ADR-template",
+      desc: "Plantilla Markdown (incluye versión en español) para documentar decisiones con contexto, decisión y consecuencias"
     },
     {
-      title: "Claude Code Hooks Tutorial: Automate Your Workflow",
-      url: "https://blakecrosley.com/blog/claude-code-hooks-tutorial",
-      desc: "Tutorial con ejemplos de producción"
+      title: "ADR: La memoria arquitectónica que tu IA necesita (ES) — Secture",
+      url: "https://secture.com/adr-memoria-arquitectonica-ia/",
+      desc: "Explica qué es un ADR, cómo estructurarlo (MADR) y cómo organizarlo en /docs/adr/"
+    }
+  ],
+  "docs-jsdoc": [
+    {
+      title: "JSDoc — documentación oficial",
+      url: "https://jsdoc.app/",
+      desc: "Referencia oficial de JSDoc (tags, ejemplos, generación de docs) para mantener documentación consistente"
+    }
+  ],
+  "hooks-basics": [
+    {
+      title: "Claude Code — Hooks reference (oficial)",
+      url: "https://code.claude.com/docs/en/hooks",
+      desc: "Referencia oficial de eventos, esquema de configuración y formatos; aclara qué se puede automatizar realmente"
+    },
+    {
+      title: "Husky (Git hooks) — guía oficial",
+      url: "https://typicode.github.io/husky/get-started.html",
+      desc: "Cómo configurar hooks de git en el repo (pre-commit, commit-msg, etc.) de forma reproducible para el equipo"
     }
   ],
   "hooks-config": [
     {
-      title: "Claude Code power user customization: How to configure hooks",
-      url: "https://andresospina.co/claude-code-tutorial",
-      desc: "Documentación oficial de Anthropic sobre configuración de hooks"
+      title: "Husky — How To (pre-commit, skip, troubleshooting) — oficial",
+      url: "https://typicode.github.io/husky/how-to.html",
+      desc: "Casos reales de hooks: saltar hooks, scripts, monorepos, Windows, y patrones recomendados"
     },
     {
-      title: "Claude Code Hooks: Complete Guide with 20+ Ready-to-Use Examples",
-      url: "https://aiorg.dev/blog/claude-code-hooks",
-      desc: "Guía completa con ejemplos listos para usar"
+      title: "Claude Code — Hooks reference (oficial)",
+      url: "https://code.claude.com/docs/en/hooks",
+      desc: "Esquema y eventos de hooks del ciclo de vida del agente (SessionStart/End, PreToolUse, Stop, etc.)"
+    }
+  ],
+  "hooks-husky": [
+    {
+      title: "Husky — documentación oficial",
+      url: "https://typicode.github.io/husky/",
+      desc: "Documentación y conceptos base para hooks compartidos en repositorios (Windows incluido)"
     }
   ],
   "orchestration": [
     {
-      title: "Claude Code Agent Skills",
-      url: "https://prg.sh/notes/Claude-Code-Agent-Skills",
-      desc: "Notas sobre agentes especializados y orquestación"
+      title: "How we built our multi-agent research system — Anthropic",
+      url: "https://www.anthropic.com/engineering/built-multi-agent-research-system",
+      desc: "Patrón orquestador‑workers, delegación paralela, control de esfuerzo y lecciones reales de coordinación"
+    },
+    {
+      title: "Handoff template (Markdown) — multi-agent coordination framework",
+      url: "https://github.com/timothyjrainwater-lab/multi-agent-coordination-framework/blob/main/templates/HANDOFF_TEMPLATE.md",
+      desc: "Template de handoff estructurado (qué se hizo, decisiones, bloqueos, próximos pasos) para transferir contexto sin ruido"
+    },
+    {
+      title: "Claude Code CLI reference — fork de sesión (oficial)",
+      url: "https://code.claude.com/docs/en/cli-reference",
+      desc: "Referencia oficial del flag `--fork-session` para aislar contextos y explorar en paralelo sin contaminar la sesión principal"
     }
   ],
   "sdd-basics": [
@@ -246,6 +321,18 @@ export const REFERENCES = {
       title: "How to Write a Good Spec for AI Agents",
       url: "https://www.oreilly.com/radar/how-to-write-a-good-spec-for-ai-agents/",
       desc: "Guía de Addy Osmani sobre specs efectivas para agentes"
+    }
+  ],
+  "mcp-fastmcp": [
+    {
+      title: "FastMCP — documentación oficial",
+      url: "https://gofastmcp.com/",
+      desc: "Framework Python para construir servidores MCP; quickstart y guías de despliegue"
+    },
+    {
+      title: "FastMCP Server — guía (Tools/Resources/Prompts, transports)",
+      url: "https://gofastmcp.com/servers",
+      desc: "Referencia práctica para exponer tools/resources/prompts y correr por STDIO/HTTP"
     }
   ],
   "ide-cursor": [
@@ -291,20 +378,25 @@ const mapping: Record<string, ReferenceKey | undefined> = {
   "mcp-basics": "mcp-basics",
   "mcp-architecture": "mcp-basics",
   "mcp-essential": "mcp-servers",
-  "mcp-security": "mcp-basics",
+  "mcp-security": "mcp-security",
   "mcp-efficiency": "mcp-basics",
   "mcp-build": "mcp-servers",
+  "mcp-fastmcp": "mcp-fastmcp",
   "skills-basics": "skills-basics",
   "skills-anatomy": "skills-structure",
   "skills-essential": "skills-basics",
   "skills-scope": "skills-basics",
   "skills-create": "skills-basics",
   "docs-context7": "docs-context7",
+  "docs-adrs": "docs-adrs",
+  "docs-jsdoc": "docs-jsdoc",
   "docs-internal": "docs-context7",
   "docs-generated": "docs-context7",
   "prompts-library": "prompts-basics",
   "prompts-onboarding": "prompts-basics",
   "prompts-types": "prompts-basics",
+  "prompts-structure": "prompts-structure",
+  "agents-tool-use": "agents-tool-use",
   "hooks-precommit": "hooks-config",
   "hooks-postmerge": "hooks-basics",
   "hooks-scripts": "hooks-basics",
