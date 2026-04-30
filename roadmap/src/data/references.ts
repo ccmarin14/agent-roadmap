@@ -263,6 +263,37 @@ export const REFERENCES = {
       desc: "Referencia oficial de JSDoc (tags, ejemplos, generación de docs) para mantener documentación consistente"
     }
   ],
+  "docs-tasks": [
+    {
+      title: "Building effective agents",
+      url: "https://www.anthropic.com/index/building-effective-agents",
+      desc: "Guía práctica para diseñar flujos agentic: descomposición, pasos pequeños, guardrails y validación"
+    }
+  ],
+  "docs-design": [
+    {
+      title: "Design Docs at Google",
+      url: "https://www.industrialempathy.com/posts/design-docs-at-google/",
+      desc: "Estructura práctica de design docs: objetivos/no-objetivos, tradeoffs, cross-cutting concerns y decisiones"
+    },
+    {
+      title: "ADR template (incluye español) — pmerson/ADR-template",
+      url: "https://github.com/pmerson/ADR-template",
+      desc: "Plantilla Markdown (incluye versión en español) para registrar decisiones, contexto y consecuencias"
+    }
+  ],
+  "docs-database": [
+    {
+      title: "Migration Rollback Strategies — AWS (guía oficial)",
+      url: "https://aws.amazon.com/blogs/migration-and-modernization/migration-rollback-strategies-when-your-migration-doesnt-go-as-planned/",
+      desc: "Estrategias de rollback y preparación operativa para cambios de datos y migraciones (plan, validación, drills)"
+    },
+    {
+      title: "The three levels of a database rollback strategy — pgroll",
+      url: "https://pgroll.com/blog/levels-of-a-database-rollback-strategy",
+      desc: "Explica niveles de estrategia de rollback (manual → expand/contract), útil para diseñar migraciones reversibles"
+    }
+  ],
   "hooks-basics": [
     {
       title: "Claude Code — Hooks reference (oficial)",
@@ -390,6 +421,9 @@ const mapping: Record<string, ReferenceKey | undefined> = {
   "docs-context7": "docs-context7",
   "docs-adrs": "docs-adrs",
   "docs-jsdoc": "docs-jsdoc",
+  "docs-tasks": "docs-tasks",
+  "docs-design": "docs-design",
+  "docs-database": "docs-database",
   "docs-internal": "docs-context7",
   "docs-generated": "docs-context7",
   "prompts-library": "prompts-basics",
