@@ -1,268 +1,268 @@
-# File Templates
+# Plantillas de archivos
 
-These are starting points — adapt them heavily based on the actual project.
-Never copy verbatim. Fill in real content or leave explicit TODOs.
+Son puntos de partida — adáptalas en profundidad según el proyecto real.
+Nunca copiar literalmente. Rellenar con contenido real o dejar TODOs explícitos.
 
 ---
 
-## AGENTS.md template
+## Plantilla AGENTS.md
 
 ```markdown
 # AGENTS.md
 
-Guidelines for AI agents working in this repository.
+Guía para agentes de IA que trabajen en este repositorio.
 
-## Setup
+## Configuración inicial
 
-<!-- TODO: What commands does an agent need to run first? -->
-```bash
-# Install dependencies
-[package-manager install command]
+<!-- TODO: ¿Qué comandos necesita ejecutar un agente primero? -->
+\`\`\`bash
+# Instalar dependencias
+[comando de instalación]
 
-# Verify setup
-[verification command]
-```
+# Verificar configuración
+[comando de verificación]
+\`\`\`
 
-## Development commands
+## Comandos de desarrollo
 
-| Task | Command |
-|------|---------|
-| Build | `[command]` |
-| Test | `[command]` |
-| Lint | `[command]` |
-| Type check | `[command]` |
+| Tarea       | Comando       |
+|-------------|---------------|
+| Build       | `[comando]`   |
+| Tests       | `[comando]`   |
+| Lint        | `[comando]`   |
+| Tipos       | `[comando]`   |
 
-## Repository structure
+## Estructura del repositorio
 
-```
-[key directories and what they contain]
-```
+\`\`\`
+[directorios clave y qué contienen]
+\`\`\`
 
-## Rules
+## Reglas
 
-- [Specific constraint for this project]
-- [Another constraint]
+- [Restricción específica de este proyecto]
+- [Otra restricción]
 
-## Protected areas
+## Zonas protegidas
 
-Do NOT modify these without explicit instruction:
-- `[path]` — [reason]
+NO modificar sin instrucción explícita:
+- `[ruta]` — [motivo]
 
-## Before finishing a task
+## Antes de terminar una tarea
 
-- [ ] Run tests: `[command]`
-- [ ] Run lint: `[command]`
-- [ ] [Any other check specific to this project]
+- [ ] Ejecutar tests: `[comando]`
+- [ ] Ejecutar lint: `[comando]`
+- [ ] [Cualquier otra comprobación específica del proyecto]
 
-## Known issues and gotchas
+## Problemas conocidos y advertencias
 
-- [Something that trips up agents or newcomers]
+- [Algo que suele confundir a agentes o a personas nuevas]
 ```
 
 ---
 
-## AUDIENCE.md template
+## Plantilla AUDIENCE.md
 
 ```markdown
 # AUDIENCE.md
 
-Who this project is for — and who it's not for.
+Para quién existe este proyecto — y para quién no.
 
-## Primary audience
+## Audiencia principal
 
-[Specific, behavioral description. Example: "Independent developers building side projects
-who want to move fast and have high technical tolerance but low patience for marketing fluff."]
+[Descripción conductual y específica. Ejemplo: "Desarrolladores independientes que construyen
+side projects, con alta tolerancia técnica pero poca paciencia para contenido genérico de IA."]
 
-## What they already know
+## Qué ya saben
 
-- [Assumption 1]
-- [Assumption 2]
+- [Supuesto 1]
+- [Supuesto 2]
 
-## What they're trying to accomplish
+## Qué intentan conseguir
 
-- [Goal 1]
-- [Goal 2]
+- [Objetivo 1]
+- [Objetivo 2]
 
-## Their common objections or fears
+## Sus objeciones o miedos habituales
 
-- [Objection 1]
-- [Objection 2]
+- [Objeción 1]
+- [Objeción 2]
 
-## Language and tone
+## Lenguaje y tono
 
-**Use:** [words, register, style that resonates]  
-**Avoid:** [words, register, style that alienates]
+**Usar:** [palabras, registro, estilo que conecta]
+**Evitar:** [palabras, registro, estilo que aleja]
 
-## Who this is NOT for
+## Quién NO es la audiencia
 
-[Explicit exclusions. This is as important as inclusions.]
+[Exclusiones explícitas. Tan importante como las inclusiones.]
 
-## Unsupported assumptions
+## Supuestos sin validar
 
-<!-- Things we believe about our audience that we haven't validated yet -->
-- [Assumption we're not sure about]
+<!-- Cosas que creemos sobre nuestra audiencia pero que aún no hemos verificado -->
+- [Supuesto sobre el que no estamos seguros]
 ```
 
 ---
 
-## llms.txt template
+## Plantilla llms.txt
 
 ```markdown
-# [Project name]
+# [Nombre del proyecto]
 
-> [One sentence description]
+> [Una frase de descripción]
 
-[2–3 sentences of context: what it does, who uses it, what problem it solves]
+[2–3 frases de contexto: qué hace, quién lo usa, qué problema resuelve]
 
-## Documentation
+## Documentación
 
-- [Most important page](URL): [Why to read this first]
-- [Second most important](URL): [Brief annotation]
-- [API reference](URL): [What it covers]
+- [Página más importante](URL): [Por qué leer esto primero]
+- [Segunda más importante](URL): [Anotación breve]
+- [Referencia de API](URL): [Qué cubre]
 
-## Optional (read if relevant to task)
+## Opcional (leer si es relevante para la tarea)
 
-- [Advanced topic](URL)
-- [Configuration guide](URL)
+- [Tema avanzado](URL)
+- [Guía de configuración](URL)
 
-## Skip
+## Omitir
 
-- [Changelog](URL): Historical only
-- [Archive](URL): Deprecated content
+- [Changelog](URL): Solo histórico
+- [Archivo](URL): Contenido deprecated
 ```
 
 ---
 
-## ADR template
+## Plantilla ADR
 
 ```markdown
-# ADR-[NNN]: [Short title]
+# ADR-[NNN]: [Título corto]
 
-**Date:** YYYY-MM-DD  
-**Status:** [Proposed | Accepted | Deprecated | Superseded by ADR-NNN]
+**Fecha:** AAAA-MM-DD
+**Estado:** [Propuesto | Aceptado | Obsoleto | Reemplazado por ADR-NNN]
 
-## Context
+## Contexto
 
-[What situation or problem led to this decision? What constraints existed?]
+[¿Qué situación o problema llevó a esta decisión? ¿Qué restricciones existían?]
 
-## Decision
+## Decisión
 
-[What was decided? State it clearly and directly.]
+[¿Qué se decidió? Expresarlo de forma clara y directa.]
 
-## Alternatives considered
+## Alternativas consideradas
 
-- **[Alternative A]:** [Why it was considered, why it was rejected]
-- **[Alternative B]:** [Same]
+- **[Alternativa A]:** [Por qué se consideró, por qué se descartó]
+- **[Alternativa B]:** [Igual]
 
-## Consequences
+## Consecuencias
 
-**Positive:**
-- [Benefit]
+**Positivas:**
+- [Beneficio]
 
-**Negative / trade-offs:**
-- [Trade-off or cost]
+**Negativas / compromisos:**
+- [Coste o compromiso]
 
-**Risks:**
-- [Something to watch for]
+**Riesgos:**
+- [Algo a vigilar]
 ```
 
 ---
 
-## SECURITY.md template
+## Plantilla SECURITY.md
 
 ```markdown
-# Security Policy
+# Política de seguridad
 
-## Reporting a vulnerability
+## Reportar una vulnerabilidad
 
-**Do not open a public GitHub issue for security vulnerabilities.**
+**No abrir un issue público de GitHub para vulnerabilidades de seguridad.**
 
-<!-- TODO: Choose one: -->
-Send reports to: [security@yourdomain.com]
-<!-- OR -->
-Use GitHub's private vulnerability reporting: [link to security advisories]
+<!-- TODO: Elegir uno: -->
+Enviar informes a: [security@tudominio.com]
+<!-- O bien -->
+Usar el sistema de reporte privado de GitHub: [enlace a security advisories]
 
-Please include:
-- Description of the vulnerability
-- Steps to reproduce
-- Potential impact
-- Suggested fix (if any)
+Por favor, incluir:
+- Descripción de la vulnerabilidad
+- Pasos para reproducirla
+- Impacto potencial
+- Corrección sugerida (si la hay)
 
-We will acknowledge receipt within [X] business days and aim to resolve
-confirmed vulnerabilities within [Y] days.
+Confirmaremos la recepción en [X] días laborables y buscaremos resolver
+las vulnerabilidades confirmadas en [Y] días.
 
-## Supported versions
+## Versiones con soporte
 
-| Version | Supported |
-|---------|-----------|
-| [x.x.x] | ✅ |
-| [x.x.x] | ❌ |
+| Versión   | Soporte |
+|-----------|---------|
+| [x.x.x]   | ✅      |
+| [x.x.x]   | ❌      |
 
 ## Scope
 
-**In scope:**
-- [What you care about]
+**En scope:**
+- [Qué nos importa]
 
-**Out of scope:**
-- Denial of service attacks
-- Social engineering
-- [Other exclusions]
+**Fuera de scope:**
+- Ataques de denegación de servicio
+- Ingeniería social
+- [Otras exclusiones]
 ```
 
 ---
 
-## DESIGN.md template
+## Plantilla DESIGN.md
 
 ```markdown
 # DESIGN.md
 
-Visual and experience principles for [project name].
+Principios visuales y de experiencia para [nombre del proyecto].
 
-## Core principles
+## Principios fundamentales
 
-1. **[Principle]:** [What it means in practice. Be specific.]
-2. **[Principle]:** [Concrete implication, not a platitude.]
+1. **[Principio]:** [Qué significa en la práctica. Ser específico.]
+2. **[Principio]:** [Implicación concreta, no un tópico.]
 
-## Typography
+## Tipografía
 
-- **Headings:** [Font, weight, size scale]
-- **Body:** [Font, size, line height]
-- **Code:** [Monospace font]
+- **Títulos:** [Fuente, peso, escala de tamaños]
+- **Cuerpo:** [Fuente, tamaño, interlineado]
+- **Código:** [Fuente monoespaciada]
 
 ## Color
 
-| Role | Value | Usage |
-|------|-------|-------|
-| Primary | `#[hex]` | CTAs, key actions |
-| Background | `#[hex]` | Page background |
-| Surface | `#[hex]` | Cards, panels |
-| Text | `#[hex]` | Body text |
-| Danger | `#[hex]` | Errors, destructive actions |
+| Rol         | Valor     | Uso                        |
+|-------------|-----------|----------------------------|
+| Primario    | `#[hex]`  | CTAs, acciones clave       |
+| Fondo       | `#[hex]`  | Fondo de página            |
+| Superficie  | `#[hex]`  | Tarjetas, paneles          |
+| Texto       | `#[hex]`  | Texto de cuerpo            |
+| Peligro     | `#[hex]`  | Errores, acciones destructivas |
 
-<!-- TODO: Link to Figma or design tokens file if it exists -->
+<!-- TODO: Enlazar a Figma o archivo de design tokens si existe -->
 
-## Spacing system
+## Sistema de espaciado
 
-[e.g., 4px base unit. Allowed multiples: 4, 8, 12, 16, 24, 32, 48, 64]
+[ej: unidad base de 4px. Múltiplos permitidos: 4, 8, 12, 16, 24, 32, 48, 64]
 
-## Components
+## Componentes
 
-[Where to find the component library, or list key component conventions]
+[Dónde encontrar la librería de componentes, o lista de convenciones clave]
 
-## Accessibility baseline
+## Accesibilidad mínima
 
-- Minimum contrast ratio: [4.5:1 for text / 3:1 for UI elements]
-- All interactive elements keyboard-navigable
-- [Any other non-negotiables]
+- Ratio de contraste mínimo: [4.5:1 para texto / 3:1 para elementos de UI]
+- Todos los elementos interactivos navegables por teclado
+- [Otras no negociables]
 
-## What to avoid
+## Qué evitar
 
-- [Specific visual anti-pattern for this project]
-- [Another one]
+- [Antipatrón visual específico de este proyecto]
+- [Otro]
 
-## Examples
+## Ejemplos
 
-<!-- If possible, link to screens or components that represent the ideal -->
-- ✅ Good: [description or link]
-- ❌ Avoid: [description or link]
+<!-- Si es posible, enlazar a pantallas o componentes que representen el ideal -->
+- ✅ Bien: [descripción o enlace]
+- ❌ Evitar: [descripción o enlace]
 ```

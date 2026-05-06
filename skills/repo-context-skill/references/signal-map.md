@@ -1,204 +1,204 @@
-# Signal Map — When to recommend each file
+# Mapa de señales — Cuándo recomendar cada archivo
 
-This reference guides the recommendation logic in Step 3 of the skill.
-For each file, the signals that justify it and the signals that argue against it.
+Esta referencia guía la lógica de recomendación del Paso 3 de la skill.
+Para cada archivo: las señales que lo justifican y las que argumentan en contra.
 
 ---
 
 ## README.md
 
-Always assess this first. It's the baseline.
+Evaluar siempre este primero. Es la línea de base.
 
-**Recommend improving if:**
-- It doesn't exist
-- It's outdated (references old setup steps, old tech, old team)
-- It doesn't explain how to install and run the project
-- It's missing contribution guidelines in a team project
+**Recomendar mejorarlo si:**
+- No existe
+- Está desactualizado (referencias a pasos de instalación, tecnología o equipo antiguo)
+- No explica cómo instalar y ejecutar el proyecto
+- Falta guía de contribución en un proyecto de equipo
 
-**Don't create from scratch if:** It already exists and covers the basics. Just note gaps.
+**No crear desde cero si:** Ya existe y cubre lo básico. Solo señalar las carencias.
 
-**Unique role:** This is for humans AND agents. It's the entry point for both.
-A good README reduces the need for some other files.
+**Rol único:** Es para humanos Y para agentes. Es el punto de entrada para ambos.
+Un buen README reduce la necesidad de algunos otros archivos.
 
 ---
 
 ## AGENTS.md
 
-**Recommend (Tier 1) if:**
-- AI agents are actively used to write code, generate files, or automate tasks in the repo
-- The repo has non-obvious setup (specific package manager, pre-commit hooks, test commands)
-- Multiple people or agents work on it and consistency matters
-- There are folders or files that should never be touched by an agent
+**Recomendar (Nivel 1) si:**
+- Se usan agentes de IA activamente para escribir código, generar archivos o automatizar tareas en el repo
+- El repo tiene una configuración no obvia (gestor de paquetes específico, hooks de pre-commit, comandos de test)
+- Varias personas o agentes trabajan en él y la consistencia importa
+- Hay carpetas o archivos que un agente nunca debería tocar
 
-**Recommend (Tier 2) if:**
-- The user plans to use AI agents soon
-- The repo has any CI/CD or automation that an agent could break
+**Recomendar (Nivel 2) si:**
+- El usuario planea usar agentes de IA pronto
+- El repo tiene CI/CD o automatización que un agente podría romper
 
-**Don't recommend if:**
-- It's a solo side project with no agent usage
-- The README already covers all operational context
+**No recomendar si:**
+- Es un side project en solitario sin uso de agentes
+- El README ya cubre todo el contexto operativo
 
-**Key content to generate:**
-- Package manager and exact install command
-- Build, test, lint commands
-- Protected directories/files
-- Commit and PR conventions
-- Known failure modes (e.g., "don't run migrations without backup")
+**Contenido clave a generar:**
+- Gestor de paquetes y comando de instalación exacto
+- Comandos de build, test, lint
+- Directorios/archivos protegidos
+- Convenciones de commits y PRs
+- Fallos conocidos (ej: "no ejecutar migraciones sin backup previo")
 
 ---
 
 ## AUDIENCE.md
 
-**Recommend (Tier 1) if:**
-- The project has user-facing copy, UI, or content
-- AI is used to generate text, landing pages, emails, docs, or onboarding flows
-- The product targets a specific, non-obvious audience
+**Recomendar (Nivel 1) si:**
+- El proyecto tiene copy, UI o contenido orientado a usuarios
+- Se usa IA para generar textos, landing pages, emails, docs o flujos de onboarding
+- El producto se dirige a una audiencia específica y no obvia
 
-**Recommend (Tier 2) if:**
-- There's a marketing site, README aimed at external users, or public docs
-- Multiple contributors write copy with inconsistent tone
+**Recomendar (Nivel 2) si:**
+- Hay un sitio de marketing, README orientado a usuarios externos, o docs públicas
+- Varios colaboradores escriben copy con tono inconsistente
 
-**Don't recommend if:**
-- It's a backend service, CLI, or library with no end-user-facing content
-- It's an internal tool used only by the team building it
-- The audience is "everyone" (this is almost always a sign the file won't be useful)
+**No recomendar si:**
+- Es un servicio de backend, CLI o librería sin contenido orientado a usuarios finales
+- Es una herramienta interna usada solo por el equipo que la construye
+- La audiencia es "todo el mundo" (esto es casi siempre señal de que el archivo no será útil)
 
-**Key content to generate:**
-- Primary audience (specific, behavioral description — not demographics)
-- What they already know and what they don't
-- What they're trying to accomplish
-- What language/tone resonates vs. what to avoid
-- Who is NOT the audience
+**Contenido clave a generar:**
+- Audiencia principal (descripción conductual y específica — no demográfica)
+- Qué saben ya y qué no saben
+- Qué intentan conseguir
+- Qué lenguaje/tono encaja vs. qué evitar
+- Quién NO es la audiencia
 
 ---
 
 ## llms.txt
 
-**Recommend (Tier 1) if:**
-- The project has public-facing documentation spread across multiple pages
-- It's an SDK, API, or library that developers will use with AI assistance
-- The docs site has significant noise (changelogs, archived versions, generated pages)
+**Recomendar (Nivel 1) si:**
+- El proyecto tiene documentación pública repartida en múltiples páginas
+- Es un SDK, API o librería que los developers usarán con asistencia de IA
+- El sitio de docs tiene mucho ruido (changelogs, versiones archivadas, páginas generadas)
 
-**Recommend (Tier 2) if:**
-- It's an open source project with a docs site
+**Recomendar (Nivel 2) si:**
+- Es un proyecto open source con sitio de documentación
 
-**Don't recommend if:**
-- The project is private or internal
-- There are no public docs
-- The entire documentation fits in one or two files (llms.txt would just duplicate them)
+**No recomendar si:**
+- El proyecto es privado o interno
+- No hay docs públicas
+- Toda la documentación cabe en uno o dos archivos (llms.txt solo los duplicaría)
 
-**Key content to generate:**
-- Project name and one-line description
-- Ordered list of most important documentation pages with brief annotations
-- What to skip (changelogs, deprecated content, auto-generated API refs if there's a better entry point)
+**Contenido clave a generar:**
+- Nombre del proyecto y descripción en una línea
+- Lista ordenada de las páginas de documentación más importantes con anotaciones breves
+- Qué omitir (changelogs, contenido deprecated, referencias de API auto-generadas si hay un mejor punto de entrada)
 
 ---
 
 ## OpenAPI
 
-**Recommend (Tier 1) if:**
-- The project exposes HTTP endpoints consumed by other services or by humans
-- AI agents are used to write API clients, tests, or integrations
-- There's no existing API documentation
+**Recomendar (Nivel 1) si:**
+- El proyecto expone endpoints HTTP consumidos por otros servicios o por personas
+- Se usan agentes de IA para escribir clientes de API, tests o integraciones
+- No existe documentación de la API
 
-**Recommend (Tier 2) if:**
-- There's existing API documentation but it's informal (README section, Notion, etc.)
+**Recomendar (Nivel 2) si:**
+- Hay documentación de la API pero es informal (sección en README, Notion, etc.)
 
-**Don't recommend if:**
-- No HTTP API (library, CLI, pure frontend)
-- The API is already documented with OpenAPI
+**No recomendar si:**
+- No hay API HTTP (librería, CLI, frontend puro)
+- La API ya está documentada con OpenAPI
 
-**Note:** Don't generate the full spec — that requires deep knowledge of the codebase.
-Instead, generate the structure and scaffold, and note which endpoints need to be documented.
-If the user has route files available, offer to read them and generate the spec from the code.
+**Nota:** No generar la spec completa — requiere conocimiento profundo del código.
+En su lugar, generar la estructura y el scaffold, e indicar qué endpoints deben documentarse.
+Si el usuario tiene archivos de rutas disponibles, ofrecer leerlos y generar la spec desde el código.
 
 ---
 
 ## ADR (Architecture Decision Records)
 
-**Recommend (Tier 1) if:**
-- The team is more than 2 people
-- The project has been running for 6+ months with meaningful architectural choices
-- There are tech choices that could be questioned by someone new to the project
-- AI agents are used and could propose "improvements" that would reopen closed debates
+**Recomendar (Nivel 1) si:**
+- El equipo tiene más de 2 personas
+- El proyecto lleva 6+ meses con decisiones arquitectónicas con peso propio
+- Hay decisiones técnicas que alguien nuevo podría cuestionar sin el contexto adecuado
+- Se usan agentes de IA que podrían proponer "mejoras" reabriendo debates ya cerrados
 
-**Recommend (Tier 2) if:**
-- Solo project but growing fast, or planning to onboard collaborators
+**Recomendar (Nivel 2) si:**
+- Proyecto en solitario pero creciendo rápido, o con planes de incorporar colaboradores
 
-**Don't recommend if:**
-- New project with no meaningful decisions made yet
-- Solo side project unlikely to be maintained long-term
-- All architectural choices are obvious or conventional
+**No recomendar si:**
+- Proyecto nuevo sin decisiones significativas tomadas aún
+- Side project en solitario con poca probabilidad de mantenerse a largo plazo
+- Todas las decisiones arquitectónicas son obvias o convencionales
 
-**Key content to generate:**
-- ADR template (the standard is: Title, Status, Context, Decision, Consequences)
-- 1–2 example ADRs based on what you know about the project
-- Suggested location: `/docs/adr/` or `/adr/`
+**Contenido clave a generar:**
+- Plantilla ADR (el estándar es: Título, Estado, Contexto, Decisión, Consecuencias)
+- 1–2 ADRs de ejemplo basados en lo que se conoce del proyecto
+- Ubicación sugerida: /docs/adr/ o /adr/
 
 ---
 
 ## SECURITY.md
 
-**Recommend (Tier 1) if:**
-- Open source project (this is expected by the ecosystem)
-- Handles authentication, user data, payments, or other sensitive information
-- Has a public bug bounty or responsible disclosure expectation
+**Recomendar (Nivel 1) si:**
+- Proyecto open source (el ecosistema lo espera)
+- Maneja autenticación, datos de usuarios, pagos u otra información sensible
+- Tiene expectativas de bug bounty o divulgación responsable pública
 
-**Recommend (Tier 2) if:**
-- Internal project with sensitive data or integrations
-- Team project where security incidents should be handled privately, not via public issues
+**Recomendar (Nivel 2) si:**
+- Proyecto interno con datos sensibles o integraciones delicadas
+- Proyecto de equipo donde los incidentes de seguridad deben gestionarse de forma privada, no por issues públicos
 
-**Don't recommend if:**
-- Personal script or side project with no users and no sensitive data
-- Purely static site or documentation project with no attack surface
+**No recomendar si:**
+- Script personal o side project sin usuarios y sin datos sensibles
+- Sitio estático o proyecto de documentación sin superficie de ataque
 
-**Key content to generate:**
-- How to report a vulnerability (private channel: email, security advisory, etc.)
-- What is in scope and out of scope
-- Supported versions (if relevant)
-- Expected response time
+**Contenido clave a generar:**
+- Cómo reportar una vulnerabilidad (canal privado: email, security advisory, etc.)
+- Qué está en scope y qué no
+- Versiones con soporte (si aplica)
+- Tiempo de respuesta esperado
 
 ---
 
 ## DESIGN.md
 
-**Recommend (Tier 1) if:**
-- AI is used to generate UI components, landing pages, emails, or visual content
-- The project has an established design system or brand
-- Inconsistency in visual output is a real problem
+**Recomendar (Nivel 1) si:**
+- Se usa IA para generar componentes de UI, landing pages, emails o contenido visual
+- El proyecto tiene un sistema de diseño o marca establecida
+- La inconsistencia visual es un problema real
 
-**Recommend (Tier 2) if:**
-- There's a frontend but no current AI usage — it may come soon
-- The project has design tokens or a Figma system not yet codified in code
+**Recomendar (Nivel 2) si:**
+- Hay frontend pero sin uso actual de IA — puede llegar pronto
+- El proyecto tiene design tokens o un sistema Figma no codificado aún
 
-**Don't recommend if:**
-- No user-facing UI (backend, CLI, library)
-- The UI is generated 100% from a design system with no custom components
-- No brand guidelines exist and none are planned
+**No recomendar si:**
+- Sin UI orientada a usuarios (backend, CLI, librería)
+- La UI se genera al 100% desde un sistema de diseño sin componentes personalizados
+- No hay guías de marca ni están planeadas
 
-**Key content to generate:**
-- Visual principles (not "make it pretty" — specific things like "dense over spacious", "no decorative illustrations")
-- Color and typography system or reference to where it lives
-- Component conventions
-- Patterns to avoid
-- Accessibility baseline
-- Examples of good vs. bad (even described in words)
+**Contenido clave a generar:**
+- Principios visuales (no "que sea bonito" — cosas concretas como "denso sobre espacioso", "sin ilustraciones decorativas")
+- Sistema de color y tipografía, o referencia a dónde vive
+- Convenciones de componentes
+- Patrones a evitar
+- Baseline de accesibilidad
+- Ejemplos de bien vs. mal (aunque sea descritos con palabras)
 
 ---
 
-## MCP configuration
+## Configuración MCP
 
-**Recommend (Tier 1) if:**
-- The project explicitly uses MCP-compatible agents
-- There are external tools (databases, CRMs, APIs) the agent needs to access
+**Recomendar (Nivel 1) si:**
+- El proyecto usa explícitamente agentes compatibles con MCP
+- Hay herramientas externas (bases de datos, CRMs, APIs) a las que el agente necesita acceder
 
-**Recommend (Tier 2) if:**
-- The project is moving toward agent automation of complex workflows
+**Recomendar (Nivel 2) si:**
+- El proyecto avanza hacia la automatización de flujos complejos con agentes
 
-**Don't recommend if:**
-- No MCP tooling in use or planned
-- The project doesn't need external tool access beyond the codebase itself
+**No recomendar si:**
+- Sin tooling MCP en uso ni planeado
+- El proyecto no necesita acceso a herramientas externas más allá del propio código
 
-**Note:** MCP config is often tool-specific in implementation. Focus on documenting
-*what external tools the project needs access to* and let the user configure the
-specific MCP server format for their toolchain.
+**Nota:** La configuración MCP es a menudo específica de herramienta en su implementación.
+Centrarse en documentar qué herramientas externas necesita el proyecto y dejar que el usuario
+configure el formato concreto del servidor MCP para su toolchain.

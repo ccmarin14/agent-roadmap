@@ -1,152 +1,151 @@
 ---
 name: repo-context-skill
 description: >
-  Analyzes a software project and determines which context files it needs to work well with AI agents.
-  Use this skill whenever a user asks how to prepare their repo for AI, what files to add for agents,
-  how to structure their repository for LLM-assisted development, or wants to create files like
-  AGENTS.md, AUDIENCE.md, llms.txt, ADR, SECURITY.md, DESIGN.md, or OpenAPI specs.
-  Also trigger when a user says their AI agent "doesn't understand the project", "keeps making wrong
-  assumptions", or "needs more context". This skill avoids recommending files blindly — it diagnoses
-  first and recommends only what the project actually needs.
+  Analiza un proyecto de software y determina qué archivos de contexto necesita para funcionar bien
+  con agentes de IA. Usar esta skill cuando el usuario pregunte cómo preparar su repo para IA,
+  qué archivos añadir para agentes, cómo estructurar su repositorio para desarrollo asistido por LLMs,
+  o quiera crear archivos como AGENTS.md, AUDIENCE.md, llms.txt, ADR, SECURITY.md, DESIGN.md
+  o especificaciones OpenAPI. También activar cuando el usuario diga que su agente "no entiende
+  el proyecto", "sigue tomando decisiones incorrectas" o "necesita más contexto". Esta skill evita
+  recomendar archivos a ciegas — diagnostica primero y recomienda solo lo que el proyecto realmente necesita.
 ---
 
-# Repo Context Skill
+# Skill: Contexto de Repositorio
 
-This skill helps users prepare their repository so that AI agents can work in it effectively.
-The goal is NOT to add more documentation for its own sake. The goal is to make implicit context
-explicit — so agents stop guessing and start working correctly.
+Esta skill ayuda a preparar un repositorio para que los agentes de IA puedan trabajar en él con
+eficacia. El objetivo NO es añadir documentación por añadir. El objetivo es hacer explícito el
+contexto implícito, para que los agentes dejen de adivinar y empiecen a trabajar correctamente.
 
-## Core principle
+## Principio fundamental
 
-Context files are investments. Each one takes time to write and maintain. Only recommend files
-where the value clearly outweighs that cost for this specific project.
+Los archivos de contexto son inversiones. Cada uno requiere tiempo para escribirse y mantenerse.
+Solo recomendar archivos donde el valor supera claramente ese coste para este proyecto concreto.
 
 ---
 
-## Step 1: Gather project signals
+## Paso 1: Recopilar señales del proyecto
 
-Before recommending anything, you need to understand the project. If the user has shared
-a repo structure, codebase, or description, extract signals from it. If not, ask.
+Antes de recomendar nada, hay que entender el proyecto. Si el usuario ha compartido la estructura
+del repo, código o una descripción, extraer señales de ahí. Si no, preguntar.
 
-**Do NOT ask all questions at once.** Start with the most diagnostic ones:
+**NO hacer todas las preguntas a la vez.** Empezar por las más diagnósticas:
 
 ```
-1. What kind of project is this? (web app, API, library, CLI, data pipeline, docs site, monorepo, other)
-2. Is it open source or internal/private?
-3. What's its maturity? (new / active development / stable / legacy)
+1. ¿Qué tipo de proyecto es? (web app, API, librería, CLI, pipeline de datos, sitio de docs, monorepo, otro)
+2. ¿Es open source o interno/privado?
+3. ¿Cuál es su madurez? (nuevo / en desarrollo activo / estable / legado)
 ```
 
-Then, based on answers, ask follow-up questions only if needed:
-- Does it have a user-facing product or UI? → signals AUDIENCE.md and DESIGN.md
-- Does it expose HTTP endpoints? → signals OpenAPI
-- Is AI actively used to work on it (write code, generate UI, automate tasks)? → signals AGENTS.md
-- Does it have public documentation? → signals llms.txt
-- Does it handle sensitive data or have security considerations? → signals SECURITY.md
-- Has the team made non-obvious architectural decisions that could be revisited? → signals ADR
+Luego, según las respuestas, hacer preguntas de seguimiento solo si hacen falta:
+- ¿Tiene un producto o UI orientado a usuarios? → señala AUDIENCE.md y DESIGN.md
+- ¿Expone endpoints HTTP? → señala OpenAPI
+- ¿Se usa IA activamente para trabajar en él (escribir código, generar UI, automatizar tareas)? → señala AGENTS.md
+- ¿Tiene documentación pública? → señala llms.txt
+- ¿Maneja datos sensibles o tiene consideraciones de seguridad? → señala SECURITY.md
+- ¿El equipo ha tomado decisiones arquitectónicas no obvias que podrían reabrirse? → señala ADR
 
-If the user can share the repo structure (even just `ls` or a tree output), that's faster than
-asking all of these. Parse it for clues: presence of API routes, UI components, docs folders,
-existing markdown files, config files, etc.
-
----
-
-## Step 2: Classify the project
-
-Map gathered signals to a project profile. See `references/signal-map.md` for the full decision
-logic. Here's the high-level classification:
-
-**Size/maturity axis:**
-- `solo-small`: one person, side project or early prototype
-- `solo-growing`: one person, but becoming real (users, complexity, longevity)
-- `team`: multiple contributors, shared codebase
-- `product`: has users, brand, design system, or public documentation
-
-**Type axis:**
-- `backend-only`: APIs, services, data pipelines — no user-facing UI
-- `frontend`: web/mobile UI, design-driven
-- `fullstack`: both
-- `library`: imported by other projects, no UI
-- `cli`: terminal tools
-- `docs`: documentation sites, wikis
-
-**Visibility axis:**
-- `public`: open source or public-facing
-- `private`: internal or personal
-
-These three axes together determine which files make sense. A `solo-small / cli / private`
-project needs almost nothing. A `team / fullstack / public` project may need all of them.
+Si el usuario puede compartir la estructura del repo (aunque sea un `ls` o `tree`), es más rápido
+que preguntar todo. Buscar pistas: rutas de API, componentes de UI, carpetas de docs, archivos
+markdown existentes, archivos de configuración, etc.
 
 ---
 
-## Step 3: Recommend files
+## Paso 2: Clasificar el proyecto
 
-Using the classification, recommend files in three tiers:
+Mapear las señales a un perfil de proyecto. Ver `references/signal-map.md` para la lógica
+completa de decisión. Clasificación de alto nivel:
 
-### Tier 1 — Essential
-These should be created or improved immediately. They have the most impact.
+**Eje tamaño/madurez:**
+- `solo-pequeño`: una persona, side project o prototipo inicial
+- `solo-creciendo`: una persona, pero volviéndose real (usuarios, complejidad, longevidad)
+- `equipo`: varios colaboradores, codebase compartido
+- `producto`: tiene usuarios, marca, sistema de diseño o documentación pública
 
-### Tier 2 — Recommended
-These add real value for this project. Worth doing soon.
+**Eje tipo:**
+- `solo-backend`: APIs, servicios, pipelines de datos — sin UI orientada a usuarios
+- `frontend`: UI web/móvil, orientado a diseño
+- `fullstack`: ambos
+- `librería`: importada por otros proyectos, sin UI
+- `cli`: herramientas de terminal
+- `docs`: sitios de documentación, wikis
 
-### Tier 3 — Optional / Later
-These could help, but the cost/benefit is marginal for this project right now.
-Be honest when a file is not worth it.
+**Eje visibilidad:**
+- `público`: open source o de cara al exterior
+- `privado`: interno o personal
 
-### Files out of scope
-Always explicitly state which files from the framework are NOT needed and why.
-This prevents cargo-cult documentation.
-
----
-
-## Step 4: Generate the files
-
-For each Tier 1 (and Tier 2 if the user wants them), generate a working first draft.
-
-Do not generate placeholder lorem ipsum. Generate real, specific content based on
-what you know about the project. If you don't have enough information for a section,
-leave a clearly marked `<!-- TODO: [specific question] -->` comment so the user knows
-exactly what to fill in.
-
-Use the file templates in `references/file-templates.md` as starting points.
-Adapt them — never copy them verbatim.
+Los tres ejes juntos determinan qué archivos tienen sentido. Un proyecto `solo-pequeño / cli / privado`
+necesita casi nada. Un proyecto `equipo / fullstack / público` puede necesitarlos todos.
 
 ---
 
-## Output format
+## Paso 3: Recomendar archivos
 
-Structure your response like this:
+Usando la clasificación, recomendar archivos en tres niveles:
+
+### Nivel 1 — Esencial
+Deben crearse o mejorarse de inmediato. Tienen el mayor impacto.
+
+### Nivel 2 — Recomendado
+Aportan valor real para este proyecto. Vale la pena hacerlos pronto.
+
+### Nivel 3 — Opcional / Más adelante
+Podrían ayudar, pero la relación coste/beneficio es marginal para este proyecto ahora mismo.
+Ser honesto cuando un archivo no merece la pena.
+
+### Archivos fuera de scope
+Indicar siempre explícitamente qué archivos del framework NO se necesitan y por qué.
+Esto evita documentación por inercia.
+
+---
+
+## Paso 4: Generar los archivos
+
+Para cada archivo de Nivel 1 (y Nivel 2 si el usuario lo pide), generar un primer borrador funcional.
+
+No generar lorem ipsum ni placeholders vacíos. Generar contenido real y específico basado en lo que
+se sabe del proyecto. Si falta información para una sección, dejar un comentario claramente marcado
+`<!-- TODO: [pregunta específica] -->` para que el usuario sepa exactamente qué completar.
+
+Usar las plantillas de `references/file-templates.md` como punto de partida.
+Adaptarlas — nunca copiarlas literalmente.
+
+---
+
+## Formato de respuesta
+
+Estructurar la respuesta así:
 
 ```
-## Project diagnosis
-[2–3 sentences summarizing the project profile and why it matters for context files]
+## Diagnóstico del proyecto
+[2–3 frases resumiendo el perfil del proyecto y por qué importa para los archivos de contexto]
 
-## What this project needs
+## Qué necesita este proyecto
 
-### ✅ Essential
-- **FILENAME.md** — [one sentence on why, specific to this project]
+### ✅ Esencial
+- **ARCHIVO.md** — [una frase sobre por qué, específica a este proyecto]
 
-### 📋 Recommended  
-- **FILENAME.md** — [one sentence on why]
+### 📋 Recomendado
+- **ARCHIVO.md** — [una frase sobre por qué]
 
-### 💡 Optional
-- **FILENAME.md** — [one sentence on why, and when it would become worth it]
+### 💡 Opcional
+- **ARCHIVO.md** — [una frase sobre por qué, y cuándo pasaría a merecer la pena]
 
-### ❌ Not needed
-- **FILENAME** — [brief reason]
+### ❌ No necesario
+- **ARCHIVO** — [razón breve]
 
 ---
 
-## Draft files
+## Borradores
 
-[Generated content for each Essential file, then Recommended if requested]
+[Contenido generado para cada archivo Esencial, luego Recomendado si se solicita]
 ```
 
 ---
 
-## Anti-patterns to avoid
+## Antipatrones a evitar
 
-- **Do not recommend all files to all projects.** A script someone runs locally does not need SECURITY.md, AUDIENCE.md, or llms.txt.
-- **Do not generate generic boilerplate.** An AGENTS.md that says "run tests before committing" without knowing the test command is worse than no file — it wastes the agent's attention on noise.
-- **Do not conflate tool-specific files with universal context.** Files like `.cursor/rules`, `CLAUDE.md`, or Copilot instructions are tool-specific and outside the scope of this skill. Focus only on tool-agnostic context files that any agent can use.
-- **Do not recommend ADRs where there are no decisions to record.** New projects without architectural choices yet don't need ADR infrastructure.
-- **Do not create maintenance burden without proportional value.** Every file you recommend will need to be kept up to date.
+- **No recomendar todos los archivos a todos los proyectos.** Un script que alguien ejecuta en local no necesita SECURITY.md, AUDIENCE.md ni llms.txt.
+- **No generar boilerplate genérico.** Un AGENTS.md que dice "ejecuta los tests antes de hacer commit" sin saber el comando concreto es peor que no tener nada — malgasta la atención del agente en ruido.
+- **No confundir archivos específicos de herramienta con contexto universal.** Archivos como `.cursor/rules`, `CLAUDE.md` o instrucciones de Copilot son específicos de herramienta y están fuera del scope de esta skill. Centrarse solo en archivos de contexto agnósticos que cualquier agente pueda usar.
+- **No recomendar ADRs donde no hay decisiones que registrar.** Proyectos nuevos sin decisiones arquitectónicas aún no necesitan infraestructura ADR.
+- **No crear carga de mantenimiento sin valor proporcional.** Cada archivo recomendado deberá mantenerse actualizado.
