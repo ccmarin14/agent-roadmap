@@ -1,0 +1,133 @@
+# llms.txt - Agent Forge & AI Toolkit
+
+Contexto estructurado para LLMs que interactúan con este repositorio.
+Este archivo describe la estructura pública y los módulos accesibles del proyecto.
+
+---
+
+## Project Summary
+agent_kit es un repositorio que contiene una aplicación web educativa (roadmap) y módulos de herramientas para agentes IA (skills, prompts, agents, MCP).
+
+---
+
+## Repository Structure
+
+```
+agent_kit/
+├── roadmap/              # Aplicación web React + TypeScript (Roadmap educativo)
+│   └── src/
+│       ├── data/        # Contenido: levels, quizzes, exams
+│       ├── components/  # Componentes React
+│       ├── hooks/       # Custom hooks (useProgress, useAuth)
+│       ├── lib/         # Supabase client
+│       ├── pages/       # AdminDashboard
+│       ├── utils/       # unlockLogic, quizHelpers
+│       ├── types.ts     # TypeScript interfaces
+│       ├── theme.ts     # Design tokens (colores)
+│       └── config.ts    # Variables de entorno
+│
+├── skills/              # Skills para agentes IA
+│   ├── skill-builder/
+│   ├── feature-docs/
+│   └── code-review/
+│
+├── prompts/             # Librería de prompts reutilizables
+├── agents/              # Configuraciones de agentes especializados
+├── mcp/                 # Documentación de servidores MCP
+├── .agents/             # Configuración local de agentes (no versionado)
+│
+├── AGENTS.md            # Guía para agentes IA trabajando en el repo
+├── SECURITY.md          # Guía de seguridad y manejo de secretos
+├── AUDIENCE.md          # Definición de audiencias por módulo
+├── DESIGN.md            # Sistema de diseño del roadmap
+└── README.md            # Descripción general del proyecto
+```
+
+---
+
+## Module Descriptions
+
+### Roadmap (roadmap/)
+- **Stack**: React 18, TypeScript 5, Vite 5, Tailwind CSS v4, Supabase, Recharts
+- **Props**: Educational roadmap with quizzes, exams, and progress tracking
+- **Users**: Students (guests + authenticated), Admins
+- **Key files**: `types.ts`, `theme.ts`, `data/` (levels, quizzes, exams)
+
+### Skills (skills/)
+- **Structure**: Each skill has `SKILL.md`, optional `references/`, optional `scripts/`
+- **Installed skills**: skill-builder, feature-docs, code-review, repo-context-skill
+- **Format**: Markdown for docs, `.ts`/`.ps1` for scripts
+
+### Prompts (prompts/)
+- **Format**: `.md` for text prompts, `.json` for structured prompts
+- **Usage**: Reusable prompts for AI agents
+
+### Agents (agents/)
+- **Format**: JSON configurations for specialized agents
+- **Note**: Private agent configs may not be in public parts of repo
+
+### MCP (mcp/)
+- **Format**: Markdown for docs, JSON for server configs
+- **Purpose**: Model Context Protocol server documentation
+
+---
+
+## Conventions Quick Reference
+
+### Roadmap
+- **Extensions**: `.ts` (logic), `.tsx` (React components)
+- **Imports**: Named exports, no extensions, order: React → Libs → Data → Components → Utils
+- **Naming**: `PascalCase` (components/types), `camelCase` (functions), `UPPER_SNAKE` (constants)
+- **TypeScript**: No `any`, types in `types.ts`, `readonly` for immutable arrays
+- **Styles**: Tailwind CSS + tokens from `theme.ts`
+
+### Agent Tooling
+- **Skills**: `SKILL.md` required, references and scripts optional
+- **Prompts**: `.md` or `.json` format
+- **Agents**: JSON configs
+- **MCP**: Markdown docs + JSON configs
+
+---
+
+## Key Rules for LLMs
+
+1. **Don't break persistence** — Changes to `roadmap/src/data/` structure invalidate saved progress
+2. **No `any` type** — Define proper types in `types.ts`
+3. **Don't add libraries** without justification
+4. **Maintain backward compatibility** — Changes to skills/prompts/agents must not break existing agents
+5. **No secrets in public parts** — Credentials stay in `.env`, private configs in `.agents/`
+6. **Update docs on change** — Keep `mcp/` and `prompts/` docs current
+
+---
+
+## Environment Variables (Roadmap)
+
+```env
+VITE_SUPABASE_URL=         # Supabase project URL
+VITE_SUPABASE_KEY=         # Supabase anon key (public but don't expose unnecessarily)
+VITE_ALLOW_GUESTS=true     # Enable guest access
+VITE_EXAMS_FOR_USERS=true  # Enable exams for authenticated users
+VITE_EXAMS_FOR_GUESTS=true # Enable exams for guests
+VITE_ADMIN_PASSWORD=       # Admin dashboard password (NEVER in public repos)
+```
+
+---
+
+## Common Commands
+
+```bash
+# Roadmap development
+cd roadmap && npm run dev      # Start dev server
+cd roadmap && npm run build    # Production build
+npx vitest run path/to/test   # Run tests
+```
+
+---
+
+## Notes for AI Agents
+
+- This repo has **mixed visibility** (public + private parts)
+- When generating code for `roadmap/`, follow the strict TypeScript and style conventions
+- When working with `skills/`, maintain compatibility with existing skill consumers
+- Check `AGENTS.md` for detailed guidelines before making changes
+- Respect `.gitignore` and never commit secrets or `.env` files with real values

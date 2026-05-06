@@ -10,9 +10,14 @@ Kit para trabajar con agentes de IA en equipos de desarrollo.
 agent-kit/
 ├── roadmap/          # App interactiva de aprendizaje (React + Vite)
 ├── mcp/              # Documentación de servidores MCP
-├── skills/           # Plantilla para skills del equipo
-├── agents/           # Plantilla para agentes especializados
-└── prompts/         # Plantilla para librería de prompts
+├── skills/           # Skills del equipo para agentes IA
+├── agents/           # Configuraciones de agentes especializados
+├── prompts/          # Librería de prompts reutilizables
+├── AGENTS.md         # Guía para agentes IA
+├── SECURITY.md       # Guía de seguridad
+├── AUDIENCE.md       # Definición de audiencias
+├── llms.txt          # Contexto para LLMs
+└── DESIGN.md         # Sistema de diseño del roadmap
 ```
 
 ---
@@ -55,55 +60,15 @@ Abre `http://localhost:5173`.
 
 ---
 
-## mcp
+## Documentación para Agentes IA
 
-Documentación de servidores MCP disponibles para usar en proyectos.
+Este repositorio incluye documentación especializada para que agentes de IA puedan trabajar efectivamente en el proyecto:
 
-Cada archivo es una guía de configuración y uso para un servidor específico.
-
-→ Ver [mcp/README.md](./mcp/README.md)
-
----
-
-## skills
-
-Skills personalizados que reflejan las decisiones y patrones del equipo.
-
-La carpeta contiene la estructura y plantillas para crear skills. Los skills se copian manualmente a cada proyecto.
-
-→ Ver [skills/README.md](./skills/README.md)
-
----
-
-## agents
-
-Configuraciones de agentes especializados organizados por tipo de tarea.
-
-La carpeta contiene la estructura y plantillas para definir agentes. Cada agente incluye su propio AGENT.md con instrucciones, herramientas disponibles y workflow.
-
-→ Ver [agents/README.md](./agents/README.md)
-
----
-
-## prompts
-
-Librería de prompts documentados por tipo de tarea: features, debugging, code review, refactor, generación de tests, migraciones, documentación.
-
-La carpeta contiene la estructura y plantillas para crear prompts.
-
-→ Ver [prompts/README.md](./prompts/README.md)
-
----
-
-## Por dónde empezar
-
-Si eres nuevo en el equipo o en el trabajo con agentes, empieza por el roadmap:
-
-```bash
-cd roadmap
-npm install
-npm run dev
-```
+- **[AGENTS.md](./AGENTS.md)** — Guía completa para agentes IA (convenciones, reglas, estructura de módulos)
+- **[SECURITY.md](./SECURITY.md)** — Manejo de secretos, visibilidad mixta y consideraciones de seguridad
+- **[AUDIENCE.md](./AUDIENCE.md)** — Definición de audiencias por módulo (usuarios finales, desarrolladores, agentes IA)
+- **[llms.txt](./llms.txt)** — Contexto estructurado para LLMs que interactúan con el repositorio
+- **[DESIGN.md](./DESIGN.md)** — Sistema de diseño del roadmap (tokens de color, patrones UI)
 
 ---
 

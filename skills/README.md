@@ -182,6 +182,7 @@ Más instrucciones...
 |-------|-------------|------------|
 | [code-review](./code-review/) | Análisis exhaustivo de código: bugs, seguridad, performance, arquitectura | Standard |
 | [feature-docs](./feature-docs/) | Documentar features del proyecto | Standard |
+| [repo-context-skill](./repo-context-skill/) | Analiza el repo y determina qué archivos de contexto necesita para trabajar con IA | Standard |
 | [skill-builder](./skill-builder/) | Wizard para crear nuevas skills | Standard |
 
 ---

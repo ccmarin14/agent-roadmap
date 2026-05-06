@@ -11,3 +11,6 @@ roadmap/.env.*.local
 .env
 .env.local
 .env.*.local
+
+#IA
+.agents/
