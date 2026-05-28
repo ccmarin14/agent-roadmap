@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS public.admins (
   created_at timestamptz default now()
 );
 
+ALTER TABLE public.admins ENABLE ROW LEVEL SECURITY;
+
 -- 3. Create is_admin function
 CREATE OR REPLACE FUNCTION public.is_admin()
 RETURNS boolean
