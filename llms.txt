@@ -29,7 +29,9 @@ agent_kit/
 ├── skills/              # Skills para agentes IA
 │   ├── skill-builder/
 │   ├── feature-docs/
-│   └── code-review/
+│   ├── feature-workflow/
+│   ├── code-review/
+│   └── repo-context-skill/
 │
 ├── prompts/             # Librería de prompts reutilizables
 ├── agents/              # Configuraciones de agentes especializados
@@ -54,8 +56,9 @@ agent_kit/
 - **Key files**: `types.ts`, `theme.ts`, `data/` (levels, quizzes, exams)
 
 ### Skills (skills/)
-- **Structure**: Each skill has `SKILL.md`, optional `references/`, optional `scripts/`
-- **Installed skills**: skill-builder, feature-docs, code-review, repo-context-skill
+- **Structure**: Each skill has `SKILL.md`, optional `references/`, optional `scripts/`. Workflow skills add `WORKFLOW.md`, `templates/` and `reference/`.
+- **Installed skills**: skill-builder, feature-docs, feature-workflow, code-review, repo-context-skill
+- **feature-workflow**: Explicit invocation only — `feature-workflow spec` (requirement → WIP artifacts in `docs/_wip/{slug}/`) or `feature-workflow implement` (build from WIP slug). See `skills/feature-workflow/README.md`.
 - **Format**: Markdown for docs, `.ts`/`.ps1` for scripts
 
 ### Prompts (prompts/)

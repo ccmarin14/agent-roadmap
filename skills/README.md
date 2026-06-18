@@ -38,7 +38,21 @@ skill-name/
     └── validate.sh
 ```
 
+### Workflow (Flujo multi-fase)
+Para skills que guían procesos con gates de aprobación, plantillas y artefactos.
+```
+skill-name/
+├── SKILL.md
+├── WORKFLOW.md
+├── README.md
+├── templates/
+│   └── ...
+└── reference/
+    └── ...
+```
+
 ---
+
 
 ## Plantilla de SKILL.md
 
@@ -182,6 +196,7 @@ Más instrucciones...
 |-------|-------------|------------|
 | [code-review](./code-review/) | Análisis exhaustivo de código: bugs, seguridad, performance, arquitectura | Standard |
 | [feature-docs](./feature-docs/) | Documentar features del proyecto | Standard |
+| [feature-workflow](./feature-workflow/) | Especificar e implementar features con gates de aprobación, artefactos WIP y fases controladas | Workflow |
 | [repo-context-skill](./repo-context-skill/) | Analiza el repo y determina qué archivos de contexto necesita para trabajar con IA | Standard |
 | [skill-builder](./skill-builder/) | Wizard para crear nuevas skills | Standard |
 

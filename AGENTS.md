@@ -80,13 +80,20 @@ VITE_ADMIN_PASSWORD=
 Estos módulos siguen convenciones independientes de la aplicación web:
 
 #### skills/
-Skills del equipo (skill-builder, feature-docs, code-review, repo-context-skill) que siguen la estructura:
+Skills del equipo (skill-builder, feature-docs, feature-workflow, code-review, repo-context-skill) que siguen la estructura:
 ```
 skills/<skill-name>/
 ├── SKILL.md        # Instrucciones completas de la skill
 ├── references/     # Archivos de referencia (opcional)
+├── reference/      # Checklists y gates (opcional, p. ej. feature-workflow)
+├── templates/      # Plantillas de artefactos (opcional, p. ej. feature-workflow)
+├── WORKFLOW.md     # Flujo canónico multi-fase (opcional)
 └── scripts/        # Scripts auxiliares (opcional)
 ```
+
+**feature-workflow** — invocación explícita: `feature-workflow spec` (especificación) o
+`feature-workflow implement` (implementación desde `docs/_wip/{slug}/`). Ver
+[skills/feature-workflow/README.md](skills/feature-workflow/README.md).
 - Convenciones: SKILL.md usa Markdown, scripts usan `.ts`/`.ps1` según corresponda
 - Regla: No modificar skills existentes sin mantener compatibilidad con agentes que las usan
 

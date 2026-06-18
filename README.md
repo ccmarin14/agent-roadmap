@@ -28,7 +28,7 @@ agent-kit/
 |--------|--------|-------------|
 | roadmap | ✅ Listo | App React con 4 niveles de aprendizaje |
 | mcp | ✅ Listo | Documentación de servidores |
-| skills | ✅ Listo | Skills personalizados |
+| skills | ✅ Listo | Skills personalizados (ver [skills/README.md](./skills/README.md)) |
 | agents | 🔄 Plantilla | Estructura lista, sin agentes |
 | prompts | 🔄 Plantilla | Estructura lista, sin prompts |
 
@@ -77,7 +77,7 @@ Este repositorio incluye documentación especializada para que agentes de IA pue
 Agregar nuevo contenido:
 
 - **mcp**: Crear un archivo `.md` con la documentación del servidor
-- **skills**: Crear una carpeta con `SKILL.md` y recursos
+- **skills**: Crear una carpeta con `SKILL.md` y recursos — ver [skills/README.md](./skills/README.md) para catálogo y plantillas
 - **agents**: Crear una carpeta con `AGENT.md` y configuración
 - **prompts**: Crear un archivo `.md` con la plantilla de prompt
 

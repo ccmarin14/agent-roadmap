@@ -163,3 +163,5 @@ Mostrar al usuario:
 - **Detecta stack primero**: Usa find/grep para identificar tecnología
 - **Genera contenido real**: Basado en el código existente
 - **Actualiza siempre el índice**: Para que los docs no queden huérfanos
+- **Flujo previo**: Para especificar e implementar antes de documentar, usar
+  [feature-workflow](../feature-workflow/) (`feature-workflow spec` / `implement`)
