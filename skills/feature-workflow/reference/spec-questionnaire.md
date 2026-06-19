@@ -4,6 +4,10 @@ Antes de crear **cualquier archivo** en `docs/_wip/`, el agente debe cubrir las
 categorías aplicables al requerimiento. Usar `AskQuestion` cuando la plataforma
 lo permita.
 
+En modo **`issue`**, la Issue del usuario **pre-llena** ítems del cuestionario;
+igual hay que completar **A–H** y las rondas mínimas (ver
+[issue-import-checklist.md](issue-import-checklist.md)).
+
 ## Reglas
 
 1. **Mínimo dos rondas temáticas** de preguntas, salvo requerimiento ya

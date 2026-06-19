@@ -3,8 +3,6 @@
 Skill portable para especificar e implementar features con aprobación humana en
 cada fase. Funciona en **Cursor** y **OpenCode** con el mismo paquete.
 
-Parte del catálogo del repositorio: ver [skills/README.md](../README.md).
-
 ## Instalación
 
 ### Cursor (personal)
@@ -41,6 +39,9 @@ Invocación **explícita** (no auto-descubrimiento):
 feature-workflow spec
 <requerimiento>
 
+feature-workflow issue
+<issue-pegada-o-ruta-a-archivo.md>
+
 feature-workflow implement
 <slug-o-ruta-wip>
 ```
@@ -48,6 +49,7 @@ feature-workflow implement
 Ejemplos:
 
 - «Usa feature-workflow spec: el modal debe mostrar X y Y siempre visibles»
+- «feature-workflow issue docs/borrador-mi-feature.md»
 - «feature-workflow implement ayuda-expresion-modal»
 
 ## Artefactos en el repo
@@ -80,10 +82,22 @@ feature-workflow/
 ├── WORKFLOW.md           # Flujo canónico
 ├── README.md             # Este archivo
 ├── templates/            # Plantillas genéricas
-└── reference/            # Descubrimiento, cuestionario spec y fases
+└── reference/            # Descubrimiento, cuestionario, import issue y fases
 ```
 
-## Modo spec: no ir demasiado rápido
+## Tres modos de entrada
+
+| Modo | Comando | Cuándo |
+|------|---------|--------|
+| **spec** | `feature-workflow spec` | Requerimiento desde cero |
+| **issue** | `feature-workflow issue` | Ya tienes la Issue (texto o archivo) |
+| **implement** | `feature-workflow implement` | WIP con `PROMPT.md` listo |
+
+En modo **issue**, el `SPEC.md` tiene la **misma función** que en `spec`; el
+cuestionario **A–H** se mantiene completo (la Issue solo pre-llena ítems).
+Ver [reference/issue-import-checklist.md](reference/issue-import-checklist.md).
+
+## Modo spec / issue: no ir demasiado rápido
 
 Antes de crear `docs/_wip/`, el agente debe:
 
@@ -113,5 +127,5 @@ permanezcan en el repo.
 ## Requisitos
 
 - Agente con acceso al repositorio y herramientas de edición.
-- `AskQuestion` recomendado en modo spec (si la plataforma lo soporta).
+- `AskQuestion` recomendado en modos `spec` e `issue` (si la plataforma lo soporta).
 - OpenCode: versión reciente con soporte de skills en `~/.agents/skills/`.

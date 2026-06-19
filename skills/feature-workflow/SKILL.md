@@ -3,8 +3,9 @@ name: feature-workflow
 description: >-
   Guía un flujo de especificación e implementación de features con gates de
   aprobación humana, artefactos en docs/_wip/ y fases sin tests hasta revisión.
-  Usar cuando el usuario invoque feature-workflow spec o feature-workflow implement,
-  o pida especificar/implementar una feature con paradas entre fases.
+  Usar cuando el usuario invoque feature-workflow spec, feature-workflow issue,
+  feature-workflow implement, o pida especificar/implementar una feature con
+  paradas entre fases.
 disable-model-invocation: true
 ---
 
@@ -18,6 +19,7 @@ cerrada con aprobación explícita del usuario en cada fase.
 | Modo | Cómo invocar | Entrada |
 |------|--------------|---------|
 | **Especificación** | `feature-workflow spec` | Requerimiento del usuario (texto libre) |
+| **Issue importada** | `feature-workflow issue` | Issue pegada en chat o ruta a archivo `.md` |
 | **Implementación** | `feature-workflow implement` | Slug WIP o ruta a `docs/_wip/{slug}/` |
 
 Lee [WORKFLOW.md](WORKFLOW.md) como fuente canónica. Usa plantillas en
@@ -73,7 +75,7 @@ Resumen:
 1. Descubrimiento del repo.
 2. Preguntas al usuario en **rondas temáticas** (mínimo 2 si aplica UI/API);
    usar `AskQuestion` cuando exista.
-3. **S1.5** — Completar cuestionario (categorías A–G: Cerrada / N/A / Diferida).
+3. **S1.5** — Completar cuestionario (categorías A–H: Cerrada / N/A / Diferida).
 4. Proponer **1 vs N historias** con justificación; usuario confirma.
 5. **S2.5 Gate pre-SPEC** — tabla de cobertura + OK explícito **antes** de escribir archivos.
 6. Crear `SPEC.md` desde [templates/SPEC.md](templates/SPEC.md).
@@ -81,6 +83,27 @@ Resumen:
    y `PROMPT.md` desde sus plantillas.
 8. Iniciar `USER_SUMMARY.md`.
 9. **STOP** — OK del usuario antes de implementar.
+
+## Modo Issue importada (`issue`)
+
+Seguir [WORKFLOW.md § Issue](WORKFLOW.md#modo-issue-importada-issue) y
+[reference/issue-import-checklist.md](reference/issue-import-checklist.md).
+
+Alternativa a `spec` cuando el usuario **ya tiene una Issue** (gestor, documento,
+chat). El `SPEC.md` conserva **la misma plantilla y rol** que en `spec`.
+
+Resumen:
+
+1. Recibir Issue (**texto pegado** o **ruta a archivo**).
+2. **Preguntar nombre del desarrollador** (obligatorio).
+3. Descubrimiento del repo + patrones análogos.
+4. Mapear la Issue al cuestionario **A–H** (ítems cubiertos → Cerrada; huecos → preguntas).
+5. Rondas de preguntas hasta completar cuestionario (**mínimo 2** si aplica UI/API).
+6. Proponer **1 vs N** historias; usuario confirma.
+7. **Gate pre-WIP** — tabla de cobertura + OK explícito **antes** de crear archivos.
+8. Crear `SPEC.md` (importación + decisiones), `ISSUE.md` (formato usuario, sincronizada con SPEC),
+   `PROMPT.md`, `USER_SUMMARY.md`.
+9. **STOP** — OK del usuario antes de `implement`.
 
 ## Modo Implementación (`implement`)
 
@@ -116,8 +139,6 @@ Resumen:
 - No duplicar la Issue entera en el repo.
 - No actualizar `SPEC.md` como doc permanente; actualizar docs de producto del
   proyecto si el comportamiento visible cambió.
-- Para generar documentación permanente en `docs/`, usar la skill
-  [feature-docs](../feature-docs/) cuando corresponda.
 
 ## Recursos
 
@@ -133,5 +154,6 @@ Resumen:
 | [reference/discovery-checklist.md](reference/discovery-checklist.md) | Descubrimiento por repo |
 | [reference/spec-questionnaire.md](reference/spec-questionnaire.md) | Cuestionario obligatorio antes del SPEC |
 | [reference/reuse-patterns-checklist.md](reference/reuse-patterns-checklist.md) | Patrones existentes a reutilizar |
+| [reference/issue-import-checklist.md](reference/issue-import-checklist.md) | Modo `issue`: Issue pegada o archivo |
 | [reference/phase-gates.md](reference/phase-gates.md) | Fases 1–6 detalladas |
 | [README.md](README.md) | Instalación e invocación |

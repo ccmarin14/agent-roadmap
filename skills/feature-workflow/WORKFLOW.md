@@ -88,7 +88,7 @@ o en borrador interno antes de crear archivos:
 
 Antes de historias de usuario o SPEC:
 
-1. Recorrer las categorías obligatorias en `spec-questionnaire.md` (A–G).
+1. Recorrer las categorías obligatorias en `spec-questionnaire.md` (A–H).
 2. Marcar cada ítem: **Cerrada**, **N/A** o **Diferida** (esta última solo con OK
    explícito del usuario).
 3. Si faltan categorías obligatorias aplicables → **otra ronda de preguntas** (volver a S1).
@@ -190,6 +190,80 @@ Usar [templates/USER_SUMMARY.md](templates/USER_SUMMARY.md):
 
 ---
 
+## Modo Issue importada (`issue`)
+
+### Entrada
+
+- Issue del usuario **pegada en el chat** tras `feature-workflow issue`, o
+- **Ruta a archivo** (relativa al repo o absoluta), p. ej.
+  `feature-workflow issue docs/mi-issue.md`.
+
+Alternativa a `spec` cuando ya existe una Issue redactada. El siguiente paso sigue
+siendo `feature-workflow implement`.
+
+Seguir [reference/issue-import-checklist.md](reference/issue-import-checklist.md).
+
+### Pasos
+
+#### I0 — Recibir la Issue
+
+1. Cargar texto completo (pegar o leer archivo).
+2. Analizar secciones y mapear al formato estándar de Issue (📌 🎯 ✅ 🛠️ 🧪 📎).
+3. **Preguntar siempre** el nombre del desarrollador para el título
+   `# {NOMBRE DESARROLLADOR} - {Título}`.
+
+#### I1 — Slug WIP
+
+- Proponer `{feature-slug}` (kebab-case del título); el usuario **confirma**
+  (misma regla que en `spec`).
+
+#### I2 — Descubrimiento
+
+Igual que **S0** del modo `spec` (checklists de descubrimiento y patrones).
+
+#### I3 — Mapeo al cuestionario
+
+- Marcar en borrador qué ítems **A–H** cubre la Issue (**Cerrada** / **N/A** / abierto).
+- La Issue **no sustituye** el cuestionario ni las rondas mínimas.
+
+#### I4 — Preguntas por huecos
+
+- Mismas reglas que **S1** y **S1.5**: rondas temáticas, mínimo 2 si UI/API,
+  `AskQuestion` cuando exista, patrones del repo.
+- Cerrar todas las categorías obligatorias aplicables.
+
+#### I5 — Historias de usuario
+
+Igual que **S2** (proponer 1 vs N; usuario confirma).
+
+#### I6 — Gate pre-WIP
+
+Igual que **S2.5**: tabla de cobertura + OK explícito **antes** de crear
+`docs/_wip/{slug}/`.
+
+#### I7 — Redactar SPEC.md
+
+Igual que **S3**: **misma plantilla**, mismo rol. En «Cómo se construyó» documentar
+**importación desde Issue** + rondas para huecos. Las decisiones de negocio viven
+solo aquí.
+
+#### I8 — Redactar ISSUE.md
+
+- Basarse en la Issue importada; normalizar al formato de [templates/ISSUE.md](templates/ISSUE.md).
+- **Respetar el fondo** de la Issue del usuario; sincronizar criterios/objetivos si
+  el cuestionario añadió ítems acordados.
+- Título con el nombre del desarrollador confirmado en I0.
+
+#### I9 — Derivar PROMPT.md e iniciar USER_SUMMARY.md
+
+Igual que **S5** y **S6**.
+
+#### I10 — Gate antes de implementar
+
+Igual que **S7**: **STOP** hasta OK explícito para `feature-workflow implement`.
+
+---
+
 ## Modo Implementación (`implement`)
 
 ### Entrada
@@ -198,7 +272,7 @@ Usar [templates/USER_SUMMARY.md](templates/USER_SUMMARY.md):
 - Ruta al directorio WIP, o
 - Petición de implementar con contexto suficiente para localizar el WIP.
 
-Si no existe `PROMPT.md`, detenerse y pedir completar especificación primero.
+Si no existe `PROMPT.md`, detenerse y pedir completar `spec` o `issue` primero.
 
 ### Pasos
 
@@ -299,18 +373,46 @@ No hay atajos como skills separadas. El comportamiento se adapta en cada paso:
 
 ## Trazabilidad
 
+### Modo `spec`
+
 ```mermaid
 flowchart TD
   R[Requerimiento] --> D[Descubrimiento repo]
   D --> Q[Preguntas — mín. 2 rondas si UI/API]
   Q --> CQ[Cuestionario completo S1.5]
-  CQ --> G2{Gate pre-SPEC S2.5}
+  CQ --> G2{Gate pre-WIP S2.5}
   G2 -->|OK usuario| SPEC[SPEC.md]
   G2 -->|más preguntas| Q
   SPEC --> ISSUE[ISSUE.md]
   SPEC --> PROMPT[PROMPT.md]
   SPEC --> USER[USER_SUMMARY.md]
-  PROMPT --> BUILD[AGENTS_BUILD.md]
+  PROMPT --> G7{OK implementar}
+  G7 --> IMP[feature-workflow implement]
+```
+
+### Modo `issue`
+
+```mermaid
+flowchart TD
+  IN[Issue texto o archivo] --> DEV[Preguntar desarrollador]
+  DEV --> D[Descubrimiento repo]
+  D --> MAP[Mapeo Issue → cuestionario A–H]
+  MAP --> Q[Preguntas huecos — mín. 2 rondas si UI/API]
+  Q --> G2{Gate pre-WIP I6}
+  G2 -->|OK usuario| SPEC[SPEC.md]
+  G2 -->|más preguntas| Q
+  SPEC --> ISSUE[ISSUE.md desde Issue usuario]
+  SPEC --> PROMPT[PROMPT.md]
+  SPEC --> USER[USER_SUMMARY.md]
+  PROMPT --> G7{OK implementar I10}
+  G7 --> IMP[feature-workflow implement]
+```
+
+### Modo `implement`
+
+```mermaid
+flowchart TD
+  PROMPT[PROMPT.md] --> BUILD[AGENTS_BUILD.md]
   BUILD --> ACT[ACTIVITY.md]
   BUILD --> F1[Fase 1 Implementación]
   F1 --> F2[Fase 2 Revisión]
@@ -327,3 +429,4 @@ flowchart TD
 | Fecha | Evento |
 |-------|--------|
 | 2026-06-18 | Creación inicial del workflow |
+| 2026-06-18 | Modo `issue` (Issue importada como alternativa a `spec`) |

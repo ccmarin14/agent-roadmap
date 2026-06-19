@@ -104,14 +104,23 @@ técnicas relevantes.
 
 ## Instrucciones para el agente (no incluir en la Issue exportada)
 
-Al **derivar** `ISSUE.md` desde `SPEC.md`:
+Al **derivar** `ISSUE.md` desde `SPEC.md` (modo `spec`):
+
+Al **redactar** `ISSUE.md` en modo `issue`:
+
+1. Basarse en la Issue importada del usuario; normalizar secciones/emojis sin
+   cambiar el fondo acordado.
+2. Sincronizar con `SPEC.md` si el cuestionario añadió criterios u objetivos.
+
+En **ambos modos**:
 
 1. **Título:** `# {NOMBRE DESARROLLADOR} - {Título}` — sin códigos HU ni IDs internos.
-   - Preguntar el nombre del desarrollador si no se conoce; si no aplica, usar
-     `Por asignar`.
+   - Modo `spec`: preguntar nombre del desarrollador; si no se conoce, usar `Por asignar`.
+   - Modo `issue`: **preguntar siempre** el nombre del desarrollador.
 2. **Secciones:** usar exactamente los encabezados `###` con emojis de esta plantilla.
 3. **Contenido:** complementar SPEC sin duplicar el proceso de refinamiento ni
-   las tablas de decisiones extensas.
+   las tablas de decisiones extensas (modo `spec`); o respetar Issue importada
+   y alinear con SPEC (modo `issue`).
 4. **Exportar al gestor / chat:** si el usuario pide la Issue para copiar:
 
    **Formato de respuesta**
