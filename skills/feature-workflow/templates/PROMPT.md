@@ -1,7 +1,8 @@
 # Prompt de implementación — {título de la issue}
 
 **WIP:** `docs/_wip/{feature-slug}/`  
-**Issue:** [ISSUE.md](ISSUE.md) · **Build:** [AGENTS_BUILD.md](AGENTS_BUILD.md)
+**Issue(s):** [ISSUE.md](ISSUE.md) o carpeta [issues/](issues/) (según índice en
+[SPEC.md](SPEC.md)) · **Build:** [AGENTS_BUILD.md](AGENTS_BUILD.md)
 
 Al iniciar implementación, crear `AGENTS_BUILD.md` desde la plantilla y copiar
 ahí el snapshot mínimo de contexto (HU, decisiones, criterios, escenarios) para
@@ -11,10 +12,12 @@ trabajar sin reabrir SPEC.
 
 ## Tarea
 
-Implementa la issue **«{título descriptivo}»** siguiendo este prompt y
-[reference/phase-gates.md](../reference/phase-gates.md) (en el paquete skill).
+Implementa {1 issue · el epic con N issues según SPEC} **«{título descriptivo}»**
+siguiendo este prompt y [reference/phase-gates.md](../reference/phase-gates.md)
+(en el paquete skill).
 
-Lee `ISSUE.md` y el snapshot en `AGENTS_BUILD.md` antes de escribir código.
+Lee la(s) Issue(s) del WIP (`ISSUE.md` o `issues/HU-XX.md` en scope) y el snapshot
+en `AGENTS_BUILD.md` antes de escribir código.
 
 ---
 

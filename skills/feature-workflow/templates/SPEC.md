@@ -5,7 +5,7 @@ aceptación acordados en conversación.
 
 **Estado:** {borrador | especificación cerrada} · **implementación:** {pendiente | en curso | completada}
 
-**Issue:** [ISSUE.md](ISSUE.md) · **Implementación:** [PROMPT.md](PROMPT.md)
+**Issues:** {1 HU → [ISSUE.md](ISSUE.md) · N>1 → ver índice abajo} · **Implementación:** [PROMPT.md](PROMPT.md)
 
 ---
 
@@ -156,27 +156,47 @@ documentado (persona distinta, entrega independiente, otro canal, epic distinto)
 |-----------|---------|
 | **Historias** | {1 | N} |
 | **Motivo** | |
+| **Issues** | {1 → `ISSUE.md` \| N → `issues/HU-01.md` …} |
 
 ---
 
-## Historia de usuario (definitiva)
+## Índice de Issues
 
-### Identificación
+Solo si **N > 1** HU. Si hay una sola HU, usar `ISSUE.md` en la raíz y omitir
+esta sección.
+
+| ID HU | Archivo Issue | Título (backlog) |
+|-------|---------------|------------------|
+| HU-01 | [issues/HU-01.md](issues/HU-01.md) | |
+| HU-02 | [issues/HU-02.md](issues/HU-02.md) | |
+
+---
+
+## Historias de usuario
+
+Repetir el bloque siguiente **por cada HU** acordada. Las decisiones transversales
+del epic van en «Decisiones de producto» más abajo; cada HU lleva su alcance,
+criterios y escenarios propios.
+
+### HU-01 — {título backlog}
+
+#### Identificación
 
 | Campo | Valor |
 |-------|--------|
-| **ID interno** | {opcional — no usar en título de Issue} |
+| **ID interno** | HU-01 |
 | **Título (backlog)** | {descriptivo} |
+| **Issue** | [ISSUE.md](ISSUE.md) si N=1 · [issues/HU-01.md](issues/HU-01.md) si N>1 |
 | **Persona** | |
-| **Dependencias** | |
+| **Dependencias** | {otras HU, si aplica} |
 
-### Narrativa
+#### Narrativa
 
 **Como** {persona},  
 **quiero** {acción},  
 **para** {beneficio}.
 
-### Alcance de la HU
+#### Alcance de la HU
 
 **Incluye:**
 
@@ -186,27 +206,43 @@ documentado (persona distinta, entrega independiente, otro canal, epic distinto)
 
 - {ítem}
 
-### Definición de hecho (DoD)
+#### Definición de hecho (DoD)
 
-- [ ] Criterios de aceptación cumplidos
-- [ ] Checklist de implementación completado (fases 1–5)
-- [ ] Escenarios GWT verificados manualmente (fase 3)
-- [ ] Tests automatizados actualizados si el proyecto los usa (fase 4)
-- [ ] {criterio específico de la feature}
+- [ ] Criterios de aceptación de esta HU cumplidos
+- [ ] Escenarios GWT de esta HU verificados manualmente (fase 3)
+- [ ] {criterio específico}
 
-### Subtareas técnicas (no son historias de usuario)
+#### Subtareas técnicas (no son historias de usuario)
 
 | ID | Subtarea | Capa |
 |----|----------|------|
 | T1 | | |
 
-### Copy / textos acordados
+#### Criterios de aceptación (esta HU)
+
+1. {criterio}
+
+#### Escenarios GWT (esta HU)
+
+##### Escenario 1 — {nombre}
+
+- **Dado** {contexto}
+- **Cuando** {acción}
+- **Entonces** {resultado}
+
+#### Copy / textos acordados
 
 > {leyendas, mensajes, etc.}
 
 ---
 
-## Decisiones de producto
+### HU-02 — {título backlog}
+
+{Repetir estructura de HU-01}
+
+---
+
+## Decisiones de producto (epic)
 
 | # | Tema | Decisión | Notas |
 |---|------|----------|-------|
@@ -214,37 +250,16 @@ documentado (persona distinta, entrega independiente, otro canal, epic distinto)
 
 ---
 
-## Criterios de aceptación
+## Criterios transversales (epic, opcional)
 
-### {Bloque 1 — ej. Visualización}
+Solo si aplica a **varias** HU a la vez. Los criterios de una sola HU van en su
+bloque arriba, no aquí.
 
-1. {criterio}
-
-### {Bloque 2}
-
-1. {criterio}
-
-### Fuera de alcance
-
-- {ítem}
+1. {criterio transversal}
 
 ---
 
-## Escenarios (Given / When / Then)
-
-### Escenario 1 — {nombre}
-
-- **Dado** {contexto}
-- **Cuando** {acción}
-- **Entonces** {resultado}
-
-### Escenario N — {nombre}
-
-- **Dado**
-- **Cuando**
-- **Entonces**
-
----
+## Fuera de alcance (epic)
 
 ## Notas técnicas
 

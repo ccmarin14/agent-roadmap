@@ -21,7 +21,8 @@ del usuario, salvo que indique lo contrario.
 **Objetivo:** código funcional según criterios de aceptación, **alineado con patrones
 existentes** del repo.
 
-- [ ] Leer `PROMPT.md`, `ISSUE.md` y `AGENTS_BUILD.md`.
+- [ ] Leer `PROMPT.md`, Issue(s) del WIP (`ISSUE.md` o `issues/HU-XX.md` según
+  SPEC) y `AGENTS_BUILD.md`.
 - [ ] Releer **patrones referencia** del SPEC y [reuse-patterns-checklist.md](reuse-patterns-checklist.md).
 - [ ] Antes de crear componentes/servicios nuevos: confirmar que no existe equivalente
   reutilizable (`DataTable`, modales, paginación API, esqueleto de capas).
@@ -140,7 +141,7 @@ El agente completa §11 en `AGENTS_BUILD.md` — checklist numerada:
 2. **Qué hacer** (pasos).
 3. **Qué deberías ver** (resultado esperado).
 
-Basarse en escenarios GWT del build y QA de `ISSUE.md`. Incluir al menos:
+Basarse en escenarios GWT del build y QA de la(s) Issue(s) en scope. Incluir al menos:
 
 - Un caso feliz
 - Un caso límite plausible
@@ -169,7 +170,7 @@ Basarse en escenarios GWT del build y QA de `ISSUE.md`. Incluir al menos:
 
 ### Si el proyecto NO tiene tests
 
-- [ ] Anotar en `ISSUE.md` y `AGENTS_BUILD.md`: «sin tests automatizados».
+- [ ] Anotar en Issue(s) y `AGENTS_BUILD.md`: «sin tests automatizados».
 - [ ] **Omitir** esta fase.
 - [ ] Pasar a Fase 5.
 

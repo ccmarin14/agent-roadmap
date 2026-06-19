@@ -189,7 +189,7 @@ Marcar OK / KO al probar. Recargar/reiniciar según aplique al proyecto.
 | Archivo | ¿Conservar? |
 |---------|-------------|
 | SPEC.md | |
-| ISSUE.md | |
+| Issue(s) | `ISSUE.md` o `issues/HU-XX.md` |
 | PROMPT.md | |
 | AGENTS_BUILD.md | |
 | USER_SUMMARY.md | |

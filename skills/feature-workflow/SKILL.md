@@ -47,13 +47,20 @@ al iniciar. Commitear temporales es **opcional**.
 ### Jerarquía
 
 ```text
-SPEC.md              ← raíz: requerimiento, decisiones, HU, diagramas
-├── ISSUE.md         ← hijo: issue Markdown complementaria
+SPEC.md              ← raíz: requerimiento, decisiones, HU(s), diagramas
+├── ISSUE.md         ← hijo: una Issue (solo si N = 1 HU)
+├── issues/          ← hijos: una Issue por HU (solo si N > 1)
+│   ├── HU-01.md
+│   └── HU-02.md
 ├── PROMPT.md        ← hijo: prompt autocontenido para implementación
 │   └── AGENTS_BUILD.md  ← hijo: traza de implementación (autocontenido)
 ├── USER_SUMMARY.md  ← hermano: resumen para el usuario (se actualiza siempre)
 └── ACTIVITY.md      ← hermano: inicio/fin y actividades por sesión
 ```
+
+**Regla Issues:** si hay **una** HU → `ISSUE.md`. Si hay **varias** HU → carpeta
+`issues/` con un archivo por HU (`HU-01.md`, `HU-02.md`, …). Cada Issue contiene
+**solo** el alcance, criterios y QA de su HU; lo transversal vive en `SPEC.md`.
 
 **Regla de decisiones:** las decisiones de negocio viven **solo en SPEC.md**.
 Los hijos derivan contenido sin repetir decisiones.
@@ -79,10 +86,11 @@ Resumen:
 4. Proponer **1 vs N historias** con justificación; usuario confirma.
 5. **S2.5 Gate pre-SPEC** — tabla de cobertura + OK explícito **antes** de escribir archivos.
 6. Crear `SPEC.md` desde [templates/SPEC.md](templates/SPEC.md).
-7. Derivar `ISSUE.md` (formato `# Desarrollador - Título`, secciones con emojis)
-   y `PROMPT.md` desde sus plantillas.
-8. Iniciar `USER_SUMMARY.md`.
-9. **STOP** — OK del usuario antes de implementar.
+7. Derivar Issue(s): **una por HU** — `ISSUE.md` si N=1, o `issues/HU-XX.md` si N>1
+   (formato `# Desarrollador - Título`, secciones con emojis).
+8. Derivar `PROMPT.md` desde su plantilla.
+9. Iniciar `USER_SUMMARY.md`.
+10. **STOP** — OK del usuario antes de implementar.
 
 ## Modo Issue importada (`issue`)
 
@@ -101,8 +109,10 @@ Resumen:
 5. Rondas de preguntas hasta completar cuestionario (**mínimo 2** si aplica UI/API).
 6. Proponer **1 vs N** historias; usuario confirma.
 7. **Gate pre-WIP** — tabla de cobertura + OK explícito **antes** de crear archivos.
-8. Crear `SPEC.md` (importación + decisiones), `ISSUE.md` (formato usuario, sincronizada con SPEC),
-   `PROMPT.md`, `USER_SUMMARY.md`.
+8. Crear `SPEC.md` (importación + decisiones), Issue(s) (formato usuario,
+   sincronizada(s) con SPEC), `PROMPT.md`, `USER_SUMMARY.md`.
+   - Una Issue importada → normalmente **1 HU** → `ISSUE.md`.
+   - Si tras el cuestionario hay **N > 1** HU → `issues/HU-XX.md` (regla igual que `spec`).
 9. **STOP** — OK del usuario antes de `implement`.
 
 ## Modo Implementación (`implement`)
@@ -129,7 +139,7 @@ Resumen:
 
 - Fases 1–3: **prohibido** crear o modificar tests automatizados.
 - Fase 4: solo si el proyecto los usa y tras OK en Fases 2 y 3.
-- Si el proyecto **no tiene** tests: anotar en `ISSUE.md` / `AGENTS_BUILD.md` y
+- Si el proyecto **no tiene** tests: anotar en Issue(s) y `AGENTS_BUILD.md` y
   **omitir** Fase 4.
 
 ## Documentación (Fase 5)

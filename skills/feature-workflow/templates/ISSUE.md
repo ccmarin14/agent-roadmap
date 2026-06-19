@@ -1,7 +1,8 @@
 # {NOMBRE DESARROLLADOR} - {Título descriptivo de la issue}
 
 > **Metadatos WIP** (no copiar al gestor si no aplica): slug `{feature-slug}` ·
-> [SPEC.md](SPEC.md) · estado: {abierta | lista para implementar | cerrada}
+> HU interna `{HU-01 | —}` · [SPEC.md](../SPEC.md) o [SPEC.md](SPEC.md) ·
+> estado: {abierta | lista para implementar | cerrada}
 
 ### 📌 Descripción
 
@@ -104,13 +105,21 @@ técnicas relevantes.
 
 ## Instrucciones para el agente (no incluir en la Issue exportada)
 
-Al **derivar** `ISSUE.md` desde `SPEC.md` (modo `spec`):
+Al **derivar** Issue(s) desde `SPEC.md` (modo `spec`):
 
-Al **redactar** `ISSUE.md` en modo `issue`:
+1. **Una Issue por HU** acordada en SPEC.
+2. **1 HU** → un solo archivo `ISSUE.md` en la raíz del WIP.
+3. **N > 1 HU** → carpeta `issues/` con `HU-01.md`, `HU-02.md`, … (sin `ISSUE.md`
+   en raíz). Cada archivo: alcance, criterios y QA **solo de esa HU**.
+4. Registrar en SPEC la tabla **Índice de Issues** cuando N > 1.
+
+Al **redactar** Issue(s) en modo `issue`:
 
 1. Basarse en la Issue importada del usuario; normalizar secciones/emojis sin
    cambiar el fondo acordado.
 2. Sincronizar con `SPEC.md` si el cuestionario añadió criterios u objetivos.
+3. Si tras el cuestionario hay **N > 1** HU, aplicar la regla de carpeta `issues/`
+   aunque la entrada fuera una sola Issue pegada.
 
 En **ambos modos**:
 
@@ -121,10 +130,11 @@ En **ambos modos**:
 3. **Contenido:** complementar SPEC sin duplicar el proceso de refinamiento ni
    las tablas de decisiones extensas (modo `spec`); o respetar Issue importada
    y alinear con SPEC (modo `issue`).
-4. **Exportar al gestor / chat:** si el usuario pide la Issue para copiar:
+4. **Exportar al gestor / chat:** si el usuario pide la(s) Issue(s) para copiar:
 
    **Formato de respuesta**
 
-   - Devuelve **únicamente** la Issue completa (sin metadatos WIP ni esta sección).
-   - La respuesta debe estar contenida **completamente** dentro de un **único**
-     bloque de código Markdown.
+   - **1 HU:** devolver **únicamente** la Issue completa (sin metadatos WIP ni
+     esta sección) en un **único** bloque de código Markdown.
+   - **N > 1:** devolver **N bloques** separados (`Issue HU-01`, `Issue HU-02`, …),
+     cada uno con la Issue completa de esa HU, sin metadatos WIP ni esta sección.

@@ -34,7 +34,7 @@ añaden metadatos de descubrimiento; el comportamiento vive aquí.
 
 | Artefacto | Dónde |
 |-----------|-------|
-| Issue | `ISSUE.md` (si el usuario conserva el WIP o lo promociona) |
+| Issue(s) | `ISSUE.md` o `issues/HU-XX.md` (si el usuario conserva el WIP o lo promociona) |
 | Código y config | Cambios en el repo |
 | Documentación de producto | Solo si Fase 5 lo exige |
 | Registro de actividades | `ACTIVITY.md` solo si el usuario elige conservarlo |
@@ -126,9 +126,9 @@ Usar [templates/SPEC.md](templates/SPEC.md). Debe incluir como mínimo:
 - Resumen ejecutivo
 - Contexto del comportamiento actual (si aplica)
 - Determinación 1 vs N HU
-- Historia de usuario definitiva (narrativa, alcance, DoD, subtareas)
-- Decisiones de producto (tabla consolidada)
-- Criterios de aceptación y escenarios GWT
+- Una sección por HU (narrativa, alcance, DoD, criterios y escenarios de esa HU)
+- Índice de Issues (tabla HU → archivo) si N > 1
+- Decisiones de producto (tabla consolidada, nivel epic)
 - Notas técnicas y riesgos
 - **Patrones existentes en el repo** y desvíos acordados (si los hay)
 - Referencias orientativas al código (estado previo)
@@ -136,15 +136,27 @@ Usar [templates/SPEC.md](templates/SPEC.md). Debe incluir como mínimo:
 
 Opcional en SPEC: ID interno (`HU-XXX`) — **nunca** en el título de la Issue.
 
-#### S4 — Derivar ISSUE.md
+#### S4 — Derivar Issue(s)
 
-Usar [templates/ISSUE.md](templates/ISSUE.md). Complementa SPEC sin duplicar
-el proceso ni las decisiones extensas.
+Usar [templates/ISSUE.md](templates/ISSUE.md). Complementan SPEC sin duplicar
+el proceso ni las decisiones extensas del epic.
 
-**Formato obligatorio de la Issue:**
+**Regla 1 Issue = 1 HU:**
+
+| Historias acordadas | Archivos |
+|---------------------|----------|
+| **1 HU** | `ISSUE.md` en la raíz del WIP |
+| **N > 1 HU** | `issues/HU-01.md`, `issues/HU-02.md`, … (una por HU) |
+
+- Cada Issue incluye **solo** descripción, objetivos, criterios, técnico y QA
+  **de esa HU**. Decisiones transversales del epic quedan en `SPEC.md`.
+- En `SPEC.md`, tabla **Índice de Issues** (ID HU → archivo → título backlog).
+- IDs de archivo (`HU-01`) son internos al WIP; **no** van en el título exportado.
+
+**Formato obligatorio de cada Issue:**
 
 ```markdown
-# {NOMBRE DESARROLLADOR} - {Título descriptivo}
+# {NOMBRE DESARROLLADOR} - {Título descriptivo de la HU}
 ### 📌 Descripción
 ### 🎯 Objetivos
 ### ✅ Criterios de aceptación
@@ -154,18 +166,20 @@ el proceso ni las decisiones extensas.
 ```
 
 - **Título:** `{NOMBRE DESARROLLADOR} - {Título}` — descriptivo, sin códigos HU.
-  Preguntar nombre del desarrollador; si no se conoce, usar `Por asignar`.
+  Preguntar nombre del desarrollador (mismo para todas las Issues salvo que el
+  usuario indique lo contrario); si no se conoce, usar `Por asignar`.
 - **Descripción:** tres viñetas (problema/necesidad, impacto usuario o sistema,
-  razón del cambio).
-- **Criterios:** checkboxes observables y verificables.
-- Metadatos WIP (slug, enlace SPEC, estado) solo en bloque al inicio del archivo
-  local; **excluirlos** al exportar la Issue al gestor.
+  razón del cambio) **acotadas a la HU**.
+- **Criterios:** checkboxes observables y verificables **de esa HU**.
+- Metadatos WIP (slug, enlace SPEC, ID HU interno, estado) solo en bloque al
+  inicio del archivo local; **excluirlos** al exportar la Issue al gestor.
 
-**Al entregar la Issue en el chat** (copiar al gestor):
+**Al entregar Issue(s) en el chat** (copiar al gestor):
 
-- Devolver **solo** la Issue completa.
-- Contenida **entera** en un **único** bloque de código Markdown.
-- Sin instrucciones del agente ni metadatos WIP.
+- **1 HU:** devolver **solo** la Issue completa en un **único** bloque Markdown.
+- **N > 1:** devolver **N bloques** separados, uno por Issue, etiquetados en el
+  chat (`Issue HU-01`, `Issue HU-02`, …). Cada bloque: Issue completa, sin
+  metadatos WIP ni instrucciones del agente.
 
 #### S5 — Derivar PROMPT.md
 
@@ -247,12 +261,15 @@ Igual que **S3**: **misma plantilla**, mismo rol. En «Cómo se construyó» doc
 **importación desde Issue** + rondas para huecos. Las decisiones de negocio viven
 solo aquí.
 
-#### I8 — Redactar ISSUE.md
+#### I8 — Redactar Issue(s)
 
 - Basarse en la Issue importada; normalizar al formato de [templates/ISSUE.md](templates/ISSUE.md).
 - **Respetar el fondo** de la Issue del usuario; sincronizar criterios/objetivos si
   el cuestionario añadió ítems acordados.
 - Título con el nombre del desarrollador confirmado en I0.
+- Si tras el cuestionario hay **N > 1** HU, aplicar la misma regla que **S4**
+  (`issues/HU-XX.md`); la Issue importada suele cubrir la primera HU o el epic
+  completo — repartir alcance según lo acordado en SPEC.
 
 #### I9 — Derivar PROMPT.md e iniciar USER_SUMMARY.md
 
@@ -282,7 +299,7 @@ Crear o continuar desde [templates/AGENTS_BUILD.md](templates/AGENTS_BUILD.md).
 
 **Autocontenido:** copiar snapshot mínimo de SPEC:
 
-- Historia de usuario (narrativa + incluye / no incluye)
+- Historia(s) de usuario en scope (narrativa + incluye / no incluye por HU)
 - Tabla resumen de decisiones
 - Criterios de aceptación
 - Escenarios GWT
@@ -383,7 +400,7 @@ flowchart TD
   CQ --> G2{Gate pre-WIP S2.5}
   G2 -->|OK usuario| SPEC[SPEC.md]
   G2 -->|más preguntas| Q
-  SPEC --> ISSUE[ISSUE.md]
+  SPEC --> ISSUE[Issue(s)\nISSUE.md o issues/HU-XX.md]
   SPEC --> PROMPT[PROMPT.md]
   SPEC --> USER[USER_SUMMARY.md]
   PROMPT --> G7{OK implementar}
@@ -401,7 +418,7 @@ flowchart TD
   Q --> G2{Gate pre-WIP I6}
   G2 -->|OK usuario| SPEC[SPEC.md]
   G2 -->|más preguntas| Q
-  SPEC --> ISSUE[ISSUE.md desde Issue usuario]
+  SPEC --> ISSUE[Issue(s)\nimportada + derivadas si N>1]
   SPEC --> PROMPT[PROMPT.md]
   SPEC --> USER[USER_SUMMARY.md]
   PROMPT --> G7{OK implementar I10}
@@ -430,3 +447,4 @@ flowchart TD
 |-------|--------|
 | 2026-06-18 | Creación inicial del workflow |
 | 2026-06-18 | Modo `issue` (Issue importada como alternativa a `spec`) |
+| 2026-06-18 | Una Issue por HU cuando N > 1 (`issues/HU-XX.md`) |

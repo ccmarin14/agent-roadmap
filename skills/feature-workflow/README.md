@@ -59,7 +59,8 @@ Durante el trabajo, el agente crea:
 ```text
 docs/_wip/{feature-slug}/
 ├── SPEC.md
-├── ISSUE.md
+├── ISSUE.md              ← solo si 1 HU
+├── issues/               ← solo si N > 1 HU (HU-01.md, HU-02.md, …)
 ├── PROMPT.md
 ├── AGENTS_BUILD.md
 ├── USER_SUMMARY.md
@@ -69,7 +70,7 @@ docs/_wip/{feature-slug}/
 | Tipo | Archivos |
 |------|----------|
 | **Temporales** | SPEC, PROMPT, AGENTS_BUILD, USER_SUMMARY, ACTIVITY (según cierre) |
-| **Permanentes** | ISSUE (si se conserva), código, docs de producto actualizadas |
+| **Permanentes** | Issue(s) en `ISSUE.md` o `issues/` (si se conservan), código, docs de producto actualizadas |
 
 Commitear el WIP es **opcional**. Al cerrar la feature, la Fase 6 pregunta qué
 conservar o borrar.
@@ -97,6 +98,9 @@ En modo **issue**, el `SPEC.md` tiene la **misma función** que en `spec`; el
 cuestionario **A–H** se mantiene completo (la Issue solo pre-llena ítems).
 Ver [reference/issue-import-checklist.md](reference/issue-import-checklist.md).
 
+**Varias historias de usuario:** en `spec` (y en `issue` si N > 1 tras cuestionario),
+generar **una Issue por HU** — `ISSUE.md` si N=1, o `issues/HU-01.md`, … si N>1.
+
 ## Modo spec / issue: no ir demasiado rápido
 
 Antes de crear `docs/_wip/`, el agente debe:
@@ -116,7 +120,7 @@ Antes del SPEC y en Fase 1, buscar en el repo pantallas y capas análogas. Ver
 
 | Temporal | Permanente |
 |----------|------------|
-| Spec de trabajo | Issue (`ISSUE.md` si se conserva) |
+| Spec de trabajo | Issue(s) (`ISSUE.md` o `issues/HU-XX.md` si se conservan) |
 | Prompt y build del agente | Cambios en el repositorio |
 | Resumen para usuario | Documentación de producto acordada |
 | Actividades de sesión | — (primera persona del usuario en `ACTIVITY.md`) |

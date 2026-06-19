@@ -102,9 +102,18 @@ Orden recomendado:
   patrones repo, cobertura cuestionario, etc.
 - La Issue del usuario es **entrada**, no reemplazo del SPEC.
 
-### 8.2 — `ISSUE.md` (formato del usuario)
+### 8.2 — Issue(s) (formato del usuario)
 
-Usar [templates/ISSUE.md](../templates/ISSUE.md):
+Usar [templates/ISSUE.md](../templates/ISSUE.md).
+
+**Regla 1 Issue = 1 HU** (igual que S4 en modo `spec`):
+
+| Historias | Archivos |
+|-----------|----------|
+| 1 HU | `ISSUE.md` |
+| N > 1 | `issues/HU-01.md`, `issues/HU-02.md`, … + índice en SPEC |
+
+Formato de cada Issue:
 
 ```markdown
 # {NOMBRE DESARROLLADOR} - {Título}
@@ -116,7 +125,8 @@ Usar [templates/ISSUE.md](../templates/ISSUE.md):
 ### 📎 Notas adicionales
 ```
 
-- Basarse en la Issue importada; **normalizar** secciones y emojis si faltan.
+- Basarse en la Issue importada (normalmente **1 HU** → `ISSUE.md`); si N > 1,
+  repartir alcance entre `issues/HU-XX.md` según SPEC.
 - Incorporar criterios u objetivos **añadidos** en el cuestionario para alinear
   Issue y SPEC (sin reescribir el espíritu de la Issue original).
 - Metadatos WIP solo al inicio del archivo local.
@@ -141,7 +151,7 @@ cerrada — implementación pendiente».
 |---------|--------|---------|
 | Entrada | Requerimiento vago | Issue existente |
 | Punto de partida en SPEC | Requerimiento literal | Issue importada + huecos |
-| `ISSUE.md` | Derivada del SPEC | Desde Issue del usuario + sync con SPEC |
+| Issue(s) | `ISSUE.md` si 1 HU; `issues/HU-XX.md` si N > 1 | Igual en ambos modos |
 | Cuestionario A–H | Completo | Completo (ítems pre-cerrados si la Issue los cubre) |
 | Gate pre-WIP | S2.5 | Igual |
 | Siguiente paso | `implement` | `implement` |

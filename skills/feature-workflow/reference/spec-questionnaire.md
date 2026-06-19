@@ -107,6 +107,7 @@ Marcar cada fila antes del gate pre-SPEC.
 | ID | Pregunta guía | Obligatoria |
 |----|---------------|-------------|
 | G1 | ¿1 vs N historias de usuario (con justificación)? | Sí |
+| G1b | Si N > 1: ¿una Issue por HU (`issues/HU-XX.md`) acordada? | Si N > 1 |
 | G2 | ¿Casos límite y regresiones plausibles identificados? | Sí |
 | G3 | ¿Escenarios GWT trazables a decisiones? | Sí |
 | G4 | ¿Copy o textos visibles acordados o pendientes? | Si hay UI |
